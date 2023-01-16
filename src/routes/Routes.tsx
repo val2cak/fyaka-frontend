@@ -7,7 +7,7 @@ import GuestLayout from '../features/dashboard/guest/GuestLayout';
 //
 
 // TYPES
-import { CustomRouteObject } from '../types/enums/typeDefinitions';
+import { CustomRouteObject } from '../types/typeDefinitions';
 //
 
 export let Routes: CustomRouteObject[] = [
@@ -35,17 +35,18 @@ export let Routes: CustomRouteObject[] = [
         children: [
           {
             path: 'home',
-            name: 'Home',
+            name: 'Naslovna',
             element: <div>Home</div>,
           },
           {
             path: 'services-list',
-            name: 'Services List',
+            name: 'Popis Usluga',
             element: <div>Services List</div>,
           },
           {
             path: 'services-list/:id',
-            name: 'Single Service',
+            name: 'Usluga',
+            invisible: true,
             element: <div>Single Service</div>,
           },
         ],
@@ -61,41 +62,41 @@ export let Routes: CustomRouteObject[] = [
         children: [
           {
             path: 'looking-for-service',
-            name: 'Looking for service',
+            name: 'Trebam Uslugu',
             element: <div>Looking For Service</div>,
           },
           {
             path: '',
-            name: 'Profile Menu',
+            name: 'Profil',
             children: [
               {
                 path: 'profile',
-                name: 'Profile',
+                name: 'Profil',
                 element: <div>Profile</div>,
               },
               {
                 path: 'ratings',
-                name: 'Ratings',
+                name: 'Ocjene',
                 element: <div>Ratings</div>,
               },
               {
                 path: 'my-services',
-                name: 'My Services',
+                name: 'Moje usluge',
                 element: <div>My Services</div>,
               },
               {
                 path: 'favorites',
-                name: 'Favorites',
+                name: 'Favoriti',
                 element: <div>Favorites</div>,
               },
               {
                 path: 'messages',
-                name: 'Messages',
+                name: 'Poruke',
                 element: <div>Messages</div>,
               },
               {
                 path: 'settings',
-                name: 'Settings',
+                name: 'Postavke',
                 element: <div>Settings</div>,
               },
             ],

@@ -1,5 +1,5 @@
-import './App.scss';
 import 'react-toastify/dist/ReactToastify.css';
+import './styles/globals.css';
 
 import { Routes } from './routes/Routes';
 import { useRoutes } from 'react-router-dom';
