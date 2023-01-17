@@ -1,13 +1,14 @@
 // ROUTES
 import ProtectedRoute from './ProtectedRoute';
 import AuthLayout from '../features/auth/AuthLayout';
-import DashboardLayout from '../features/dashboard/DashboardLayout';
-import AdminLayout from '../features/dashboard/admin/AdminLayout';
-import GuestLayout from '../features/dashboard/guest/GuestLayout';
+import AdminLayout from '../features/admin/AdminLayout';
+import GuestLayout from '../features/guest/GuestLayout';
+import HomeContainer from '../features/guest/Home/HomeContainer';
 //
 
 // TYPES
 import { CustomRouteObject } from '../types/typeDefinitions';
+import { Outlet } from 'react-router-dom';
 //
 
 export let Routes: CustomRouteObject[] = [
@@ -26,7 +27,7 @@ export let Routes: CustomRouteObject[] = [
   {
     path: '/',
     name: 'Dashboard',
-    element: <DashboardLayout />,
+    element: <Outlet />,
     children: [
       {
         path: '',
@@ -36,7 +37,7 @@ export let Routes: CustomRouteObject[] = [
           {
             path: 'home',
             name: 'Naslovna',
-            element: <div>Home</div>,
+            element: <HomeContainer />,
           },
           {
             path: 'services-list',

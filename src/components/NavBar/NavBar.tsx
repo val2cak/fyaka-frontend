@@ -3,7 +3,7 @@ import Logo from './Logo';
 
 const NavBar = () => {
   return (
-    <header className='flex justify-between p-5 bg-primaryColor text-lightColor h-[82px]'>
+    <header className='flex justify-between p-4 bg-primaryColor text-lightColor'>
       <Links name='Guest' />
       <Logo />
       <Links name='Admin' />

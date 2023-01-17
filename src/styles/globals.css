@@ -3,3 +3,10 @@
 @tailwind components;
 @tailwind base;
 @tailwind utilities;
+
+.ellipse {
+        background-color: #F58800;
+        height: 90vh;
+        width: 100%;
+        border-bottom-right-radius: 80% 100%;
+}

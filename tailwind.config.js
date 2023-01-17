@@ -17,9 +17,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        primaryFont: ['Ubuntu', 'sans-serif'],
-        secondaryFont: ['Raleway', 'sans-serif'],
-        logoFont: ['Montserrat Alternates', 'sans-serif'],
+        ubuntu: ['Ubuntu', 'sans-serif'],
+        raleway: ['Raleway', 'sans-serif'],
+        logo: ['Montserrat Alternates', 'sans-serif'],
       },
 
       colors: {
@@ -27,11 +27,12 @@ module.exports = {
         secondaryColor: '#1A4645',
         lightColor: '#FAFAFA',
         darkColor: '#051821',
+        grayColor: '#696969',
         redColor: '#EA4335',
         blueColor: '#2D9CDB',
       },
       backgroundImage: () => ({
-        // 'hero-cover': "url('assets/cover.png')",
+        homeCover: "url('../assets/vectors/home.png')",
       }),
       lineHeight: {
         3: '1.2rem',
@@ -44,10 +45,10 @@ module.exports = {
         10: '4.0rem',
       },
       fontSize: {
-        xs: ['16px', { lineHeight: '1.6rem' }],
-        sm: ['20px', { lineHeight: '2.0rem' }],
-        base: ['24px', { lineHeight: '2.4rem' }],
-        lg: ['36px', { lineHeight: '2.8rem' }],
+        xs: ['12px', { lineHeight: '1.6rem' }],
+        sm: ['16px', { lineHeight: '2.0rem' }],
+        base: ['20px', { lineHeight: '2.4rem' }],
+        lg: ['32px', { lineHeight: '2.8rem' }],
         xl: ['2.0rem', { lineHeight: '2.8rem' }],
         '2xl': ['2.4rem', { lineHeight: '3.2rem' }],
         '3xl': ['3.0rem', { lineHeight: '3.6rem' }],
