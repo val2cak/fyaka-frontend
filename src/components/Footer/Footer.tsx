@@ -7,7 +7,7 @@ import { SiLinkedin } from 'react-icons/si';
 const Footer = () => {
   return (
     <main
-      className={`font-ubuntu bg-secondaryColor flex flex-row justify-evenly p-5 bottom-0 w-full gap-10 text-base`}
+      className={`font-ubuntu bg-secondaryColor flex flex-row justify-evenly p-12 bottom-0 w-full gap-10 text-base`}
     >
       <ul className='flex flex-col text-lightColor'>
         <li>
@@ -20,7 +20,7 @@ const Footer = () => {
           <a href='/settings'>Centar za pomoć</a>
         </li>
       </ul>
-      <ul className='flex flex-col text-lightColor justify-center'>
+      <ul className='flex flex-col text-lightColor justify-center justify-between'>
         <ul className='flex flex-row text-primaryColor gap-5 text-lg items-center justify-start'>
           <li>
             <a href='https://www.facebook.com/'>
