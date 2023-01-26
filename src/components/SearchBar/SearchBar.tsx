@@ -7,7 +7,9 @@ const SearchBar = () => {
         placeholder='pretraži poslove, lokacije, ...'
         className='bg-transparent font-raleway text-darkColor w-full p-5 text-base rounded-xl'
       />
-      <AiOutlineSearch className='absolute text-lg right-5' />
+      <button className='absolute text-lg right-5'>
+        <AiOutlineSearch />
+      </button>
     </div>
   );
 };
