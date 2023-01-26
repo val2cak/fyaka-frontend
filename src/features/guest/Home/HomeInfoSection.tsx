@@ -1,13 +1,16 @@
 import {
-  BsShieldFillCheck as SecurityIcon,
-  BsFillGrid3X3GapFill as InterfaceIcon,
-  BsFillStarFill as ReviewIcon,
-} from 'react-icons/bs';
+  RiShieldCheckFill as SecurityIcon,
+  RiUserStarFill as ReviewIcon,
+  RiProfileFill as InterfaceIcon,
+} from 'react-icons/ri';
 import HomeInfoColumn from '../../../components/Home/HomeInfoColumn';
 
 const HomeInfoSection = () => {
   return (
-    <main className='bg-primaryColor text-lightColor mt-20 pl-20 pr-20 p-10 flex flex-row'>
+    <main
+      id='info-section'
+      className='bg-primaryColor text-lightColor mt-20 pl-20 pr-20 p-10 flex flex-row'
+    >
       <HomeInfoColumn
         icon={SecurityIcon}
         heading={'sigurno korištenje'}

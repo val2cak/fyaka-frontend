@@ -2,6 +2,11 @@ import SearchBar from '../../../components/SearchBar/SearchBar';
 import arrow from '../../../assets/shapes/arrow-down.png';
 
 const HomeCover = () => {
+  const handleClick = () => {
+    const element = document.getElementById('info-section');
+    element.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <main className='ellipse'>
       <div className='bg-homeCover bg-contain bg-no-repeat w-full h-full flex justify-center items-center'>
@@ -19,7 +24,10 @@ const HomeCover = () => {
             </div>
           </>
 
-          <button className='flex flex-row-reverse items-center pl-28 absolute -right-16 -rotate-90 uppercase text-lightColor text-base font-ubuntu opacity-70'>
+          <button
+            onClick={handleClick}
+            className='flex flex-row-reverse items-center pl-28 absolute -right-16 -rotate-90 uppercase text-lightColor text-base font-ubuntu opacity-70'
+          >
             <p>saznaj više</p>
             <img src={arrow} alt='arrow' className='rotate-90 text-4xl pt-32' />
           </button>

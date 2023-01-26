@@ -4,6 +4,7 @@ import AuthLayout from '../features/auth/AuthLayout';
 import AdminLayout from '../features/admin/AdminLayout';
 import GuestLayout from '../features/guest/GuestLayout';
 import HomeContainer from '../features/guest/Home/HomeContainer';
+import ServicesListContainer from '../features/guest/ServicesList/ServicesListContainer';
 //
 
 // TYPES
@@ -42,7 +43,7 @@ export let Routes: CustomRouteObject[] = [
           {
             path: 'services-list',
             name: 'Popis Usluga',
-            element: <div>Services List</div>,
+            element: <ServicesListContainer />,
           },
           {
             path: 'services-list/:id',
