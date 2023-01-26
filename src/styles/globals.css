@@ -10,3 +10,11 @@
         width: 100%;
         border-bottom-right-radius: 80% 100%;
 }
+
+.button {
+        font-family:'Ubuntu', sans-serif;
+        font-weight: bold;
+        border-radius: 6px;
+        padding: 5px 8px 5px 8px;
+        font-size: 24px;
+}
