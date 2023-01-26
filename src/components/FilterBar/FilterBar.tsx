@@ -7,8 +7,8 @@ import {
 const FilterBar = () => {
   return (
     <div className='font-ubuntu uppercase text-lightColor font-bold text-sm flex flex-col border border-darkColor border-opacity-40 rounded-lg'>
-      <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 pl-12 pr-12'>
-        <div className='flex flex-row justify-between w-full font-bold text-base pt-2 pb-2 gap-3'>
+      <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 px-12'>
+        <div className='flex flex-row justify-between w-full font-bold text-base py-2 gap-3'>
           <h3>cijena</h3>
           <button className='font-bold text-md'>
             <MinimizeIcon />
@@ -16,8 +16,8 @@ const FilterBar = () => {
         </div>
 
         <div className='flex flex-row gap-10'>
-          <p className='border rounded-lg pl-5 pr-5 p-2'>0 €</p>
-          <p className='border rounded-lg pl-5 pr-5 p-2'>2000+ €</p>
+          <p className='border rounded-lg px-5 p-2'>0 €</p>
+          <p className='border rounded-lg px-5 p-2'>2000+ €</p>
         </div>
         <Slider
           getAriaLabel={() => 'Price range'}
@@ -30,8 +30,8 @@ const FilterBar = () => {
         />
       </div>
 
-      <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 pl-12 pr-12'>
-        <div className='flex flex-row justify-between w-full font-bold text-base pt-2 pb-2 gap-3'>
+      <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 px-12'>
+        <div className='flex flex-row justify-between w-full font-bold text-base py-2 gap-3'>
           <h3>trajanje</h3>
           <button className='font-bold text-md'>
             <MinimizeIcon />
@@ -57,8 +57,8 @@ const FilterBar = () => {
         </div>
       </div>
 
-      <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 pl-12 pr-12'>
-        <div className='flex flex-row justify-between w-full font-bold text-base pt-2 pb-2 gap-3'>
+      <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 px-12'>
+        <div className='flex flex-row justify-between w-full font-bold text-base py-2 gap-3'>
           <h3>ocjena korisnika</h3>
           <button className='font-bold text-md'>
             <MaximizeIcon />
@@ -66,8 +66,8 @@ const FilterBar = () => {
         </div>
       </div>
 
-      <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 pl-12 pr-12'>
-        <div className='flex flex-row justify-between w-full font-bold text-base pt-2 pb-2 gap-3'>
+      <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 px-12'>
+        <div className='flex flex-row justify-between w-full font-bold text-base py-2 gap-3'>
           <h3>kategorija</h3>
           <button className='font-bold text-md'>
             <MaximizeIcon />
@@ -75,8 +75,8 @@ const FilterBar = () => {
         </div>
       </div>
 
-      <div className='flex flex-col items-start justify-start w-full p-4 pl-12 pr-12'>
-        <div className='flex flex-row justify-between w-full font-bold text-base pt-2 pb-2 gap-3'>
+      <div className='flex flex-col items-start justify-start w-full p-4 px-12'>
+        <div className='flex flex-row justify-between w-full font-bold text-base py-2 gap-3'>
           <h3>lokacija</h3>
           <button className='font-bold text-md'>
             <MaximizeIcon />

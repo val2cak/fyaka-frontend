@@ -5,6 +5,7 @@ import AdminLayout from '../features/admin/AdminLayout';
 import GuestLayout from '../features/guest/GuestLayout';
 import HomeContainer from '../features/guest/Home/HomeContainer';
 import ServicesListContainer from '../features/guest/ServicesList/ServicesListContainer';
+import LookingForServiceContainer from '../features/admin/LookingForService/LookingForServiceContainer';
 //
 
 // TYPES
@@ -65,7 +66,7 @@ export let Routes: CustomRouteObject[] = [
           {
             path: 'looking-for-service',
             name: 'Trebam Uslugu',
-            element: <div>Looking For Service</div>,
+            element: <LookingForServiceContainer />,
           },
           {
             path: '',

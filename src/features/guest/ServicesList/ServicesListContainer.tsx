@@ -1,4 +1,5 @@
 import { Pagination } from '@mui/material';
+import { Fragment } from 'react';
 import Card from '../../../components/Card/Card';
 import FilterBar from '../../../components/FilterBar/FilterBar';
 import SearchBar from '../../../components/SearchBar/SearchBar';
@@ -61,12 +62,12 @@ const ServicesListContainer = () => {
         </div>
       </div>
 
-      <div className='flex flex-row pl-44 pr-44 gap-5 pb-8 w-full'>
-        <div>
+      <div className='flex flex-row px-44 gap-5 pb-8 w-full'>
+        <Fragment>
           <FilterBar />
-        </div>
+        </Fragment>
 
-        <div className='flex flex-wrap justify-between'>
+        <div className='flex flex-wrap justify-between w-3/4'>
           {Cards.map((item, index) => (
             <Card
               key={index}

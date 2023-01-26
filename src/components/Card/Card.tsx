@@ -1,3 +1,5 @@
+import { RiArrowRightSLine } from 'react-icons/ri';
+
 const Card = (props: {
   author: string;
   title: string;
@@ -13,8 +15,8 @@ const Card = (props: {
         <p className='text-sm font-bold'>{props.date}</p>
         <p className='text-md text-primaryColor font-bold'>{props.price}</p>
         <p className='text-sm'>{props.location}</p>
-        <button className='uppercase text-base text-primaryColor'>
-          saznaj više
+        <button className='uppercase text-base text-primaryColor flex items-center justify-center gap-1'>
+          saznaj više <RiArrowRightSLine className='text-lg' />
         </button>
       </div>
     </div>
