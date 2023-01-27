@@ -14,11 +14,11 @@ const LoginRegisterContainer = () => {
           </h1>
 
           {location.pathname === '/login' ? (
-            <div className='flex justify-start items-center'>
+            <div className='flex justify-start items-center m-24'>
               <LoginForm />
             </div>
           ) : (
-            <div className='flex justify-end items-center'>
+            <div className='flex justify-end items-center mx-24 my-8'>
               <RegisterForm />
             </div>
           )}

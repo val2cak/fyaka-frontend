@@ -4,7 +4,7 @@ import { RiInstagramFill } from 'react-icons/ri';
 import { SiLinkedin } from 'react-icons/si';
 //
 
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const Footer = () => {
   const location = useLocation();
@@ -30,13 +30,13 @@ const Footer = () => {
         }`}
       >
         <li>
-          <a href='/settings'>Kako funkcionira</a>
+          <NavLink to='/settings'>Kako funkcionira</NavLink>
         </li>
         <li>
-          <a href='/settings'>O nama</a>
+          <NavLink to='/settings'>O nama</NavLink>
         </li>
         <li>
-          <a href='/settings'>Centar za pomoć</a>
+          <NavLink to='/settings'>Centar za pomoć</NavLink>
         </li>
       </ul>
       <ul
@@ -74,13 +74,13 @@ const Footer = () => {
         }`}
       >
         <li>
-          <a href='/settings'>Odredbe i uvjeti</a>
+          <NavLink to='/settings'>Odredbe i uvjeti</NavLink>
         </li>
         <li>
-          <a href='/settings'>Mediji</a>
+          <NavLink to='/settings'>Mediji</NavLink>
         </li>
         <li>
-          <a href='/settings'>Postavke kolačića</a>
+          <NavLink to='/settings'>Postavke kolačića</NavLink>
         </li>
       </ul>
     </main>

@@ -17,6 +17,17 @@ import LoginRegisterContainer from '../features/auth/LoginRegister/LoginRegister
 import { CustomRouteObject } from '../types/typeDefinitions';
 //
 
+// ICONS
+import {
+  ImUser as ProfileIcon,
+  ImStarFull as ReviewsIcon,
+  ImCog as SettingsIcon,
+  ImBubbles2 as MessagesIcon,
+  ImHeart as FavoritesIcon,
+  ImBriefcase as MyServicesIcon,
+} from 'react-icons/im';
+//
+
 export let Routes: CustomRouteObject[] = [
   {
     path: '/',
@@ -85,35 +96,42 @@ export let Routes: CustomRouteObject[] = [
           {
             path: '',
             name: 'Profil',
+            element: <Outlet />,
             children: [
               {
                 path: 'profile',
                 name: 'Profil',
+                icon: ProfileIcon,
                 element: <div>Profile</div>,
               },
               {
                 path: 'ratings',
                 name: 'Ocjene',
+                icon: ReviewsIcon,
                 element: <div>Ratings</div>,
               },
               {
                 path: 'my-services',
                 name: 'Moje usluge',
+                icon: MyServicesIcon,
                 element: <div>My Services</div>,
               },
               {
                 path: 'favorites',
                 name: 'Favoriti',
+                icon: FavoritesIcon,
                 element: <div>Favorites</div>,
               },
               {
                 path: 'messages',
                 name: 'Poruke',
+                icon: MessagesIcon,
                 element: <div>Messages</div>,
               },
               {
                 path: 'settings',
                 name: 'Postavke',
+                icon: SettingsIcon,
                 element: <div>Settings</div>,
               },
             ],

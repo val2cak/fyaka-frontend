@@ -62,7 +62,7 @@ const LookingForServiceForm = () => {
       </div>
 
       <div className='flex justify-center items-center'>
-        <button className='font-ubuntu bg-primaryColor text-lightColor font-bold rounded-lg px-8 py-3 text-md'>
+        <button className='button bg-primaryColor text-lightColor h-[60px]'>
           objavi
         </button>
       </div>

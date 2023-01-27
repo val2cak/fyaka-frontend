@@ -1,8 +1,8 @@
 import { Checkbox, FormControlLabel, Slider } from '@mui/material';
 import {
-  RiAddFill as MaximizeIcon,
-  RiSubtractFill as MinimizeIcon,
-} from 'react-icons/ri';
+  ImPlus as MaximizeIcon,
+  ImMinus as MinimizeIcon,
+} from 'react-icons/im';
 
 const FilterBar = () => {
   return (
@@ -10,7 +10,7 @@ const FilterBar = () => {
       <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 px-12'>
         <div className='flex flex-row justify-between w-full font-bold text-base py-2 gap-3'>
           <h3>cijena</h3>
-          <button className='font-bold text-md'>
+          <button className='font-bold text-sm'>
             <MinimizeIcon />
           </button>
         </div>
@@ -33,7 +33,7 @@ const FilterBar = () => {
       <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 px-12'>
         <div className='flex flex-row justify-between w-full font-bold text-base py-2 gap-3'>
           <h3>trajanje</h3>
-          <button className='font-bold text-md'>
+          <button className='font-bold text-sm'>
             <MinimizeIcon />
           </button>
         </div>
@@ -60,7 +60,7 @@ const FilterBar = () => {
       <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 px-12'>
         <div className='flex flex-row justify-between w-full font-bold text-base py-2 gap-3'>
           <h3>ocjena korisnika</h3>
-          <button className='font-bold text-md'>
+          <button className='font-bold text-sm'>
             <MaximizeIcon />
           </button>
         </div>
@@ -69,7 +69,7 @@ const FilterBar = () => {
       <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 px-12'>
         <div className='flex flex-row justify-between w-full font-bold text-base py-2 gap-3'>
           <h3>kategorija</h3>
-          <button className='font-bold text-md'>
+          <button className='font-bold text-sm'>
             <MaximizeIcon />
           </button>
         </div>
@@ -78,7 +78,7 @@ const FilterBar = () => {
       <div className='flex flex-col items-start justify-start w-full p-4 px-12'>
         <div className='flex flex-row justify-between w-full font-bold text-base py-2 gap-3'>
           <h3>lokacija</h3>
-          <button className='font-bold text-md'>
+          <button className='font-bold text-sm'>
             <MaximizeIcon />
           </button>
         </div>

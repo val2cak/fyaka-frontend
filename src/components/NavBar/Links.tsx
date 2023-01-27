@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { Routes } from '../../routes/Routes';
+import ProfileMenu from '../ProfileMenu/ProfileMenu';
 
 const Links = (props: { name: string }) => {
   return (
@@ -8,14 +9,18 @@ const Links = (props: { name: string }) => {
         ?.children?.find((child) => child.name === props.name)
         .children.map((route, index) => (
           <li key={index} className='lowercase flex'>
-            <NavLink
-              to={route.path !== undefined ? route.path : '/'}
-              className={({ isActive }) =>
-                isActive ? 'font-bold border-b-4' : undefined
-              }
-            >
-              {!route.invisible && route.name !== undefined && route.name}
-            </NavLink>
+            {route.name !== 'Profil' ? (
+              <NavLink
+                to={route.path !== undefined ? route.path : '/'}
+                className={({ isActive }) =>
+                  isActive ? 'font-bold border-b-4' : undefined
+                }
+              >
+                {!route.invisible && route.name !== undefined && route.name}
+              </NavLink>
+            ) : (
+              <ProfileMenu routes={route.children} />
+            )}
           </li>
         ))}
     </ul>
