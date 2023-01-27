@@ -33,6 +33,7 @@ module.exports = {
       },
       backgroundImage: () => ({
         homeCover: "url('../assets/vectors/home.png')",
+        login: "url('../assets/vectors/login.png')",
       }),
       lineHeight: {
         3: '1.2rem',

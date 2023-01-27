@@ -1,3 +1,7 @@
+// REACT
+import { Outlet } from 'react-router-dom';
+//
+
 // ROUTES
 import ProtectedRoute from './ProtectedRoute';
 import AdminLayout from '../features/admin/AdminLayout';
@@ -5,12 +9,12 @@ import GuestLayout from '../features/guest/GuestLayout';
 import HomeContainer from '../features/guest/Home/HomeContainer';
 import ServicesListContainer from '../features/guest/ServicesList/ServicesListContainer';
 import LookingForServiceContainer from '../features/admin/LookingForService/LookingForServiceContainer';
+import GetStartedContainer from '../features/auth/GetStarted/GetStartedContainer';
+import LoginRegisterContainer from '../features/auth/LoginRegister/LoginRegisterContainer';
 //
 
 // TYPES
 import { CustomRouteObject } from '../types/typeDefinitions';
-import { Outlet } from 'react-router-dom';
-import GetStarted from '../features/auth/GetStarted';
 //
 
 export let Routes: CustomRouteObject[] = [
@@ -22,17 +26,17 @@ export let Routes: CustomRouteObject[] = [
       {
         path: 'get-started',
         name: 'Get Started',
-        element: <GetStarted />,
+        element: <GetStartedContainer />,
       },
       {
         path: 'login',
         name: 'Login',
-        element: <div>Login</div>,
+        element: <LoginRegisterContainer />,
       },
       {
         path: 'register',
         name: 'Register',
-        element: <div>Register</div>,
+        element: <LoginRegisterContainer />,
       },
     ],
   },
