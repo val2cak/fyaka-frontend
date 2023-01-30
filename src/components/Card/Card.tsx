@@ -10,7 +10,12 @@ const Card = (props: ServiceCard) => {
   const flag = location.pathname === '/my-services' ? 1 : 0;
 
   return (
-    <div className='w-[250px] h-[250px] bg-lightColor rounded-lg font-ubuntu flex flex-col items-center justify-center'>
+    <button
+      onClick={() =>
+        flag ? navigateTo(`/my-services/:id`) : navigateTo(`/services-list/:id`)
+      }
+      className='w-[250px] h-[250px] bg-lightColor rounded-lg font-ubuntu flex flex-col items-center justify-center'
+    >
       <div className='flex flex-col items-start'>
         {!flag && (
           <p className='text-sm text-grayColor font-bold'>{props.author}</p>
@@ -19,19 +24,12 @@ const Card = (props: ServiceCard) => {
         <p className='text-sm font-bold'>{props.date}</p>
         <p className='text-md text-primaryColor font-bold'>{props.price}</p>
         <p className='text-sm'>{props.location}</p>
-        <button
-          onClick={() =>
-            flag
-              ? navigateTo(`/my-services/:id`)
-              : navigateTo(`/services-list/:id`)
-          }
-          className='uppercase text-base text-primaryColor flex items-center justify-center gap-1'
-        >
+        <p className='uppercase text-base text-primaryColor flex items-center justify-center gap-1'>
           {flag ? <span>uredi</span> : <span>saznaj više</span>}
           <RiArrowRightSLine className='text-lg' />
-        </button>
+        </p>
       </div>
-    </div>
+    </button>
   );
 };
 

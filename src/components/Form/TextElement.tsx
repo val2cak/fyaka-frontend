@@ -1,9 +1,9 @@
-const InputElement = (props: {
+const TextElement = (props: {
   label: string;
   placeholder: string;
   value?: string | number;
   labelClasses?: string;
-  inputClasses?: string;
+  textClasses?: string;
 }) => {
   return (
     <div className='flex flex-col'>
@@ -12,14 +12,14 @@ const InputElement = (props: {
       >
         {props.label}
       </label>
-      <input
+      <textarea
         placeholder={props.placeholder}
         value={props.value}
-        className={`p-5 rounded-lg font-raleway ${props.inputClasses}`}
+        className={`p-5 rounded-lg font-raleway ${props.textClasses}`}
       />
       <text />
     </div>
   );
 };
 
-export default InputElement;
+export default TextElement;

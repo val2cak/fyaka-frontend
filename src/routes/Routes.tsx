@@ -18,6 +18,7 @@ import MyServicesContainer from '../features/admin/MyServices/MyServicesContaine
 import FavoritesContainer from '../features/admin/Favorites/FavoritesContainer';
 import MessagesContainer from '../features/admin/Messages/MessagesContainer';
 import SettingsContainer from '../features/admin/Settings/SettingsContainer';
+import MySingleServiceContainer from '../features/admin/MySingleService/MySingleServiceContainer';
 //
 
 // TYPES
@@ -127,7 +128,7 @@ export let Routes: CustomRouteObject[] = [
                 path: 'my-services/:id',
                 name: 'Moja usluga',
                 invisible: true,
-                element: <div>Moja usluga</div>,
+                element: <MySingleServiceContainer />,
               },
               {
                 path: 'favorites',
