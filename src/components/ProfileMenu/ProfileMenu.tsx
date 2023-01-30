@@ -39,10 +39,10 @@ const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
               </NavLink>
             </li>
           ))}
-          <li className='flex flex-row items-center gap-2'>
+          <button className='flex flex-row items-center gap-2'>
             <LogoutIcon className='text-md' />
             odjava
-          </li>
+          </button>
         </ul>
       )}
     </main>

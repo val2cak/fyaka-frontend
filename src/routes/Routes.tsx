@@ -12,6 +12,12 @@ import LookingForServiceContainer from '../features/admin/LookingForService/Look
 import GetStartedContainer from '../features/auth/GetStarted/GetStartedContainer';
 import LoginRegisterContainer from '../features/auth/LoginRegister/LoginRegisterContainer';
 import SingleServiceContainer from '../features/guest/SingleService/SingleServiceContainer';
+import ProfileContainer from '../features/admin/Profile/ProfileContainer';
+import RatingsContainer from '../features/admin/Ratings/RatingsContainer';
+import MyServicesContainer from '../features/admin/MyServices/MyServicesContainer';
+import FavoritesContainer from '../features/admin/Favorites/FavoritesContainer';
+import MessagesContainer from '../features/admin/Messages/MessagesContainer';
+import SettingsContainer from '../features/admin/Settings/SettingsContainer';
 //
 
 // TYPES
@@ -103,37 +109,37 @@ export let Routes: CustomRouteObject[] = [
                 path: 'profile',
                 name: 'Profil',
                 icon: ProfileIcon,
-                element: <div>Profile</div>,
+                element: <ProfileContainer />,
               },
               {
                 path: 'ratings',
                 name: 'Ocjene',
                 icon: ReviewsIcon,
-                element: <div>Ratings</div>,
+                element: <RatingsContainer />,
               },
               {
                 path: 'my-services',
                 name: 'Moje usluge',
                 icon: MyServicesIcon,
-                element: <div>My Services</div>,
+                element: <MyServicesContainer />,
               },
               {
                 path: 'favorites',
                 name: 'Favoriti',
                 icon: FavoritesIcon,
-                element: <div>Favorites</div>,
+                element: <FavoritesContainer />,
               },
               {
                 path: 'messages',
                 name: 'Poruke',
                 icon: MessagesIcon,
-                element: <div>Messages</div>,
+                element: <MessagesContainer />,
               },
               {
                 path: 'settings',
                 name: 'Postavke',
                 icon: SettingsIcon,
-                element: <div>Settings</div>,
+                element: <SettingsContainer />,
               },
             ],
           },
