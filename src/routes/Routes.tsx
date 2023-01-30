@@ -11,6 +11,7 @@ import ServicesListContainer from '../features/guest/ServicesList/ServicesListCo
 import LookingForServiceContainer from '../features/admin/LookingForService/LookingForServiceContainer';
 import GetStartedContainer from '../features/auth/GetStarted/GetStartedContainer';
 import LoginRegisterContainer from '../features/auth/LoginRegister/LoginRegisterContainer';
+import SingleServiceContainer from '../features/guest/SingleService/SingleServiceContainer';
 //
 
 // TYPES
@@ -75,7 +76,7 @@ export let Routes: CustomRouteObject[] = [
             path: 'services-list/:id',
             name: 'Usluga',
             invisible: true,
-            element: <div>Single Service</div>,
+            element: <SingleServiceContainer />,
           },
         ],
       },

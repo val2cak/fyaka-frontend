@@ -7,3 +7,17 @@ export interface CustomRouteObject extends NonIndexRouteObject {
   icon?: IconType;
   invisible?: boolean;
 }
+
+export interface ServiceCard {
+  author: string;
+  title: string;
+  date: string;
+  price: string;
+  location: string;
+}
+
+export interface ServiceInfo extends ServiceCard {
+  category: string;
+  description: string;
+  people: number;
+}

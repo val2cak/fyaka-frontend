@@ -4,6 +4,7 @@ import {
   BsChevronDown as ArrowDownIcon,
   BsChevronUp as ArrowUpIcon,
 } from 'react-icons/bs';
+import { RiLogoutCircleRLine as LogoutIcon } from 'react-icons/ri';
 import { NavLink } from 'react-router-dom';
 
 const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
@@ -21,7 +22,7 @@ const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
       {open && (
         <ul
           onMouseLeave={() => setOpen(false)}
-          className='absolute z-[1000] bg-primaryColor pb-16 pt-4 px-24 right-0 top-16 bg-opacity-90 flex flex-col gap-4'
+          className='absolute z-[1000] bg-primaryColor pb-16 pt-4 px-24 right-0 top-16 bg-opacity-90 flex flex-col gap-4 items-start'
         >
           {props.routes.map((item, index) => (
             <li key={index} className='lowercase flex'>
@@ -38,6 +39,10 @@ const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
               </NavLink>
             </li>
           ))}
+          <li className='flex flex-row items-center gap-2'>
+            <LogoutIcon className='text-md' />
+            odjava
+          </li>
         </ul>
       )}
     </main>
