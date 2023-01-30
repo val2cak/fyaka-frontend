@@ -35,7 +35,7 @@ const ProtectedRoute = ({ children }: any) => {
       // });
       navigateTo('/get-started');
     } else if (location.pathname === '/') {
-      navigateTo('/home');
+      navigateTo('/');
     }
   }, [user, navigateTo, location]);
 

@@ -38,7 +38,7 @@ import {
 
 export let Routes: CustomRouteObject[] = [
   {
-    path: '/',
+    path: '/auth/',
     name: 'Authentication',
     element: <Outlet />,
     children: [
@@ -70,7 +70,7 @@ export let Routes: CustomRouteObject[] = [
         element: <GuestLayout />,
         children: [
           {
-            path: 'home',
+            path: '',
             name: 'Naslovna',
             element: <HomeContainer />,
           },

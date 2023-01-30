@@ -13,7 +13,7 @@ const LoginRegisterContainer = () => {
             !Fyaka
           </h1>
 
-          {location.pathname === '/login' ? (
+          {location.pathname === '/auth/login' ? (
             <div className='flex justify-start items-center m-24'>
               <LoginForm />
             </div>

@@ -10,7 +10,7 @@ const Footer = () => {
   const location = useLocation();
 
   const flag =
-    location.pathname === '/home' ||
+    location.pathname === '/' ||
     location.pathname === '/looking-for-service' ||
     location.pathname === '/ratings' ||
     location.pathname === '/favorites' ||

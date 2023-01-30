@@ -16,13 +16,13 @@ const GetStartedContainer = () => {
         <div className='flex flex-col w-1/3 gap-8 justify-center items-center'>
           <button
             className='button bg-secondaryColor text-lightColor h-[70px]'
-            onClick={() => navigateTo('/login')}
+            onClick={() => navigateTo('/auth/login')}
           >
             Prijava
           </button>
           <button
             className='button bg-lightColor text-secondaryColor h-[70px]'
-            onClick={() => navigateTo('/register')}
+            onClick={() => navigateTo('/auth/register')}
           >
             Registracija
           </button>

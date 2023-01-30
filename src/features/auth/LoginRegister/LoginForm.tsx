@@ -31,7 +31,7 @@ const LoginForm = () => {
       </button>
       <div className='flex gap-1 font-ubuntu text-base font-bold text-secondaryColor'>
         Još nemaš račun?
-        <NavLink to={'/register'} className='text-primaryColor'>
+        <NavLink to={'/auth/register'} className='text-primaryColor'>
           Registriraj se
         </NavLink>
       </div>

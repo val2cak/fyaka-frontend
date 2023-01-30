@@ -49,7 +49,7 @@ const RegisterForm = () => {
       </button>
       <div className='flex gap-1 font-ubuntu text-base font-bold text-secondaryColor'>
         Već imaš račun?
-        <NavLink to={'/login'} className='text-primaryColor'>
+        <NavLink to={'/auth/login'} className='text-primaryColor'>
           Prijavi se
         </NavLink>
       </div>
