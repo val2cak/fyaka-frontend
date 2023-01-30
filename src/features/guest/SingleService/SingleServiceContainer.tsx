@@ -1,9 +1,13 @@
 import TitleBar from '../../../components/TitleBar/TitleBar';
 import SingleServiceCard from './SingleServiceCard';
 import { IoArrowUndoCircleSharp as ArrowBackIcon } from 'react-icons/io5';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SingleServiceContainer = () => {
+  const location = useLocation();
+
+  const flag = location.pathname.includes('/favorites') ? 1 : 0;
+
   const navigateTo = useNavigate();
 
   const service = {
@@ -20,10 +24,10 @@ const SingleServiceContainer = () => {
 
   return (
     <main className='bg-secondaryColor'>
-      <TitleBar title={'popis usluga'} />
+      <TitleBar title={`${flag ? 'favoriti' : 'popis usluga'}`} />
 
       <button
-        onClick={() => navigateTo('/services-list')}
+        onClick={() => navigateTo(-1)}
         className='text-lightColor text-3xl m-3 absolute'
       >
         <ArrowBackIcon />

@@ -1,7 +1,7 @@
 import Card from '../../../components/Card/Card';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import TitleBar from '../../../components/TitleBar/TitleBar';
-import arrow from '../../../assets/shapes/arrow-left.png';
+import arrow from '../../../assets/shapes/arrow-left-light.png';
 
 const ServicesListContainer = () => {
   const Cards = [

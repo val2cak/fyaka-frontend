@@ -137,6 +137,12 @@ export let Routes: CustomRouteObject[] = [
                 element: <FavoritesContainer />,
               },
               {
+                path: 'favorites/:id',
+                name: 'Favorit',
+                invisible: true,
+                element: <SingleServiceContainer />,
+              },
+              {
                 path: 'messages',
                 name: 'Poruke',
                 icon: MessagesIcon,
