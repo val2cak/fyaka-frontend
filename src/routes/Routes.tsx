@@ -124,6 +124,12 @@ export let Routes: CustomRouteObject[] = [
                 element: <MyServicesContainer />,
               },
               {
+                path: 'my-services/:id',
+                name: 'Moja usluga',
+                invisible: true,
+                element: <div>Moja usluga</div>,
+              },
+              {
                 path: 'favorites',
                 name: 'Favoriti',
                 icon: FavoritesIcon,

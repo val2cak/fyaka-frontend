@@ -1,9 +1,11 @@
-import React from 'react';
+import TitleBar from '../../../components/TitleBar/TitleBar';
 
-type Props = {};
-
-const SettingsContainer = (props: Props) => {
-  return <div>SettingsContainer</div>;
+const SettingsContainer = () => {
+  return (
+    <main>
+      <TitleBar title={'postavke'} />
+    </main>
+  );
 };
 
 export default SettingsContainer;

@@ -1,9 +1,11 @@
-import React from 'react';
+import TitleBar from '../../../components/TitleBar/TitleBar';
 
-type Props = {};
-
-const MessagesContainer = (props: Props) => {
-  return <div>MessagesContainer</div>;
+const MessagesContainer = () => {
+  return (
+    <main>
+      <TitleBar title={'poruke'} />
+    </main>
+  );
 };
 
 export default MessagesContainer;

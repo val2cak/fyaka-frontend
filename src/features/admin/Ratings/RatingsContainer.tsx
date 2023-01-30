@@ -1,9 +1,11 @@
-import React from 'react';
+import TitleBar from '../../../components/TitleBar/TitleBar';
 
-type Props = {};
-
-const RatingsContainer = (props: Props) => {
-  return <div>RatingsContainer</div>;
+const RatingsContainer = () => {
+  return (
+    <main>
+      <TitleBar title={'ocjene'} />
+    </main>
+  );
 };
 
 export default RatingsContainer;

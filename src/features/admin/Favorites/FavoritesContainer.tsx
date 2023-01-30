@@ -1,9 +1,11 @@
-import React from 'react';
+import TitleBar from '../../../components/TitleBar/TitleBar';
 
-type Props = {};
-
-const FavoritesContainer = (props: Props) => {
-  return <div>FavoritesContainer</div>;
+const FavoritesContainer = () => {
+  return (
+    <main>
+      <TitleBar title={'favoriti'} />
+    </main>
+  );
 };
 
 export default FavoritesContainer;
