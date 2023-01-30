@@ -66,7 +66,9 @@ const Footer = () => {
             </a>
           </li>
         </ul>
-        <li>All rights reserved ©!Fyaka</li>
+        <li className={`${!flag ? 'text-primaryColor' : 'text-lightColor'}`}>
+          All rights reserved ©!Fyaka
+        </li>
       </ul>
       <ul
         className={`flex flex-col ${

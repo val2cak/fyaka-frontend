@@ -15,9 +15,9 @@ const FilterBar = () => {
           </button>
         </div>
 
-        <div className='flex flex-row gap-10'>
-          <p className='border rounded-lg px-5 p-2'>0 €</p>
-          <p className='border rounded-lg px-5 p-2'>2000+ €</p>
+        <div className='flex flex-row justify-between w-full'>
+          <p className='border rounded-lg px-5 p-2 flex flex-nowrap'>0 €</p>
+          <p className='border rounded-lg px-5 p-2 flex flex-nowrap'>2000+ €</p>
         </div>
         <Slider
           getAriaLabel={() => 'Price range'}
