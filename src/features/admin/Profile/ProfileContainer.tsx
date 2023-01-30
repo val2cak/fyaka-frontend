@@ -1,9 +1,12 @@
+import ProfileImage from './ProfileImage';
+import ProfileInfo from './ProfileInfo';
+
 const ProfileContainer = () => {
   return (
-    <main className='bg-secondaryColor flex py-32 px-56 gap-8'>
-      <div>picture</div>
+    <main className='bg-secondaryColor flex py-24 px-56 justify-center items-center gap-32'>
+      <ProfileImage />
 
-      <div>info</div>
+      <ProfileInfo />
     </main>
   );
 };
