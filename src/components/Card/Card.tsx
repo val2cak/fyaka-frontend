@@ -1,6 +1,7 @@
 import { RiArrowRightSLine } from 'react-icons/ri';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ServiceCard } from '../../types/typeDefinitions';
+import { AiFillHeart as FavoriteFilledIcon } from 'react-icons/ai';
 
 const Card = (props: ServiceCard) => {
   const navigateTo = useNavigate();
@@ -25,8 +26,13 @@ const Card = (props: ServiceCard) => {
       }
       className={`w-[250px] h-[250px] ${
         flag === 2 ? 'bg-secondaryColor text-lightColor' : 'bg-lightColor'
-      } rounded-lg font-ubuntu flex flex-col items-center justify-center`}
+      } rounded-lg font-ubuntu flex flex-col items-center justify-center relative`}
     >
+      {flag === 2 && (
+        <div className='absolute right-2 top-2 text-primaryColor text-md'>
+          <FavoriteFilledIcon />
+        </div>
+      )}
       <div className='flex flex-col items-start'>
         {flag !== 1 && (
           <p
