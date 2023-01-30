@@ -1,6 +1,5 @@
 import { Rating } from '@mui/material';
 import InputElement from '../../../components/Form/InputElement';
-import { MdStarRate as StarIcon } from 'react-icons/md';
 
 const ProfileInfo = () => {
   return (
@@ -17,8 +16,6 @@ const ProfileInfo = () => {
             readOnly
             size='medium'
             precision={0.5}
-            emptyIcon={<StarIcon className='opacity-50' />}
-            icon={<StarIcon className='text-primaryColor' />}
           />
         </div>
       </div>

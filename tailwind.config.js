@@ -26,6 +26,7 @@ module.exports = {
         primaryColor: '#F58800',
         secondaryColor: '#1A4645',
         lightColor: '#FAFAFA',
+        lightGrayColor: '#F2F2F2',
         darkColor: '#051821',
         grayColor: '#696969',
         redColor: '#EA4335',

@@ -1,8 +1,8 @@
 import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
-import { ServiceInfo } from '../../../types/typeDefinitions';
+import { ServiceFormProps } from '../../../types/typeDefinitions';
 
-const MySingleServiceCard = (props: { service: ServiceInfo }) => {
+const MySingleServiceCard = (props: { service: ServiceFormProps }) => {
   return (
     <div className='bg-lightColor rounded-lg py-12 px-28 flex flex-col gap-12'>
       <div className='flex flex-row justify-evenly gap-10'>

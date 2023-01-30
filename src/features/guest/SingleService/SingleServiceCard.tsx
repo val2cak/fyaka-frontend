@@ -1,11 +1,11 @@
-import { ServiceInfo } from '../../../types/typeDefinitions';
+import { ServiceFormProps } from '../../../types/typeDefinitions';
 import {
   AiFillHeart as FavoriteFilledIcon,
   AiOutlineHeart as FavoriteOutlinedIcon,
 } from 'react-icons/ai';
 import { useState } from 'react';
 
-const SingleServiceCard = (props: { service: ServiceInfo }) => {
+const SingleServiceCard = (props: { service: ServiceFormProps }) => {
   const [favorite, setFavorite] = useState(false);
 
   return (

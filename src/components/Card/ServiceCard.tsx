@@ -1,9 +1,9 @@
 import { RiArrowRightSLine } from 'react-icons/ri';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ServiceCard } from '../../types/typeDefinitions';
+import { ServiceProps } from '../../types/typeDefinitions';
 import { AiFillHeart as FavoriteFilledIcon } from 'react-icons/ai';
 
-const Card = (props: ServiceCard) => {
+const ServiceCard = (props: ServiceProps) => {
   const navigateTo = useNavigate();
 
   const location = useLocation();
@@ -56,4 +56,4 @@ const Card = (props: ServiceCard) => {
   );
 };
 
-export default Card;
+export default ServiceCard;

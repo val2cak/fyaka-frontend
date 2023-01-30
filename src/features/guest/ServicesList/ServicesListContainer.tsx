@@ -1,6 +1,6 @@
 import { Pagination } from '@mui/material';
 import { Fragment } from 'react';
-import Card from '../../../components/Card/Card';
+import ServiceCard from '../../../components/Card/ServiceCard';
 import FilterBar from '../../../components/FilterBar/FilterBar';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import TitleBar from '../../../components/TitleBar/TitleBar';
@@ -69,7 +69,7 @@ const ServicesListContainer = () => {
 
         <div className='flex flex-wrap justify-between w-3/4'>
           {Cards.map((item, index) => (
-            <Card
+            <ServiceCard
               key={index}
               author={item.author}
               title={item.title}

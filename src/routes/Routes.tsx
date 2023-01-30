@@ -28,7 +28,7 @@ import { CustomRouteObject } from '../types/typeDefinitions';
 // ICONS
 import {
   ImUser as ProfileIcon,
-  ImStarFull as ReviewsIcon,
+  ImStarFull as RatingsIcon,
   ImCog as SettingsIcon,
   ImBubbles2 as MessagesIcon,
   ImHeart as FavoritesIcon,
@@ -115,7 +115,7 @@ export let Routes: CustomRouteObject[] = [
               {
                 path: 'ratings',
                 name: 'Ocjene',
-                icon: ReviewsIcon,
+                icon: RatingsIcon,
                 element: <RatingsContainer />,
               },
               {

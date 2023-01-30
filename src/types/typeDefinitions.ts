@@ -8,7 +8,7 @@ export interface CustomRouteObject extends NonIndexRouteObject {
   invisible?: boolean;
 }
 
-export interface ServiceCard {
+export interface ServiceProps {
   author: string;
   title: string;
   date: string;
@@ -16,8 +16,14 @@ export interface ServiceCard {
   location: string;
 }
 
-export interface ServiceInfo extends ServiceCard {
+export interface ServiceFormProps extends ServiceProps {
   category: string;
   description: string;
   people: number;
+}
+
+export interface ReviewProps {
+  author: string;
+  rating: number;
+  text: string;
 }

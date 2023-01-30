@@ -1,4 +1,4 @@
-import Card from '../../../components/Card/Card';
+import ServiceCard from '../../../components/Card/ServiceCard';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import TitleBar from '../../../components/TitleBar/TitleBar';
 import arrow from '../../../assets/shapes/arrow-left-dark.png';
@@ -76,7 +76,7 @@ const FavoritesContainer = () => {
 
       <div className='flex flex-wrap justify-between items-center flex-row px-56 gap-4 w-full'>
         {Cards.map((item, index) => (
-          <Card
+          <ServiceCard
             key={index}
             author={item.author}
             title={item.title}
