@@ -19,17 +19,17 @@ const SingleServiceContainer = () => {
   };
 
   return (
-    <main className='bg-secondaryColor'>
+    <main className='bg-lightColor'>
       <TitleBar title={'moje usluge'} />
 
       <button
         onClick={() => navigateTo('/my-services')}
-        className='text-lightColor text-3xl m-3 absolute'
+        className='text-secondaryColor text-3xl m-3 absolute'
       >
         <ArrowBackIcon />
       </button>
 
-      <div className='px-36 py-10'>
+      <div className='px-28 py-10'>
         <MySingleServiceCard service={service} />
       </div>
     </main>

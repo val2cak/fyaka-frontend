@@ -14,7 +14,7 @@ const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
     <main>
       <button
         onMouseEnter={() => setOpen(true)}
-        className='flex justify-center items-center gap-2 py-2'
+        className='flex justify-center items-center gap-2 pb-1'
       >
         profil {open ? <ArrowUpIcon /> : <ArrowDownIcon />}
       </button>

@@ -14,7 +14,8 @@ const Footer = () => {
     location.pathname === '/looking-for-service' ||
     location.pathname === '/ratings' ||
     location.pathname === '/favorites' ||
-    location.pathname === '/settings'
+    location.pathname === '/settings' ||
+    location.pathname.includes('/my-services/')
       ? 1
       : 0;
 

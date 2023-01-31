@@ -15,7 +15,7 @@ const Links = (props: { name: string }) => {
                 className={({ isActive }) =>
                   isActive
                     ? 'font-bold border-b-4 py-1'
-                    : 'font-regular py-2 hover:py-1 delay-50 hover:font-bold hover:border-b-4 duration-100'
+                    : 'font-regular pb-1 hover:py-1 delay-50 hover:font-bold hover:border-b-4 duration-100'
                 }
               >
                 {!route.invisible && route.name !== undefined && route.name}

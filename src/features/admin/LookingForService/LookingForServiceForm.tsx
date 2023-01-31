@@ -1,9 +1,10 @@
 import InputElement from '../../../components/Form/InputElement';
+import TextElement from '../../../components/Form/TextElement';
 
 const LookingForServiceForm = () => {
   return (
-    <div className='bg-secondaryColor rounded-lg py-16 px-32 flex flex-col gap-8'>
-      <div className='grid grid-cols-2 gap-10'>
+    <div className='bg-secondaryColor rounded-lg py-12 px-32 flex flex-col gap-8'>
+      <div className='grid grid-cols-2 gap-8'>
         <InputElement
           label={'autor'}
           placeholder={'autor'}
@@ -41,27 +42,27 @@ const LookingForServiceForm = () => {
 
         <InputElement
           label={'broj osoba'}
-          placeholder={'naslov'}
+          placeholder={'broj osoba'}
           labelClasses={'text-primaryColor'}
           inputClasses={'placeholder-primaryColor'}
         />
 
-        <InputElement
+        <TextElement
           label={'opis'}
-          placeholder={'naslov'}
+          placeholder={'opis'}
           labelClasses={'text-primaryColor'}
-          inputClasses={'placeholder-primaryColor'}
+          textClasses={'placeholder-primaryColor'}
         />
 
         <InputElement
           label={'cijena usluge'}
-          placeholder={'naslov'}
+          placeholder={'cijena usluge'}
           labelClasses={'text-primaryColor'}
           inputClasses={'placeholder-primaryColor'}
         />
       </div>
 
-      <div className='flex justify-center items-center'>
+      <div className='flex justify-center items-center pt-4'>
         <button className='button bg-primaryColor text-lightColor h-[60px]'>
           objavi
         </button>

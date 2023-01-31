@@ -22,6 +22,10 @@
   justify-content: center;
 }
 
+.button:hover {
+  --tw-bg-opacity: 0.8;
+}
+
 hr {
   border: none;
   border-bottom: 3px double #fafafa;
