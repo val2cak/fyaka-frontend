@@ -1,4 +1,4 @@
-import { RiArrowRightSLine } from 'react-icons/ri';
+import { BsChevronRight as ArrowRightIcon } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ServiceProps } from '../../types/typeDefinitions';
 import { AiFillHeart as FavoriteFilledIcon } from 'react-icons/ai';
@@ -26,7 +26,7 @@ const ServiceCard = (props: ServiceProps) => {
       }
       className={`w-[250px] h-[250px] ${
         flag === 2 ? 'bg-secondaryColor text-lightColor' : 'bg-lightColor'
-      } rounded-lg font-ubuntu flex flex-col items-center justify-center relative`}
+      } rounded-lg font-ubuntu flex flex-col items-center justify-center relative transition ease-in-out delay-50 hover:scale-105 duration-300`}
     >
       {flag === 2 && (
         <div className='absolute right-2 top-2 text-primaryColor text-md'>
@@ -38,18 +38,18 @@ const ServiceCard = (props: ServiceProps) => {
           <p
             className={`text-sm ${
               flag === 2 ? 'text-lightColor opacity-50' : 'text-grayColor'
-            } font-bold`}
+            } font-ubuntu font-medium`}
           >
             {props.author}
           </p>
         )}
         <p className='text-base font-bold'>{props.title}</p>
         <p className='text-sm font-bold'>{props.date}</p>
-        <p className='text-md text-primaryColor font-bold'>{props.price}</p>
+        <p className='text-md text-primaryColor font-medium'>{props.price}</p>
         <p className='text-sm'>{props.location}</p>
-        <p className='uppercase text-base text-primaryColor flex items-center justify-center gap-1'>
+        <p className='uppercase text-base text-primaryColor flex items-center justify-center gap-2 font-ubuntu font-light'>
           {flag === 1 ? <span>uredi</span> : <span>saznaj više</span>}
-          <RiArrowRightSLine className='text-lg' />
+          <ArrowRightIcon />
         </p>
       </div>
     </button>

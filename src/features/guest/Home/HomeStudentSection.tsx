@@ -2,7 +2,7 @@ import students from '../../../assets/vectors/home1.png';
 
 const HomeStudentSection = () => {
   return (
-    <main className='text-lightColor font-raleway uppercase flex flex-row p-5'>
+    <main className='text-lightColor font-raleway font-regular uppercase flex flex-row p-5'>
       <div className='flex flex-col w-1/3 items-end justify-center gap-20'>
         <p className='-rotate-[25deg] pr-24'>student si?</p>
         <p className='-rotate-[65deg]'>trebaš džeparac?</p>

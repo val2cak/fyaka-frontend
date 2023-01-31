@@ -12,10 +12,10 @@ const HomeCover = () => {
       <div className='bg-homeCover bg-contain bg-no-repeat w-full h-full flex justify-center items-center'>
         <div className='flex flex-col justify-center items-center w-full h-[400px] p-5 bg-grayColor/50 relative'>
           <>
-            <div className='text-lightColor text-3xl font-ubuntu font-bold'>
+            <div className='text-lightColor text-3xl font-ubuntu font-medium pt-4 pb-2'>
               budi dio zajednice i zaradi novce
             </div>
-            <div className='text-lightColor text-base font-bold font-raleway w-[25vw] text-center leading-4 p-2'>
+            <div className='text-lightColor text-md font-medium font-raleway text-center leading-5 pb-4 w-[30vw]'>
               bilo da trebaš ili nudiš uslugu, ovdje ćeš pronaći najaktualnije
               jednokratne poslove na jednom mjestu
             </div>
@@ -26,7 +26,7 @@ const HomeCover = () => {
 
           <button
             onClick={handleClick}
-            className='flex flex-row-reverse items-center pl-28 absolute -right-16 -rotate-90 uppercase text-lightColor text-base font-ubuntu opacity-70 h-10'
+            className='flex flex-row-reverse items-center pl-28 absolute -right-16 -rotate-90 uppercase text-lightColor text-base font-ubuntu opacity-70 h-1 animate-bounce'
           >
             <p>saznaj više</p>
             <img src={arrow} alt='arrow' className='rotate-90 text-4xl pt-32' />

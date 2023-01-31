@@ -1,7 +1,7 @@
 import ServiceCard from '../../../components/Card/ServiceCard';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import TitleBar from '../../../components/TitleBar/TitleBar';
-import arrow from '../../../assets/shapes/arrow-left-light.png';
+import arrow from '../../../assets/shapes/arrow-right-light.png';
 
 const ServicesListContainer = () => {
   const Cards = [
@@ -87,12 +87,20 @@ const ServicesListContainer = () => {
         ))}
       </div>
 
-      <div className='w-full flex justify-center gap-8'>
-        <button>
-          <img src={arrow} alt='arrow left' />
+      <div className='w-full flex justify-center gap-16 p-8'>
+        <button className='transition ease-in-out delay-150 hover:-translate-x-4 duration-300'>
+          <img
+            src={arrow}
+            alt='arrow left'
+            className='object-fill h-18 w-36 -rotate-180'
+          />
         </button>
-        <button>
-          <img src={arrow} alt='arrow right' className='-rotate-180' />
+        <button className='transition ease-in-out delay-150 hover:translate-x-4 duration-300'>
+          <img
+            src={arrow}
+            alt='arrow right'
+            className='object-fill h-18 w-36'
+          />
         </button>
       </div>
     </main>

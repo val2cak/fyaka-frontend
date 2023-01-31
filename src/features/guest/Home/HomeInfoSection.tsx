@@ -9,7 +9,7 @@ const HomeInfoSection = () => {
   return (
     <main
       id='info-section'
-      className='bg-primaryColor text-lightColor mt-20 px-20 p-10 flex flex-row'
+      className='bg-primaryColor text-lightColor mt-20 px-24 p-10 flex flex-row'
     >
       <HomeInfoColumn
         icon={SecurityIcon}

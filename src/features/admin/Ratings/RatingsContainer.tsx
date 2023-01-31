@@ -2,7 +2,7 @@ import { Rating } from '@mui/material';
 import RatingCard from '../../../components/Card/RatingCard';
 import TitleBar from '../../../components/TitleBar/TitleBar';
 import placeholder from '../../../assets/vectors/profile-placeholder.png';
-import arrow from '../../../assets/shapes/arrow-left-orange.png';
+import arrow from '../../../assets/shapes/arrow-right-orange.png';
 
 const Cards = [
   {
@@ -81,12 +81,20 @@ const RatingsContainer = () => {
           ))}
         </div>
 
-        <div className='w-full flex justify-center gap-8 pt-4'>
-          <button>
-            <img src={arrow} alt='arrow left' />
+        <div className='w-full flex justify-center gap-16 pt-4'>
+          <button className='transition ease-in-out delay-150 hover:-translate-x-4 duration-300'>
+            <img
+              src={arrow}
+              alt='arrow left'
+              className='object-fill h-18 w-36 -rotate-180'
+            />
           </button>
-          <button>
-            <img src={arrow} alt='arrow right' className='-rotate-180' />
+          <button className='transition ease-in-out delay-150 hover:translate-x-4 duration-300'>
+            <img
+              src={arrow}
+              alt='arrow right'
+              className='object-fill h-18 w-36'
+            />
           </button>
         </div>
       </div>

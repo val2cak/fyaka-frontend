@@ -4,7 +4,7 @@ const Logo = () => {
   return (
     <NavLink
       to='/'
-      className='font-logo text-lg font-bold justify-center items-center'
+      className='font-logo text-3xl font-semibold hover:font-bold transition ease-in-out delay-50 hover:scale-110 duration-100 justify-center items-center'
     >
       !Fyaka
     </NavLink>

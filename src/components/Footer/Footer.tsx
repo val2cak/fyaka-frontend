@@ -20,7 +20,7 @@ const Footer = () => {
 
   return (
     <main
-      className={`font-ubuntu ${
+      className={`font-raleway font-medium ${
         flag ? 'bg-secondaryColor' : 'bg-lightColor'
       } flex flex-row justify-evenly p-12 bottom-0 w-full gap-10 text-base`}
     >

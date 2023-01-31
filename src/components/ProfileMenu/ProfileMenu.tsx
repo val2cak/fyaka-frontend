@@ -14,7 +14,7 @@ const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
     <main>
       <button
         onMouseEnter={() => setOpen(true)}
-        className='flex justify-center items-center gap-2'
+        className='flex justify-center items-center gap-2 py-2'
       >
         profil {open ? <ArrowUpIcon /> : <ArrowDownIcon />}
       </button>
@@ -22,7 +22,7 @@ const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
       {open && (
         <ul
           onMouseLeave={() => setOpen(false)}
-          className='absolute z-[1000] bg-primaryColor pb-16 pt-4 px-24 right-0 top-16 bg-opacity-90 flex flex-col gap-4 items-start'
+          className='absolute z-[1000] bg-primaryColor pb-16 pt-4 px-24 right-0 top-16 bg-opacity-90 flex flex-col gap-2 items-start'
         >
           {props.routes
             .filter((route) => !route.invisible)
@@ -32,8 +32,8 @@ const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
                   to={item.path !== undefined ? item.path : '/'}
                   className={({ isActive }) =>
                     isActive
-                      ? 'font-bold border-b-4 flex flex-row justify-center items-center gap-3'
-                      : 'flex flex-row justify-center items-center gap-3'
+                      ? 'font-bold border-b-4 py-1 flex flex-row justify-center items-center gap-8'
+                      : 'font-regular delay-50 hover:font-bold hover:border-b-4 duration-100 py-1 flex flex-row justify-center items-center gap-8'
                   }
                 >
                   {item.icon && <item.icon />}
@@ -41,7 +41,7 @@ const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
                 </NavLink>
               </li>
             ))}
-          <button className='flex flex-row items-center gap-2'>
+          <button className='flex flex-row items-center gap-8'>
             <LogoutIcon className='text-md' />
             odjava
           </button>
