@@ -24,7 +24,7 @@ const SingleServiceContainer = () => {
 
       <button
         onClick={() => navigateTo('/my-services')}
-        className='text-secondaryColor text-3xl m-3 absolute'
+        className='text-secondaryColor text-3xl m-3 absolute transition ease-in-out delay-50 hover:scale-110 duration-300'
       >
         <ArrowBackIcon />
       </button>

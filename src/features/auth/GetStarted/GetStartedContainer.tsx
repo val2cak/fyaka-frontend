@@ -8,7 +8,7 @@ const GetStartedContainer = () => {
 
   return (
     <main className='ellipse max-h-screen'>
-      <h1 className='flex justify-center font-logo text-lightColor font-black text-6xl pt-5'>
+      <h1 className='flex justify-center font-logo text-lightColor font-semibold text-6xl pt-5'>
         !Fyaka
       </h1>
 
