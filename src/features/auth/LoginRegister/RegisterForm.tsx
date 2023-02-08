@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import InputElement from '../../../components/Form/InputElement';
 import { useRegisterUserMutation } from '../authApiSlice';
@@ -18,6 +18,17 @@ const RegisterForm = () => {
       isLoading: isUserRegisterLoading,
     },
   ] = useRegisterUserMutation();
+
+  useEffect(() => {
+    if (
+      userAuthData !== null &&
+      userAuthData !== undefined &&
+      !isUserRegisterError &&
+      !isUserRegisterLoading
+    ) {
+      navigateTo('/auth/login');
+    }
+  }, [isUserRegisterError, isUserRegisterLoading, userAuthData, navigateTo]);
 
   const handleFormInputChange =
     (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,9 +57,6 @@ const RegisterForm = () => {
         username: username,
         password: password,
       }).unwrap();
-
-      if (!isUserRegisterError && !isUserRegisterLoading)
-        navigateTo('/auth/login');
     } catch (error: any) {
       console.log(error.data.message);
     }
