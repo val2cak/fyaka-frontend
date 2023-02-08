@@ -6,9 +6,19 @@ import {
 } from 'react-icons/bs';
 import { RiLogoutCircleRLine as LogoutIcon } from 'react-icons/ri';
 import { NavLink } from 'react-router-dom';
+import { removeUserFromStorage } from '../../services/storage';
+import { useAppDispatch } from '../../app/hooks';
+import { logoutUser } from '../../features/auth/authStateSlice';
 
 const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
   const [open, setOpen] = useState(false);
+
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    removeUserFromStorage();
+    dispatch(logoutUser());
+  };
 
   return (
     <main>
@@ -41,7 +51,10 @@ const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
                 </NavLink>
               </li>
             ))}
-          <button className='flex flex-row items-center gap-8'>
+          <button
+            onClick={handleLogout}
+            className='font-regular delay-50 hover:font-bold hover:border-b-4 duration-100 py-1 flex flex-row justify-center items-center gap-8'
+          >
             <LogoutIcon className='text-md' />
             odjava
           </button>

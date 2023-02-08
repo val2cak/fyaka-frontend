@@ -8,6 +8,12 @@ export interface CustomRouteObject extends NonIndexRouteObject {
   invisible?: boolean;
 }
 
+export interface User {
+  username: string;
+  token: string;
+  tokenExpiry: Date;
+}
+
 export interface ServiceProps {
   author: string;
   title: string;

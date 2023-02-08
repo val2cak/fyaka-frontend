@@ -91,9 +91,9 @@ export let Routes: CustomRouteObject[] = [
         path: '',
         name: 'Admin',
         element: (
-          // <ProtectedRoute>
-          <AdminLayout />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <AdminLayout />
+          </ProtectedRoute>
         ),
         children: [
           {

@@ -1,8 +1,16 @@
 import { NavLink } from 'react-router-dom';
 import { Routes } from '../../routes/Routes';
+import { getUserFromStorage } from '../../services/storage';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 
 const Links = (props: { name: string }) => {
+  const getUser = () => {
+    const userInfo = getUserFromStorage();
+
+    if (userInfo) return JSON.parse(userInfo).username;
+    else return '';
+  };
+
   return (
     <ul className='flex justify-center items-center gap-10 first:pl-16 last:pr-16 text-md font-ubuntu'>
       {Routes.find((item) => item.name === 'Dashboard')
@@ -21,7 +29,20 @@ const Links = (props: { name: string }) => {
                 {!route.invisible && route.name !== undefined && route.name}
               </NavLink>
             ) : (
-              <ProfileMenu routes={route.children} />
+              <>
+                {getUser() === '' ? (
+                  <NavLink
+                    to='/auth/get-started'
+                    className={
+                      'font-regular pb-1 hover:py-1 delay-50 hover:font-bold hover:border-b-4 duration-100'
+                    }
+                  >
+                    prijava
+                  </NavLink>
+                ) : (
+                  <ProfileMenu routes={route.children} />
+                )}
+              </>
             )}
           </li>
         ))}

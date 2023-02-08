@@ -10,6 +10,7 @@ const InputElement = (props: {
   value?: string | number;
   labelClasses?: string;
   inputClasses?: string;
+  inputProps?: any;
 }) => {
   const flag = props.label === 'lozinka' || props.label === 'ponovi lozinku';
   const [visible, setVisible] = useState(false);
@@ -27,6 +28,7 @@ const InputElement = (props: {
           value={props.value}
           type={flag && !visible ? 'password' : 'text'}
           className={`w-full h-full p-5 rounded-lg font-raleway ${props.inputClasses}`}
+          {...props.inputProps}
         />
         {flag && (
           <button
