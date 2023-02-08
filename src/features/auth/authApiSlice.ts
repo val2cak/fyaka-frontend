@@ -6,9 +6,13 @@ const authApiHeaders = {
   Accept: 'application/json',
 };
 
-interface AuthData {
+interface LoginData {
   username: string;
   password: string;
+}
+
+interface RegisterData extends LoginData {
+  email: string;
 }
 
 interface User {
@@ -27,9 +31,18 @@ export const authApiSlice = createApi({
 
   endpoints(builder) {
     return {
-      loginUser: builder.mutation<User, AuthData>({
+      loginUser: builder.mutation<User, LoginData>({
         query: ({ ...credentials }) => ({
           url: `http://localhost:8000/api/users/login`,
+          method: 'POST',
+          body: credentials,
+          headers: authApiHeaders,
+        }),
+      }),
+      //
+      registerUser: builder.mutation<User, RegisterData>({
+        query: ({ ...credentials }) => ({
+          url: `http://localhost:8000/api/users/register`,
           method: 'POST',
           body: credentials,
           headers: authApiHeaders,
@@ -39,4 +52,4 @@ export const authApiSlice = createApi({
   },
 });
 
-export const { useLoginUserMutation } = authApiSlice;
+export const { useLoginUserMutation, useRegisterUserMutation } = authApiSlice;
