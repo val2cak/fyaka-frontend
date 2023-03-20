@@ -4,7 +4,7 @@ import {
   BsChevronUp as ArrowUpIcon,
 } from 'react-icons/bs';
 import { RiLogoutCircleRLine as LogoutIcon } from 'react-icons/ri';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { CustomRouteObject } from '../../types/typeDefinitions';
 import { removeUserFromStorage } from '../../services/storage';
@@ -13,16 +13,21 @@ import { logoutUser } from '../../features/auth/authStateSlice';
 
 interface Props {
   routes: CustomRouteObject[];
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ProfileMenu: FC<Props> = ({ routes }) => {
+const ProfileMenu: FC<Props> = ({ routes, setIsLoggedIn }) => {
   const [open, setOpen] = useState(false);
 
   const dispatch = useAppDispatch();
 
+  const navigateTo = useNavigate();
+
   const handleLogout = () => {
     removeUserFromStorage();
     dispatch(logoutUser());
+    navigateTo('/');
+    setIsLoggedIn(false);
   };
 
   return (

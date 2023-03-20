@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useAppSelector } from '../../app/hooks';
 
 import { Routes } from '../../routes/Routes';
-import { getUserFromStorage } from '../../services/storage';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 
 interface Props {
@@ -10,12 +10,11 @@ interface Props {
 }
 
 const Links: FC<Props> = ({ name }) => {
-  const getUser = () => {
-    const userInfo = getUserFromStorage();
+  const userLoggedIn = useAppSelector(
+    (state) => state.userState.data.isLoggedIn
+  );
 
-    if (userInfo) return JSON.parse(userInfo).username;
-    else return '';
-  };
+  const [isLoggedIn, setIsLoggedIn] = useState(userLoggedIn);
 
   return (
     <ul className='flex justify-center items-center gap-10 first:pl-16 last:pr-16 text-md font-ubuntu'>
@@ -36,7 +35,7 @@ const Links: FC<Props> = ({ name }) => {
               </NavLink>
             ) : (
               <>
-                {getUser() === '' ? (
+                {!isLoggedIn ? (
                   <NavLink
                     to='/auth/get-started'
                     className={
@@ -46,7 +45,10 @@ const Links: FC<Props> = ({ name }) => {
                     prijava
                   </NavLink>
                 ) : (
-                  <ProfileMenu routes={route.children} />
+                  <ProfileMenu
+                    routes={route.children}
+                    setIsLoggedIn={setIsLoggedIn}
+                  />
                 )}
               </>
             )}
