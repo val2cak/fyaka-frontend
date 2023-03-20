@@ -1,21 +1,18 @@
-// ICONS
+import { NavLink, useLocation } from 'react-router-dom';
 import { FaFacebook, FaTwitter } from 'react-icons/fa';
 import { RiInstagramFill } from 'react-icons/ri';
 import { SiLinkedin } from 'react-icons/si';
-//
-
-import { NavLink, useLocation } from 'react-router-dom';
 
 const Footer = () => {
-  const location = useLocation();
+  const locationPathname = useLocation().pathname;
 
   const flag =
-    location.pathname === '/' ||
-    location.pathname === '/looking-for-service' ||
-    location.pathname === '/ratings' ||
-    location.pathname === '/favorites' ||
-    location.pathname === '/settings' ||
-    location.pathname.includes('/my-services/')
+    locationPathname === '/' ||
+    locationPathname === '/looking-for-service' ||
+    locationPathname === '/ratings' ||
+    locationPathname === '/favorites' ||
+    locationPathname === '/settings' ||
+    locationPathname.includes('/my-services/')
       ? 1
       : 0;
 

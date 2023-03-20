@@ -1,5 +1,6 @@
-import { Pagination } from '@mui/material';
 import { Fragment } from 'react';
+import { Pagination } from '@mui/material';
+
 import ServiceCard from '../../../components/Card/ServiceCard';
 import FilterBar from '../../../components/FilterBar/FilterBar';
 import SearchBar from '../../../components/SearchBar/SearchBar';

@@ -1,6 +1,7 @@
-import TitleBar from '../../../components/TitleBar/TitleBar';
 import { IoArrowUndoCircleSharp as ArrowBackIcon } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
+
+import TitleBar from '../../../components/TitleBar/TitleBar';
 import MySingleServiceCard from './MySingleServiceCard';
 
 const SingleServiceContainer = () => {

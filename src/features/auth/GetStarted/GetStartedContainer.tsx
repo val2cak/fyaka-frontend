@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import image from '../../../assets/vectors/get-started.png';
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+
+import image from '../../../assets/vectors/get-started.png';
 
 const GetStartedContainer = () => {
   const navigateTo = useNavigate();

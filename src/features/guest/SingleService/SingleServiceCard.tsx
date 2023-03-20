@@ -1,11 +1,16 @@
-import { ServiceFormProps } from '../../../types/typeDefinitions';
+import { FC, useState } from 'react';
 import {
   AiFillHeart as FavoriteFilledIcon,
   AiOutlineHeart as FavoriteOutlinedIcon,
 } from 'react-icons/ai';
-import { useState } from 'react';
 
-const SingleServiceCard = (props: { service: ServiceFormProps }) => {
+import { ServiceFormProps } from '../../../types/typeDefinitions';
+
+interface Props {
+  service: ServiceFormProps;
+}
+
+const SingleServiceCard: FC<Props> = ({ service }) => {
   const [favorite, setFavorite] = useState(false);
 
   return (
@@ -40,15 +45,15 @@ const SingleServiceCard = (props: { service: ServiceFormProps }) => {
         </ul>
 
         <ul className='font-raleway text-base flex flex-col gap-8'>
-          <li>{props.service.author}</li>
-          <li>{props.service.title}</li>
-          <li>{props.service.category}</li>
-          <li>{props.service.description}</li>
+          <li>{service.author}</li>
+          <li>{service.title}</li>
+          <li>{service.category}</li>
+          <li>{service.description}</li>
 
-          <li>{props.service.location}</li>
-          <li>{props.service.price}</li>
-          <li>{props.service.date}</li>
-          <li>{props.service.people}</li>
+          <li>{service.location}</li>
+          <li>{service.price}</li>
+          <li>{service.date}</li>
+          <li>{service.people}</li>
         </ul>
       </div>
 

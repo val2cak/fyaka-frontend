@@ -1,12 +1,8 @@
-// HOOKS
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 // import useNotifications from '../hooks/useNotifications';
-//
 
-// SERVICES
 import { getUserFromStorage } from '../services/storage';
-//
 
 const ProtectedRoute = ({ children }: any) => {
   const navigateTo = useNavigate();

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { getUserFromStorage } from '../../services/storage';
 import { User } from '../../types/typeDefinitions';
 

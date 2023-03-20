@@ -1,8 +1,13 @@
-// REACT
 import { Outlet } from 'react-router-dom';
-//
+import {
+  ImUser as ProfileIcon,
+  ImStarFull as RatingsIcon,
+  ImCog as SettingsIcon,
+  ImBubbles2 as MessagesIcon,
+  ImHeart as FavoritesIcon,
+  ImBriefcase as MyServicesIcon,
+} from 'react-icons/im';
 
-// ROUTES
 import ProtectedRoute from './ProtectedRoute';
 import AdminLayout from '../features/admin/AdminLayout';
 import GuestLayout from '../features/guest/GuestLayout';
@@ -19,22 +24,7 @@ import FavoritesContainer from '../features/admin/Favorites/FavoritesContainer';
 import MessagesContainer from '../features/admin/Messages/MessagesContainer';
 import SettingsContainer from '../features/admin/Settings/SettingsContainer';
 import MySingleServiceContainer from '../features/admin/MySingleService/MySingleServiceContainer';
-//
-
-// TYPES
 import { CustomRouteObject } from '../types/typeDefinitions';
-//
-
-// ICONS
-import {
-  ImUser as ProfileIcon,
-  ImStarFull as RatingsIcon,
-  ImCog as SettingsIcon,
-  ImBubbles2 as MessagesIcon,
-  ImHeart as FavoritesIcon,
-  ImBriefcase as MyServicesIcon,
-} from 'react-icons/im';
-//
 
 export let Routes: CustomRouteObject[] = [
   {

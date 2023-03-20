@@ -1,16 +1,21 @@
-import { useState } from 'react';
-import { CustomRouteObject } from '../../types/typeDefinitions';
+import { FC, useState } from 'react';
 import {
   BsChevronDown as ArrowDownIcon,
   BsChevronUp as ArrowUpIcon,
 } from 'react-icons/bs';
 import { RiLogoutCircleRLine as LogoutIcon } from 'react-icons/ri';
 import { NavLink } from 'react-router-dom';
+
+import { CustomRouteObject } from '../../types/typeDefinitions';
 import { removeUserFromStorage } from '../../services/storage';
 import { useAppDispatch } from '../../app/hooks';
 import { logoutUser } from '../../features/auth/authStateSlice';
 
-const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
+interface Props {
+  routes: CustomRouteObject[];
+}
+
+const ProfileMenu: FC<Props> = ({ routes }) => {
   const [open, setOpen] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -34,7 +39,7 @@ const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
           onMouseLeave={() => setOpen(false)}
           className='absolute z-[1000] bg-primaryColor pb-16 pt-4 px-24 right-0 top-16 bg-opacity-90 flex flex-col gap-2 items-start'
         >
-          {props.routes
+          {routes
             .filter((route) => !route.invisible)
             .map((item, index) => (
               <li key={index} className='lowercase flex'>
@@ -42,8 +47,8 @@ const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
                   to={item.path !== undefined ? item.path : '/'}
                   className={({ isActive }) =>
                     isActive
-                      ? 'font-bold border-b-4 py-1 flex flex-row justify-center items-center gap-8'
-                      : 'font-regular delay-50 hover:font-bold hover:border-b-4 duration-100 py-1 flex flex-row justify-center items-center gap-8'
+                      ? 'font-bold border-b-4 pb-1 flex flex-row justify-center items-center gap-8'
+                      : 'font-regular delay-50 hover:font-bold hover:border-lightColor border-transparent border-b-4 duration-100 pb-1 flex flex-row justify-center items-center gap-8'
                   }
                 >
                   {item.icon && <item.icon />}
@@ -53,7 +58,7 @@ const ProfileMenu = (props: { routes: CustomRouteObject[] }) => {
             ))}
           <button
             onClick={handleLogout}
-            className='font-regular delay-50 hover:font-bold hover:border-b-4 duration-100 py-1 flex flex-row justify-center items-center gap-8'
+            className='font-regular delay-50 hover:font-bold hover:border-lightColor border-transparent border-b-4 duration-100 pb-1 flex flex-row justify-center items-center gap-8'
           >
             <LogoutIcon className='text-md' />
             odjava

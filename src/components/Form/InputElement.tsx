@@ -1,34 +1,41 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import {
   IoEyeOff as NotVisibleIcon,
   IoEye as VisibleIcon,
 } from 'react-icons/io5';
 
-const InputElement = (props: {
+interface Props {
   label: string;
   placeholder: string;
   value?: string | number;
   labelClasses?: string;
   inputClasses?: string;
   inputProps?: any;
+}
+
+const InputElement: FC<Props> = ({
+  label,
+  placeholder,
+  value,
+  labelClasses,
+  inputClasses,
+  inputProps,
 }) => {
-  const flag = props.label === 'lozinka' || props.label === 'ponovi lozinku';
+  const flag = label === 'lozinka' || label === 'ponovi lozinku';
   const [visible, setVisible] = useState(false);
 
   return (
     <div className='flex flex-col'>
-      <label
-        className={`font-ubuntu text-base font-bold ${props.labelClasses}`}
-      >
-        {props.label}
+      <label className={`font-ubuntu text-base font-bold ${labelClasses}`}>
+        {label}
       </label>
       <div className='w-full relative'>
         <input
-          placeholder={props.placeholder}
-          value={props.value}
+          placeholder={placeholder}
+          value={value}
           type={flag && !visible ? 'password' : 'text'}
-          className={`w-full h-full p-5 rounded-lg font-raleway ${props.inputClasses}`}
-          {...props.inputProps}
+          className={`w-full h-full p-5 rounded-lg font-raleway ${inputClasses}`}
+          {...inputProps}
         />
         {flag && (
           <button

@@ -1,4 +1,5 @@
 import { Rating } from '@mui/material';
+
 import RatingCard from '../../../components/Card/RatingCard';
 import TitleBar from '../../../components/TitleBar/TitleBar';
 import placeholder from '../../../assets/vectors/profile-placeholder.png';

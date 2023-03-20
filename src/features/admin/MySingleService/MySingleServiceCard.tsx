@@ -1,15 +1,21 @@
+import { FC } from 'react';
+
 import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
 import { ServiceFormProps } from '../../../types/typeDefinitions';
 
-const MySingleServiceCard = (props: { service: ServiceFormProps }) => {
+interface Props {
+  service: ServiceFormProps;
+}
+
+const MySingleServiceCard: FC<Props> = ({ service }) => {
   return (
     <div className='bg-secondaryColor rounded-lg py-12 px-32 flex flex-col gap-8'>
       <div className='flex flex-row justify-evenly gap-10'>
         <div className='w-1/2 flex flex-col gap-6'>
           <InputElement
             label={'naslov'}
-            value={props.service.title}
+            value={service.title}
             placeholder={'naslov'}
             labelClasses={'text-primaryColor'}
             inputClasses={
@@ -19,7 +25,7 @@ const MySingleServiceCard = (props: { service: ServiceFormProps }) => {
 
           <InputElement
             label={'kategorija'}
-            value={props.service.category}
+            value={service.category}
             placeholder={'kategorija'}
             labelClasses={'text-primaryColor'}
             inputClasses={
@@ -29,7 +35,7 @@ const MySingleServiceCard = (props: { service: ServiceFormProps }) => {
 
           <TextElement
             label={'opis'}
-            value={props.service.description}
+            value={service.description}
             placeholder={'naslov'}
             labelClasses={'text-primaryColor'}
             textClasses={
@@ -41,7 +47,7 @@ const MySingleServiceCard = (props: { service: ServiceFormProps }) => {
         <div className='w-1/2 flex flex-col gap-6'>
           <InputElement
             label={'lokacija'}
-            value={props.service.location}
+            value={service.location}
             placeholder={'lokacija'}
             labelClasses={'text-primaryColor'}
             inputClasses={
@@ -51,7 +57,7 @@ const MySingleServiceCard = (props: { service: ServiceFormProps }) => {
 
           <InputElement
             label={'vrijeme obavljanja'}
-            value={props.service.date}
+            value={service.date}
             placeholder={'vrijeme obavljanja'}
             labelClasses={'text-primaryColor'}
             inputClasses={
@@ -61,7 +67,7 @@ const MySingleServiceCard = (props: { service: ServiceFormProps }) => {
 
           <InputElement
             label={'broj osoba'}
-            value={props.service.people}
+            value={service.people}
             placeholder={'naslov'}
             labelClasses={'text-primaryColor'}
             inputClasses={
@@ -71,7 +77,7 @@ const MySingleServiceCard = (props: { service: ServiceFormProps }) => {
 
           <InputElement
             label={'cijena usluge'}
-            value={props.service.price}
+            value={service.price}
             placeholder={'naslov'}
             labelClasses={'text-primaryColor'}
             inputClasses={

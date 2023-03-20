@@ -1,12 +1,13 @@
+import { useLocation, useNavigate } from 'react-router-dom';
+import { IoArrowUndoCircleSharp as ArrowBackIcon } from 'react-icons/io5';
+
 import TitleBar from '../../../components/TitleBar/TitleBar';
 import SingleServiceCard from './SingleServiceCard';
-import { IoArrowUndoCircleSharp as ArrowBackIcon } from 'react-icons/io5';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 const SingleServiceContainer = () => {
-  const location = useLocation();
+  const locationPathname = useLocation().pathname;
 
-  const flag = location.pathname.includes('/favorites') ? 1 : 0;
+  const flag = locationPathname.includes('/favorites') ? 1 : 0;
 
   const navigateTo = useNavigate();
 

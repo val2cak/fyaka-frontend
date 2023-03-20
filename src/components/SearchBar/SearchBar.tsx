@@ -2,9 +2,9 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { useLocation } from 'react-router-dom';
 
 const SearchBar = () => {
-  const location = useLocation();
+  const locationPathname = useLocation().pathname;
 
-  const flag = location.pathname === '/favorites' ? 1 : 0;
+  const flag = locationPathname === '/favorites' ? 1 : 0;
 
   return (
     <div
