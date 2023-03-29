@@ -81,6 +81,7 @@ const RegisterForm = () => {
             inputProps={{
               value: email,
               onChange: handleFormInputChange('email'),
+              type: 'email',
             }}
           />
 
@@ -94,6 +95,7 @@ const RegisterForm = () => {
             inputProps={{
               value: username,
               onChange: handleFormInputChange('username'),
+              type: 'text',
             }}
           />
 
@@ -107,6 +109,7 @@ const RegisterForm = () => {
             inputProps={{
               value: password,
               onChange: handleFormInputChange('password'),
+              type: 'password',
             }}
           />
 
@@ -117,6 +120,9 @@ const RegisterForm = () => {
             inputClasses={
               'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor'
             }
+            inputProps={{
+              type: 'password',
+            }}
           />
         </div>
 

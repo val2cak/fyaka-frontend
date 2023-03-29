@@ -25,6 +25,7 @@ const ProfileInfo = () => {
         placeholder={'email'}
         labelClasses={'text-primaryColor'}
         inputClasses={'placeholder-darkColor w-[300px]'}
+        inputProps={{ type: 'text' }}
       />
 
       <InputElement
@@ -32,6 +33,7 @@ const ProfileInfo = () => {
         placeholder={'korisničko ime'}
         labelClasses={'text-primaryColor'}
         inputClasses={'placeholder-darkColor w-[300px]'}
+        inputProps={{ type: 'text' }}
       />
 
       <InputElement
@@ -39,6 +41,7 @@ const ProfileInfo = () => {
         placeholder={'*********'}
         labelClasses={'text-primaryColor'}
         inputClasses={'placeholder-darkColor w-[300px]'}
+        inputProps={{ type: 'password' }}
       />
     </div>
   );

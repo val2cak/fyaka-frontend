@@ -6,6 +6,7 @@ interface Props {
   value?: string | number;
   labelClasses?: string;
   textClasses?: string;
+  textProps?: any;
 }
 
 const TextElement: FC<Props> = ({
@@ -14,6 +15,7 @@ const TextElement: FC<Props> = ({
   value,
   labelClasses,
   textClasses,
+  textProps,
 }) => {
   return (
     <div className='flex flex-col'>
@@ -24,8 +26,8 @@ const TextElement: FC<Props> = ({
         placeholder={placeholder}
         value={value}
         className={`p-5 rounded-lg font-raleway ${textClasses}`}
+        {...textProps}
       />
-      <text />
     </div>
   );
 };

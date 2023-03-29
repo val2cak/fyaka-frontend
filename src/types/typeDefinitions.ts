@@ -9,6 +9,7 @@ export interface CustomRouteObject extends NonIndexRouteObject {
 }
 
 export interface User {
+  id: number;
   username: string;
   token: string;
   tokenExpiry: Date;
@@ -19,7 +20,7 @@ export interface ServiceProps {
   title: string;
   description: string;
   location: string;
-  price: string;
+  price: number;
   date: Date;
   people: number;
   author: {
@@ -27,6 +28,16 @@ export interface ServiceProps {
     username: string;
     email: string;
   };
+}
+
+export interface NewService {
+  title: string;
+  description: string;
+  location: string;
+  price: number;
+  date: Date;
+  people: number;
+  authorId: number;
 }
 
 export interface ReviewProps {

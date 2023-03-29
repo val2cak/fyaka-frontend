@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { useAppSelector } from '../../app/hooks';
 import { Routes } from '../../routes/Routes';
+import { getUserFromStorage } from '../../services/storage';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 
 interface Props {
@@ -10,11 +11,11 @@ interface Props {
 }
 
 const Links: FC<Props> = ({ name }) => {
-  const userLoggedIn = useAppSelector(
-    (state) => state.userState.data.isLoggedIn
-  );
+  const userJson: string | null = getUserFromStorage();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(userLoggedIn);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    userJson !== null ? true : false
+  );
 
   return (
     <ul className='flex justify-center items-center gap-10 first:pl-16 last:pr-16 text-md font-ubuntu'>
