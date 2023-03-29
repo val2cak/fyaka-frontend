@@ -15,17 +15,18 @@ export interface User {
 }
 
 export interface ServiceProps {
-  author: string;
+  id: number;
   title: string;
-  date: string;
-  price: string;
-  location: string;
-}
-
-export interface ServiceFormProps extends ServiceProps {
-  category: string;
   description: string;
+  location: string;
+  price: string;
+  date: Date;
   people: number;
+  author: {
+    id: number;
+    username: string;
+    email: string;
+  };
 }
 
 export interface ReviewProps {

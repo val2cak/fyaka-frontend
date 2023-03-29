@@ -2,10 +2,12 @@ import { FC } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BsChevronRight as ArrowRightIcon } from 'react-icons/bs';
 import { AiFillHeart as FavoriteFilledIcon } from 'react-icons/ai';
+import { format } from 'date-fns';
 
 import { ServiceProps } from '../../types/typeDefinitions';
 
 const ServiceCard: FC<ServiceProps> = ({
+  id,
   author,
   title,
   date,
@@ -27,10 +29,10 @@ const ServiceCard: FC<ServiceProps> = ({
     <button
       onClick={() =>
         flag === 1
-          ? navigateTo(`/my-services/:id`)
+          ? navigateTo(`/my-services/${id}`)
           : flag === 2
-          ? navigateTo(`/favorites/:id`)
-          : navigateTo(`/services-list/:id`)
+          ? navigateTo(`/favorites/${id}`)
+          : navigateTo(`/services-list/${id}`)
       }
       className={`w-[250px] h-[250px] ${
         flag === 2 ? 'bg-secondaryColor text-lightColor' : 'bg-lightColor'
@@ -48,12 +50,14 @@ const ServiceCard: FC<ServiceProps> = ({
               flag === 2 ? 'text-lightColor opacity-50' : 'text-grayColor'
             } font-ubuntu font-medium`}
           >
-            {author}
+            {author.username}
           </p>
         )}
         <p className='text-base font-bold'>{title}</p>
-        <p className='text-sm font-bold'>{date}</p>
-        <p className='text-md text-primaryColor font-medium'>{price}</p>
+        <p className='text-sm font-bold'>
+          {format(new Date(date), 'dd.MM.yyyy. H:mm')} h
+        </p>
+        <p className='text-md text-primaryColor font-medium'>{price} €</p>
         <p className='text-sm'>{location}</p>
         <p className='uppercase text-base text-primaryColor flex items-center justify-center gap-2 font-ubuntu font-light'>
           {flag === 1 ? <span>uredi</span> : <span>saznaj više</span>}

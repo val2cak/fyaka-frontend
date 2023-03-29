@@ -2,10 +2,10 @@ import { FC } from 'react';
 
 import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
-import { ServiceFormProps } from '../../../types/typeDefinitions';
+import { ServiceProps } from '../../../types/typeDefinitions';
 
 interface Props {
-  service: ServiceFormProps;
+  service: ServiceProps;
 }
 
 const MySingleServiceCard: FC<Props> = ({ service }) => {
@@ -23,7 +23,7 @@ const MySingleServiceCard: FC<Props> = ({ service }) => {
             }
           />
 
-          <InputElement
+          {/* <InputElement
             label={'kategorija'}
             value={service.category}
             placeholder={'kategorija'}
@@ -31,7 +31,7 @@ const MySingleServiceCard: FC<Props> = ({ service }) => {
             inputClasses={
               'placeholder-primaryColor bg-lightColor text-darkColor'
             }
-          />
+          /> */}
 
           <TextElement
             label={'opis'}
@@ -55,7 +55,7 @@ const MySingleServiceCard: FC<Props> = ({ service }) => {
             }
           />
 
-          <InputElement
+          {/* <InputElement
             label={'vrijeme obavljanja'}
             value={service.date}
             placeholder={'vrijeme obavljanja'}
@@ -63,7 +63,7 @@ const MySingleServiceCard: FC<Props> = ({ service }) => {
             inputClasses={
               'placeholder-primaryColor bg-lightColor text-darkColor'
             }
-          />
+          /> */}
 
           <InputElement
             label={'broj osoba'}

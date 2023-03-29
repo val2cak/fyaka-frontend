@@ -74,7 +74,7 @@ const FavoritesContainer = () => {
         </div>
       </div>
 
-      <div className='flex flex-wrap justify-between items-center flex-row px-56 gap-4 w-full'>
+      {/* <div className='flex flex-wrap justify-between items-center flex-row px-56 gap-4 w-full'>
         {Cards.map((item, index) => (
           <ServiceCard
             key={index}
@@ -85,7 +85,7 @@ const FavoritesContainer = () => {
             location={item.location}
           />
         ))}
-      </div>
+      </div> */}
 
       <div className='w-full flex justify-center gap-16 py-8'>
         <button className='transition ease-in-out delay-150 hover:-translate-x-4 duration-300'>

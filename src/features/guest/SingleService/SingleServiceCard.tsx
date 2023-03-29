@@ -3,14 +3,19 @@ import {
   AiFillHeart as FavoriteFilledIcon,
   AiOutlineHeart as FavoriteOutlinedIcon,
 } from 'react-icons/ai';
+import { format } from 'date-fns';
 
-import { ServiceFormProps } from '../../../types/typeDefinitions';
+import { ServiceProps } from '../../../types/typeDefinitions';
 
-interface Props {
-  service: ServiceFormProps;
-}
-
-const SingleServiceCard: FC<Props> = ({ service }) => {
+const SingleServiceCard: FC<ServiceProps> = ({
+  author,
+  title,
+  description,
+  location,
+  price,
+  date,
+  people,
+}) => {
   const [favorite, setFavorite] = useState(false);
 
   return (
@@ -34,10 +39,8 @@ const SingleServiceCard: FC<Props> = ({ service }) => {
         <ul className='font-ubuntu font-bold text-primaryColor text-base flex flex-col gap-8 w-2/5'>
           <li>autor</li>
           <li>naslov</li>
-          <li>kategorija</li>
+          {/* <li>kategorija</li> */}
           <li>opis</li>
-          <li></li>
-          <li></li>
           <li>lokacija</li>
           <li>cijena usluge</li>
           <li>vrijeme obavljanja</li>
@@ -45,15 +48,15 @@ const SingleServiceCard: FC<Props> = ({ service }) => {
         </ul>
 
         <ul className='font-raleway text-base flex flex-col gap-8'>
-          <li>{service.author}</li>
-          <li>{service.title}</li>
-          <li>{service.category}</li>
-          <li>{service.description}</li>
+          <li>{author.username}</li>
+          <li>{title}</li>
+          {/* <li>{category}</li> */}
+          <li>{description}</li>
 
-          <li>{service.location}</li>
-          <li>{service.price}</li>
-          <li>{service.date}</li>
-          <li>{service.people}</li>
+          <li>{location}</li>
+          <li>{price}</li>
+          <li>{format(new Date(date), 'dd.MM.yyyy. H:mm')} h</li>
+          <li>{people}</li>
         </ul>
       </div>
 

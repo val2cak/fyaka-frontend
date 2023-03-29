@@ -30,9 +30,9 @@ const SingleServiceContainer = () => {
         <ArrowBackIcon />
       </button>
 
-      <div className='px-28 py-10'>
+      {/* <div className='px-28 py-10'>
         <MySingleServiceCard service={service} />
-      </div>
+      </div> */}
     </main>
   );
 };
