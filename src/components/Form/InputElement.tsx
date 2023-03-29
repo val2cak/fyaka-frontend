@@ -8,7 +8,7 @@ import {
 interface Props {
   label: string;
   placeholder: string;
-  value?: string | number;
+  value?: string | number | Date;
   disabled?: boolean;
   labelClasses?: string;
   inputClasses?: string;

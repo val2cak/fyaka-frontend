@@ -1,23 +1,17 @@
 import { IoArrowUndoCircleSharp as ArrowBackIcon } from 'react-icons/io5';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import TitleBar from '../../../components/TitleBar/TitleBar';
+import { useGetSingleServiceQuery } from '../../guest/ServicesList/servicesApiSlice';
 import MySingleServiceCard from './MySingleServiceCard';
 
 const SingleServiceContainer = () => {
   const navigateTo = useNavigate();
 
-  const service = {
-    author: 'marinamatic21',
-    title: 'Sastavit namještaj',
-    category: 'Stolarija',
-    description:
-      'Triba mi neko da mi sastavi spavacu garnituru (ormar, krevet, komoda). Tribalo bi ponit svoj alat i volila bi da to bude sto prije napravljeno. Placam 30 eura bez obzira na brzinu sastavljanja',
-    location: 'Brda, Split',
-    price: '30 €',
-    date: '22.04.2022. 12:00 h',
-    people: 1,
-  };
+  const { id } = useParams();
+
+  const { data: serviceData, isFetching: isServiceDataLoading } =
+    useGetSingleServiceQuery(Number(id));
 
   return (
     <main className='bg-lightColor'>
@@ -30,9 +24,11 @@ const SingleServiceContainer = () => {
         <ArrowBackIcon />
       </button>
 
-      {/* <div className='px-28 py-10'>
-        <MySingleServiceCard service={service} />
-      </div> */}
+      {!isServiceDataLoading && (
+        <div className='px-28 py-10'>
+          <MySingleServiceCard {...serviceData} />
+        </div>
+      )}
     </main>
   );
 };

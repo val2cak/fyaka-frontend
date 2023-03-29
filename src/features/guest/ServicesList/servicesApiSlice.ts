@@ -12,8 +12,8 @@ export const servicesApiSlice = createApi({
   keepUnusedDataFor: 0,
   endpoints(builder) {
     return {
-      getServicesList: builder.query<ServiceProps[], void>({
-        query: () => `/`,
+      getServicesList: builder.query<ServiceProps[], number | void>({
+        query: (authorId) => (authorId ? `/?authorId=${authorId}` : '/'),
         providesTags: ['Services-List'],
       }),
       getSingleService: builder.query<ServiceProps, number>({
