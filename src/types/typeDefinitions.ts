@@ -40,6 +40,17 @@ export interface NewService {
   authorId: number;
 }
 
+export interface UpdateService {
+  id: number;
+  title: string;
+  description: string;
+  location: string;
+  price: number;
+  date: Date;
+  people: number;
+  authorId: number;
+}
+
 export interface ReviewProps {
   author: string;
   rating: number;

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import TitleBar from '../../../components/TitleBar/TitleBar';
 import { useGetSingleServiceQuery } from '../../guest/ServicesList/servicesApiSlice';
-import MySingleServiceCard from './MySingleServiceCard';
+import MySingleServiceForm from './MySingleServiceForm';
 
 const SingleServiceContainer = () => {
   const navigateTo = useNavigate();
@@ -26,7 +26,7 @@ const SingleServiceContainer = () => {
 
       {!isServiceDataLoading && (
         <div className='px-28 py-10'>
-          <MySingleServiceCard {...serviceData} />
+          <MySingleServiceForm {...serviceData} />
         </div>
       )}
     </main>

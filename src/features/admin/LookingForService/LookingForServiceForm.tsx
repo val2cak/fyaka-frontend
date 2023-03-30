@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FC, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
 import { getUserFromStorage } from '../../../services/storage';
-import { NewService, User } from '../../../types/typeDefinitions';
+import { NewService, ServiceProps, User } from '../../../types/typeDefinitions';
 import { useCreateServiceMutation } from '../../guest/ServicesList/servicesApiSlice';
 
 const LookingForServiceForm = () => {
@@ -64,8 +64,7 @@ const LookingForServiceForm = () => {
           placeholder={'autor'}
           labelClasses={'text-primaryColor'}
           inputClasses={'placeholder-primaryColor bg-lightColor'}
-          disabled={true}
-          value={user.username}
+          inputProps={{ disabled: true, value: user.username }}
         />
 
         <InputElement

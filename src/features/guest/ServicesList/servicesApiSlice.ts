@@ -1,6 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { NewService, ServiceProps } from '../../../types/typeDefinitions';
+import {
+  NewService,
+  ServiceProps,
+  UpdateService,
+} from '../../../types/typeDefinitions';
 
 export const servicesApiSlice = createApi({
   reducerPath: 'Services-List-Api-Slice',
@@ -28,6 +32,21 @@ export const servicesApiSlice = createApi({
         }),
         invalidatesTags: ['Services-List'],
       }),
+      updateService: builder.mutation({
+        query: (updatedService: UpdateService) => ({
+          url: `/${updatedService.id}`,
+          method: 'PUT',
+          body: { ...updatedService },
+        }),
+        invalidatesTags: ['Services-List'],
+      }),
+      deleteService: builder.mutation({
+        query: (id: number) => ({
+          url: `/${id}`,
+          method: 'DELETE',
+        }),
+        invalidatesTags: ['Services-List'],
+      }),
     };
   },
 });
@@ -36,4 +55,6 @@ export const {
   useGetServicesListQuery,
   useGetSingleServiceQuery,
   useCreateServiceMutation,
+  useUpdateServiceMutation,
+  useDeleteServiceMutation,
 } = servicesApiSlice;
