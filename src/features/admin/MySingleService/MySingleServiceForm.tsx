@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import DatePickerElement from '../../../components/Form/DatePickerElement';
 
 import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
@@ -14,6 +15,10 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
 
   const [formData, setFormData] = useState<ServiceProps>(data);
 
+  const handleDateChange = (newValue: Date) => {
+    setFormData({ ...formData, date: newValue });
+  };
+
   const handleFormInputChange =
     (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
       switch (name) {
@@ -25,9 +30,6 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
           break;
         case 'location':
           setFormData({ ...formData, location: event.target.value });
-          break;
-        case 'date':
-          setFormData({ ...formData, date: new Date(event.target.value) });
           break;
         case 'people':
           setFormData({ ...formData, people: Number(event.target.value) });
@@ -137,17 +139,15 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
             }}
           />
 
-          <InputElement
+          <DatePickerElement
             label={'vrijeme obavljanja'}
-            placeholder={'vrijeme obavljanja'}
             labelClasses={'text-primaryColor'}
             inputClasses={
               'placeholder-primaryColor bg-lightColor text-darkColor'
             }
             inputProps={{
-              onChange: handleFormInputChange('date'),
-              defaultValue: data.date,
-              type: 'date',
+              onChange: handleDateChange,
+              defaultValue: new Date(data.date),
             }}
           />
 

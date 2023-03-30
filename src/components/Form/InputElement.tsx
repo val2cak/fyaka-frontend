@@ -1,4 +1,3 @@
-import { TextField } from '@mui/material';
 import { FC, useState } from 'react';
 import {
   IoEyeOff as NotVisibleIcon,
@@ -8,7 +7,6 @@ import {
 interface Props {
   label: string;
   placeholder: string;
-  disabled?: boolean;
   labelClasses?: string;
   inputClasses?: string;
   inputProps?: any;
@@ -30,23 +28,12 @@ const InputElement: FC<Props> = ({
         {label}
       </label>
       <div className='w-full relative'>
-        {inputProps && inputProps.type && inputProps.type === 'date' ? (
-          <TextField
-            placeholder={placeholder}
-            id='datetime-local'
-            type='datetime-local'
-            defaultValue={new Date(Date.now())}
-            className={`w-full h-full p-5 rounded-lg font-raleway ${inputClasses}`}
-            {...inputProps}
-          />
-        ) : (
-          <input
-            placeholder={placeholder}
-            type={flag && !visible ? 'password' : 'text'}
-            className={`w-full h-full p-5 rounded-lg font-raleway ${inputClasses}`}
-            {...inputProps}
-          />
-        )}
+        <input
+          placeholder={placeholder}
+          type={flag && !visible ? 'password' : 'text'}
+          className={`w-full h-full p-5 rounded-lg font-raleway ${inputClasses}`}
+          {...inputProps}
+        />
 
         {flag && (
           <button

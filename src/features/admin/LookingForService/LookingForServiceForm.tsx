@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import DatePickerElement from '../../../components/Form/DatePickerElement';
 
 import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
@@ -28,6 +29,10 @@ const LookingForServiceForm = () => {
     } catch (error: any) {
       console.log(error);
     }
+  };
+
+  const handleDateChange = (newValue: Date) => {
+    setFormData({ ...formData, date: newValue });
   };
 
   const handleFormInputChange =
@@ -87,16 +92,14 @@ const LookingForServiceForm = () => {
           }}
         />
 
-        <InputElement
+        <DatePickerElement
           label={'vrijeme obavljanja'}
-          placeholder={'vrijeme obavljanja'}
           labelClasses={'text-primaryColor'}
           inputClasses={
             '!placeholder-primaryColor bg-lightColor !color-primaryColor'
           }
           inputProps={{
-            onChange: handleFormInputChange('date'),
-            type: 'date',
+            onChange: handleDateChange,
           }}
         />
 
