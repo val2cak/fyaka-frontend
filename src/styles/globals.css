@@ -69,3 +69,13 @@ hr:after {
 .MuiButtonBase-root.MuiPaginationItem-root.Mui-selected {
   background-color: #669695;
 }
+
+.favorites-pagination .Mui-selected,
+.favorites-pagination .MuiPaginationItem-root:hover {
+  color: #ffffff !important;
+  background-color: #1a4645 !important;
+}
+
+.favorites-pagination .MuiPaginationItem-root {
+  color: #1a4645;
+}

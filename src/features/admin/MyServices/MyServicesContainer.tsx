@@ -49,17 +49,7 @@ const ServicesListContainer = () => {
         {!isServicesListDataLoading && (
           <div className='flex flex-wrap flex-start gap-4 items-center flex-row  w-full'>
             {servicesData.map((item, index) => (
-              <ServiceCard
-                id={item.id}
-                key={index}
-                author={item.author}
-                title={item.title}
-                date={item.date}
-                price={item.price}
-                location={item.location}
-                description={item.description}
-                people={item.people}
-              />
+              <ServiceCard key={index} {...item} />
             ))}
           </div>
         )}

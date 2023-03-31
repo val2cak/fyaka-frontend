@@ -32,7 +32,7 @@ const SingleServiceCard: FC<ServiceProps> = ({
   const user: User | null = userJson ? JSON.parse(userJson).user : null;
 
   const { data: favoriteItem, isFetching: isFavoriteItemLoading } =
-    useGetSingleFavoriteQuery({ userId: user.id, serviceId: id });
+    useGetSingleFavoriteQuery({ userId: user?.id, serviceId: id });
 
   useEffect(() => {
     if (!isFavoriteItemLoading) {
@@ -65,10 +65,10 @@ const SingleServiceCard: FC<ServiceProps> = ({
   return (
     <div
       className={`bg-lightColor rounded-lg p-8 flex flex-col gap-8 ${
-        user?.id === author.id ? 'py-16' : ''
+        user?.id === author.id || !user ? 'py-16' : ''
       }`}
     >
-      {user?.id !== author.id && (
+      {user && user?.id !== author.id && (
         <button
           onClick={handleClickFavorite}
           className='uppercase w-full flex justify-end text-primaryColor'

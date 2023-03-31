@@ -1,67 +1,39 @@
+import { useState } from 'react';
+import { Pagination } from '@mui/material';
+
+import { User } from '../../../types/typeDefinitions';
+import { getUserFromStorage } from '../../../services/storage';
 import ServiceCard from '../../../components/Card/ServiceCard';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import TitleBar from '../../../components/TitleBar/TitleBar';
-import arrow from '../../../assets/shapes/arrow-right-dark.png';
+import { useGetFavoritesQuery } from './favoritesApiSlice';
 
 const FavoritesContainer = () => {
-  const Cards = [
-    {
-      author: 'marko5ovic',
-      title: 'Prošetat pasa',
-      date: '31.04.2022. 18:00 h',
-      price: '20 €',
-      location: 'Pujanke, Split',
-    },
-    {
-      author: 'ivanaa',
-      title: 'Krečenje soba',
-      date: '19.04.2022. 09:00 h',
-      price: '50 €',
-      location: 'Japirko, Solin',
-    },
-    {
-      author: 'tosamjaante',
-      title: 'Odvoz šuta',
-      date: '11.05.2022. 13:00 h',
-      price: '100 €',
-      location: 'Kman, Split',
-    },
-    {
-      author: 'marinamatic21',
-      title: 'Sastavit namještaj',
-      date: '22.04.2022. 12:00 h',
-      price: '30 €',
-      location: 'Brda, Split',
-    },
-    {
-      author: 'marko5ovic',
-      title: 'Prošetat pasa',
-      date: '31.04.2022. 18:00 h',
-      price: '20 €',
-      location: 'Pujanke, Split',
-    },
-    {
-      author: 'ivanaa',
-      title: 'Krečenje soba',
-      date: '19.04.2022. 09:00 h',
-      price: '50 €',
-      location: 'Japirko, Solin',
-    },
-    {
-      author: 'marko5ovic',
-      title: 'Prošetat pasa',
-      date: '31.04.2022. 18:00 h',
-      price: '20 €',
-      location: 'Pujanke, Split',
-    },
-    {
-      author: 'ivanaa',
-      title: 'Krečenje soba',
-      date: '19.04.2022. 09:00 h',
-      price: '50 €',
-      location: 'Japirko, Solin',
-    },
-  ];
+  const userJson: string | null = getUserFromStorage();
+  const user: User | null = userJson ? JSON.parse(userJson).user : null;
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+    refetch();
+  };
+
+  const {
+    data: favoritesListData,
+    isFetching: isFavoritesListDataLoading,
+    refetch,
+  } = useGetFavoritesQuery({
+    userId: user.id,
+    page: currentPage,
+    pageSize: 8,
+  });
+
+  const favoritesData = favoritesListData?.favorites;
+
   return (
     <main className='bg-lightColor h-full w-full flex flex-col'>
       <div className='bg-primaryColor w-full relative mb-16'>
@@ -74,34 +46,31 @@ const FavoritesContainer = () => {
         </div>
       </div>
 
-      {/* <div className='flex flex-wrap justify-between items-center flex-row px-56 gap-4 w-full'>
-        {Cards.map((item, index) => (
-          <ServiceCard
-            key={index}
-            author={item.author}
-            title={item.title}
-            date={item.date}
-            price={item.price}
-            location={item.location}
-          />
-        ))}
-      </div> */}
-
-      <div className='w-full flex justify-center gap-16 py-8'>
-        <button className='transition ease-in-out delay-150 hover:-translate-x-4 duration-300'>
-          <img
-            src={arrow}
-            alt='arrow left'
-            className='-rotate-180 object-fill h-18 w-36'
-          />
-        </button>
-        <button className='transition ease-in-out delay-150 hover:translate-x-4 duration-300'>
-          <img
-            src={arrow}
-            alt='arrow right'
-            className='object-fill h-18 w-36'
-          />
-        </button>
+      <div className='flex flex-col px-56 gap-8 pb-8'>
+        {!isFavoritesListDataLoading && (
+          <div className='flex flex-wrap flex-start gap-4 items-center flex-row  w-full'>
+            {favoritesData.map((item, index) => (
+              <ServiceCard
+                id={item.service.id}
+                key={index}
+                author={item.service.author}
+                title={item.service.title}
+                date={item.service.date}
+                price={item.service.price}
+                location={item.service.location}
+                description={item.service.description}
+                people={item.service.people}
+              />
+            ))}
+          </div>
+        )}
+        <Pagination
+          count={favoritesListData?.totalPages ?? 1}
+          size='large'
+          className={'favorites-pagination'}
+          page={currentPage}
+          onChange={handlePageChange}
+        />
       </div>
     </main>
   );

@@ -30,6 +30,13 @@ export interface ServiceProps {
   };
 }
 
+export interface FavoriteProps {
+  id: number;
+  userId: number;
+  serviceId: number;
+  service: ServiceProps;
+}
+
 export interface NewService {
   title: string;
   description: string;
