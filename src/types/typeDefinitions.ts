@@ -56,3 +56,14 @@ export interface ReviewProps {
   rating: number;
   text: string;
 }
+
+export interface Favorite {
+  id: number;
+  userId: number;
+  serviceId: number;
+}
+
+export interface NewFavorite {
+  userId: number;
+  serviceId: number;
+}

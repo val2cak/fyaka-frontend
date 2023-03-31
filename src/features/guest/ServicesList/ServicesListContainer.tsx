@@ -44,7 +44,7 @@ const ServicesListContainer = () => {
         </Fragment>
 
         {!isServicesListDataLoading && (
-          <div className='flex flex-col justify-between w-3/4'>
+          <div className='flex flex-col justify-start gap-8 w-3/4'>
             <div className='flex flex-wrap flex-start gap-4'>
               {servicesData.map((item, index) => (
                 <ServiceCard
@@ -60,12 +60,15 @@ const ServicesListContainer = () => {
                 />
               ))}
             </div>
-            <Pagination
-              count={servicesListData?.totalPages ?? 1}
-              size='large'
-              page={currentPage}
-              onChange={handlePageChange}
-            />
+
+            <div className='flex justify-start'>
+              <Pagination
+                count={servicesListData?.totalPages ?? 1}
+                size='large'
+                page={currentPage}
+                onChange={handlePageChange}
+              />
+            </div>
           </div>
         )}
       </div>

@@ -1,7 +1,6 @@
 import ServiceCard from '../../../components/Card/ServiceCard';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import TitleBar from '../../../components/TitleBar/TitleBar';
-import arrow from '../../../assets/shapes/arrow-right-light.png';
 import { useGetServicesListQuery } from '../../guest/ServicesList/servicesApiSlice';
 import { getUserFromStorage } from '../../../services/storage';
 import { User } from '../../../types/typeDefinitions';
@@ -26,7 +25,11 @@ const ServicesListContainer = () => {
     data: servicesListData,
     isFetching: isServicesListDataLoading,
     refetch,
-  } = useGetServicesListQuery({ page: currentPage, pageSize: 8 });
+  } = useGetServicesListQuery({
+    authorId: user.id,
+    page: currentPage,
+    pageSize: 8,
+  });
 
   const servicesData = servicesListData?.services;
 
