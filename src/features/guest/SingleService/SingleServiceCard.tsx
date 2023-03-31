@@ -1,13 +1,16 @@
 import { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   AiFillHeart as FavoriteFilledIcon,
   AiOutlineHeart as FavoriteOutlinedIcon,
 } from 'react-icons/ai';
 import { format } from 'date-fns';
 
-import { ServiceProps } from '../../../types/typeDefinitions';
+import { ServiceProps, User } from '../../../types/typeDefinitions';
+import { getUserFromStorage } from '../../../services/storage';
 
 const SingleServiceCard: FC<ServiceProps> = ({
+  id,
   author,
   title,
   description,
@@ -16,7 +19,12 @@ const SingleServiceCard: FC<ServiceProps> = ({
   date,
   people,
 }) => {
+  const navigateTo = useNavigate();
+
   const [favorite, setFavorite] = useState(false);
+
+  const userJson: string | null = getUserFromStorage();
+  const user: User | null = userJson ? JSON.parse(userJson).user : null;
 
   return (
     <div className='bg-lightColor rounded-lg p-8 flex flex-col gap-8'>
@@ -54,16 +62,25 @@ const SingleServiceCard: FC<ServiceProps> = ({
           <li>{description}</li>
 
           <li>{location}</li>
-          <li>{price}</li>
+          <li>{price} €</li>
           <li>{format(new Date(date), 'dd.MM.yyyy. H:mm')} h</li>
           <li>{people}</li>
         </ul>
       </div>
 
       <div className='flex justify-center items-center'>
-        <button className='button bg-primaryColor text-lightColor'>
-          pošalji poruku
-        </button>
+        {user && user.id === author.id ? (
+          <button
+            className='button bg-primaryColor text-lightColor'
+            onClick={() => navigateTo(`/my-services/${id}`)}
+          >
+            uredi
+          </button>
+        ) : (
+          <button className='button bg-primaryColor text-lightColor'>
+            pošalji poruku
+          </button>
+        )}
       </div>
     </div>
   );

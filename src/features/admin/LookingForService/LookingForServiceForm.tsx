@@ -121,16 +121,6 @@ const LookingForServiceForm = () => {
           }}
         />
 
-        <TextElement
-          label={'opis'}
-          placeholder={'opis'}
-          labelClasses={'text-primaryColor'}
-          textClasses={'placeholder-primaryColor'}
-          textProps={{
-            onChange: handleFormInputChange('description'),
-          }}
-        />
-
         <InputElement
           label={'cijena usluge (€)'}
           placeholder={'cijena usluge'}
@@ -139,6 +129,16 @@ const LookingForServiceForm = () => {
           inputProps={{
             onChange: handleFormInputChange('price'),
             type: 'number',
+          }}
+        />
+
+        <TextElement
+          label={'opis'}
+          placeholder={'opis'}
+          labelClasses={'text-primaryColor'}
+          textClasses={'placeholder-primaryColor'}
+          textProps={{
+            onChange: handleFormInputChange('description'),
           }}
         />
       </div>

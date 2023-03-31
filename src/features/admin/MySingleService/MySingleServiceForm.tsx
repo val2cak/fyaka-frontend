@@ -76,6 +76,16 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
       <div className='flex flex-row justify-evenly gap-10'>
         <div className='w-1/2 flex flex-col gap-6'>
           <InputElement
+            label={'autor'}
+            placeholder={'autor'}
+            labelClasses={'text-primaryColor'}
+            inputClasses={
+              'placeholder-primaryColor bg-lightColor text-darkColor'
+            }
+            inputProps={{ defaultValue: data.author.username, disabled: true }}
+          />
+
+          <InputElement
             label={'naslov'}
             placeholder={'naslov'}
             labelClasses={'text-primaryColor'}
@@ -87,16 +97,6 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
               defaultValue: data.title,
               type: 'text',
             }}
-          />
-
-          <InputElement
-            label={'autor'}
-            placeholder={'autor'}
-            labelClasses={'text-primaryColor'}
-            inputClasses={
-              'placeholder-primaryColor bg-lightColor text-darkColor'
-            }
-            inputProps={{ defaultValue: data.author.username, disabled: true }}
           />
 
           {/* <InputElement

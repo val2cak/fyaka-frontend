@@ -6,6 +6,11 @@ import {
   UpdateService,
 } from '../../../types/typeDefinitions';
 
+interface ServicesData {
+  services: ServiceProps[];
+  totalPages: number;
+}
+
 export const servicesApiSlice = createApi({
   reducerPath: 'Services-List-Api-Slice',
   baseQuery: fetchBaseQuery({
@@ -16,10 +21,28 @@ export const servicesApiSlice = createApi({
   keepUnusedDataFor: 0,
   endpoints(builder) {
     return {
-      getServicesList: builder.query<ServiceProps[], number | void>({
-        query: (authorId) => (authorId ? `/?authorId=${authorId}` : '/'),
+      getServicesList: builder.query<
+        ServicesData,
+        { authorId?: number; pageSize?: number; page?: number }
+      >({
+        query: ({ authorId, pageSize, page }) => {
+          let url = '/';
+          if (authorId) {
+            url += `?authorId=${authorId}`;
+          }
+          if (pageSize) {
+            url += url.includes('?')
+              ? `&pageSize=${pageSize}`
+              : `?pageSize=${pageSize}`;
+          }
+          if (page) {
+            url += url.includes('?') ? `&page=${page}` : `?page=${page}`;
+          }
+          return url;
+        },
         providesTags: ['Services-List'],
       }),
+
       getSingleService: builder.query<ServiceProps, number>({
         query: (id: number) => `/${id}`,
         providesTags: ['Single-Service'],

@@ -11,7 +11,9 @@ const ServicesListContainer = () => {
   const user: User | null = userJson ? JSON.parse(userJson).user : null;
 
   const { data: servicesListData, isFetching: isServicesListDataLoading } =
-    useGetServicesListQuery(user.id);
+    useGetServicesListQuery({ authorId: user.id, page: 1, pageSize: 8 });
+
+  const servicesData = servicesListData?.services;
 
   return (
     <main className='bg-secondaryColor h-full w-full flex flex-col'>
@@ -27,7 +29,7 @@ const ServicesListContainer = () => {
 
       {!isServicesListDataLoading && (
         <div className='flex flex-wrap flex-start gap-4 items-center flex-row px-56 w-full'>
-          {servicesListData.map((item, index) => (
+          {servicesData.map((item, index) => (
             <ServiceCard
               id={item.id}
               key={index}
