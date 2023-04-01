@@ -64,8 +64,8 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className='bg-lightColor bg-opacity-80 rounded-lg px-20 py-8 flex flex-col gap-4'>
-      <h1 className='flex justify-center items-center font-ubuntu text-secondaryColor font-bold text-3xl'>
+    <div className='bg-lightColor bg-opacity-80 rounded-lg px-12 py-8 flex flex-col gap-4'>
+      <h1 className='flex justify-center items-center font-ubuntu text-secondaryColor font-bold text-xl'>
         Registracija
       </h1>
 
@@ -76,7 +76,7 @@ const RegisterForm = () => {
             placeholder={'yourmail@mail.com'}
             labelClasses={'text-primaryColor'}
             inputClasses={
-              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor'
+              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12'
             }
             inputProps={{
               value: email,
@@ -90,7 +90,7 @@ const RegisterForm = () => {
             placeholder={'username'}
             labelClasses={'text-primaryColor'}
             inputClasses={
-              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor'
+              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12'
             }
             inputProps={{
               value: username,
@@ -104,7 +104,7 @@ const RegisterForm = () => {
             placeholder={'*********'}
             labelClasses={'text-primaryColor'}
             inputClasses={
-              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor'
+              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12'
             }
             inputProps={{
               value: password,
@@ -118,7 +118,7 @@ const RegisterForm = () => {
             placeholder={'*********'}
             labelClasses={'text-primaryColor'}
             inputClasses={
-              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor'
+              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12'
             }
             inputProps={{
               type: 'password',
@@ -129,7 +129,7 @@ const RegisterForm = () => {
         <div>
           <button
             onClick={handleFormSubmit}
-            className='button bg-secondaryColor text-lightColor !py-4'
+            className='button bg-secondaryColor text-lightColor !py-4 h-16'
           >
             registriraj se
           </button>

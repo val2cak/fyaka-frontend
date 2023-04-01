@@ -9,17 +9,17 @@ const LoginRegisterContainer = () => {
   return (
     <main className='bg-primaryColor w-screen h-screen'>
       <section className='ellipse !bg-secondaryColor max-h-screen w-screen h-screen'>
-        <div className='h-screen w-screen bg-login bg-no-repeat bg-bottom'>
+        <div className='h-screen w-screen bg-login bg-no-repeat bg-right'>
           <h1 className='flex justify-center font-logo text-lightColor font-semibold text-6xl pt-5'>
             !Fyaka
           </h1>
 
           {location.pathname === '/auth/login' ? (
-            <div className='flex justify-start items-center ml-56 my-12'>
+            <div className='flex justify-start items-center ml-52 my-20'>
               <LoginForm />
             </div>
           ) : (
-            <div className='flex justify-end items-center mr-56'>
+            <div className='flex justify-start items-center ml-52 my-8'>
               <RegisterForm />
             </div>
           )}

@@ -52,7 +52,7 @@ const FavoritesContainer = () => {
 
       <div className='flex flex-col px-56 gap-8 pb-8'>
         {!isFavoritesListDataLoading && (
-          <div className='flex flex-wrap flex-start gap-4 items-center flex-row  w-full'>
+          <div className='flex flex-wrap flex-start gap-5 items-center flex-row  w-full'>
             {favoritesData.map((item, index) => (
               <ServiceCard
                 id={item.service.id}

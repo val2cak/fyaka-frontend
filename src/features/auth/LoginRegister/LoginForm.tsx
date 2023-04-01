@@ -76,8 +76,8 @@ const LoginForm = () => {
   ]);
 
   return (
-    <div className='bg-lightColor bg-opacity-80 rounded-lg px-20 py-16 flex flex-col gap-8'>
-      <h1 className='flex justify-center items-center font-ubuntu text-primaryColor font-bold text-3xl'>
+    <div className='bg-lightColor bg-opacity-80 rounded-lg px-12 py-8 flex flex-col gap-8'>
+      <h1 className='flex justify-center items-center font-ubuntu text-primaryColor font-bold text-xl'>
         Prijava
       </h1>
 
@@ -88,7 +88,7 @@ const LoginForm = () => {
             placeholder={'username'}
             labelClasses={'text-secondaryColor'}
             inputClasses={
-              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-secondaryColor'
+              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-secondaryColor h-12'
             }
             inputProps={{
               value: userName,
@@ -101,7 +101,7 @@ const LoginForm = () => {
             placeholder={'*********'}
             labelClasses={'text-secondaryColor'}
             inputClasses={
-              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-secondaryColor'
+              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-secondaryColor h-12'
             }
             inputProps={{
               value: password,

@@ -44,15 +44,6 @@ const ServiceCard: FC<ServiceProps> = ({
         </div>
       )}
       <div className='flex flex-col items-start'>
-        {flag !== 1 && (
-          <p
-            className={`text-sm ${
-              flag === 2 ? 'text-lightColor opacity-50' : 'text-grayColor'
-            } font-ubuntu font-medium`}
-          >
-            {author.username}
-          </p>
-        )}
         <p className='text-base font-bold'>{title}</p>
         <p className='text-sm font-bold'>
           {format(new Date(date), 'dd.MM.yyyy. H:mm')} h

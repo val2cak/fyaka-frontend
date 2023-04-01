@@ -25,7 +25,7 @@ const DatePickerElement: FC<Props> = ({
       <div className='w-full relative'>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DateTimePicker
-            className={`w-full h-full p-5 rounded-lg font-raleway ${inputClasses}`}
+            className={`w-full h-16 p-5 rounded-lg font-raleway ${inputClasses}`}
             format='dd.MM.yyyy. HH:mm'
             {...inputProps}
             renderInput={(params) => <TextField {...params} />}

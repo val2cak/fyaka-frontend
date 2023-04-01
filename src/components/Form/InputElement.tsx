@@ -31,7 +31,7 @@ const InputElement: FC<Props> = ({
         <input
           placeholder={placeholder}
           type={flag && !visible ? 'password' : 'text'}
-          className={`w-full h-full p-5 rounded-lg font-raleway ${inputClasses}`}
+          className={`w-full p-5 rounded-lg font-raleway ${inputClasses}`}
           {...inputProps}
         />
 

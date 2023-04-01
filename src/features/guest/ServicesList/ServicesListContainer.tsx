@@ -52,7 +52,7 @@ const ServicesListContainer = () => {
 
         {!isServicesListDataLoading && (
           <div className='flex flex-col justify-start gap-8 w-3/4'>
-            <div className='flex flex-wrap flex-start gap-4'>
+            <div className='flex flex-wrap flex-start gap-5'>
               {servicesData.map((item, index) => (
                 <ServiceCard key={index} {...item} />
               ))}
