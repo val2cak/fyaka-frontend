@@ -31,28 +31,24 @@ export const servicesApiSlice = createApi({
         }
       >({
         query: ({ authorId, pageSize, page, searchTerm }) => {
-          let url = '/';
+          const queryParams = new URLSearchParams();
           if (authorId) {
-            url += `?authorId=${authorId}`;
+            queryParams.append('authorId', authorId.toString());
           }
           if (searchTerm) {
-            const encodedSearchTerm = encodeURIComponent(
-              searchTerm.replace(/ /g, '%20')
-            );
-            url += url.includes('?')
-              ? `&searchTerm=${encodedSearchTerm}`
-              : `?searchTerm=${encodedSearchTerm}`;
+            queryParams.append('searchTerm', encodeURI(searchTerm));
           }
           if (pageSize) {
-            url += url.includes('?')
-              ? `&pageSize=${pageSize}`
-              : `?pageSize=${pageSize}`;
+            queryParams.append('pageSize', pageSize.toString());
           }
           if (page) {
-            url += url.includes('?') ? `&page=${page}` : `?page=${page}`;
+            queryParams.append('page', page.toString());
           }
-          return url;
+          const queryString = queryParams.toString();
+          const encodedQueryString = queryString ? queryString : '';
+          return encodedQueryString ? `/?${encodedQueryString}` : '/';
         },
+
         providesTags: ['Services-List'],
       }),
 

@@ -31,24 +31,21 @@ export const favoritesApiSlice = createApi({
         }
       >({
         query: ({ userId, pageSize, page, searchTerm }) => {
-          let url = `/${userId}`;
+          const queryParams = new URLSearchParams();
           if (searchTerm) {
-            const encodedSearchTerm = encodeURIComponent(
-              searchTerm.replace(/ /g, '%20')
-            );
-            url += url.includes('?')
-              ? `&searchTerm=${encodedSearchTerm}`
-              : `?searchTerm=${encodedSearchTerm}`;
+            queryParams.append('searchTerm', encodeURI(searchTerm));
           }
           if (pageSize) {
-            url += url.includes('?')
-              ? `&pageSize=${pageSize}`
-              : `?pageSize=${pageSize}`;
+            queryParams.append('pageSize', pageSize.toString());
           }
           if (page) {
-            url += url.includes('?') ? `&page=${page}` : `?page=${page}`;
+            queryParams.append('page', page.toString());
           }
-          return url;
+          const queryString = queryParams.toString();
+          const encodedQueryString = queryString ? queryString : '';
+          return encodedQueryString
+            ? `/${userId}?${encodedQueryString}`
+            : `/${userId}`;
         },
         providesTags: ['Favorites-List'],
       }),
