@@ -18,8 +18,10 @@ const SearchBar = () => {
   const handleSearch = async () => {
     if (location.pathname === '/' || location.pathname === '/services-list')
       navigateTo('/services-list', { state: searchTerm });
-    if (location.pathname === '/my-services')
+    else if (location.pathname === '/my-services')
       navigateTo('/my-services', { state: searchTerm });
+    else if (location.pathname === '/favorites')
+      navigateTo('/favorites', { state: searchTerm });
   };
 
   return (
@@ -39,6 +41,7 @@ const SearchBar = () => {
         }`}
         onChange={handleInputChange}
         defaultValue={location.state}
+        onKeyDown={(event) => (event.key === 'Enter' ? handleSearch() : '')}
       />
       <button onClick={handleSearch} className='absolute text-lg right-5'>
         <AiOutlineSearch

@@ -36,9 +36,12 @@ export const servicesApiSlice = createApi({
             url += `?authorId=${authorId}`;
           }
           if (searchTerm) {
+            const encodedSearchTerm = encodeURIComponent(
+              searchTerm.replace(/ /g, '%20')
+            );
             url += url.includes('?')
-              ? `&searchTerm=${searchTerm}`
-              : `?searchTerm=${searchTerm}`;
+              ? `&searchTerm=${encodedSearchTerm}`
+              : `?searchTerm=${encodedSearchTerm}`;
           }
           if (pageSize) {
             url += url.includes('?')

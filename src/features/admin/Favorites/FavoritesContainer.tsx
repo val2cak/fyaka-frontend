@@ -7,6 +7,7 @@ import ServiceCard from '../../../components/Card/ServiceCard';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import TitleBar from '../../../components/TitleBar/TitleBar';
 import { useGetFavoritesQuery } from './favoritesApiSlice';
+import { useLocation } from 'react-router-dom';
 
 const FavoritesContainer = () => {
   const userJson: string | null = getUserFromStorage();
@@ -22,6 +23,8 @@ const FavoritesContainer = () => {
     refetch();
   };
 
+  const searchTerm = useLocation().state;
+
   const {
     data: favoritesListData,
     isFetching: isFavoritesListDataLoading,
@@ -30,6 +33,7 @@ const FavoritesContainer = () => {
     userId: user.id,
     page: currentPage,
     pageSize: 8,
+    searchTerm: searchTerm,
   });
 
   const favoritesData = favoritesListData?.favorites;

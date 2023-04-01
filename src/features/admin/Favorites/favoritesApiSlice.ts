@@ -23,10 +23,23 @@ export const favoritesApiSlice = createApi({
     return {
       getFavorites: builder.query<
         FavoritesData,
-        { userId: number; pageSize?: number; page?: number }
+        {
+          userId: number;
+          pageSize?: number;
+          page?: number;
+          searchTerm?: string;
+        }
       >({
-        query: ({ userId, pageSize, page }) => {
+        query: ({ userId, pageSize, page, searchTerm }) => {
           let url = `/${userId}`;
+          if (searchTerm) {
+            const encodedSearchTerm = encodeURIComponent(
+              searchTerm.replace(/ /g, '%20')
+            );
+            url += url.includes('?')
+              ? `&searchTerm=${encodedSearchTerm}`
+              : `?searchTerm=${encodedSearchTerm}`;
+          }
           if (pageSize) {
             url += url.includes('?')
               ? `&pageSize=${pageSize}`
