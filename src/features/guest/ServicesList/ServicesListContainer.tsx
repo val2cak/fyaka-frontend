@@ -6,6 +6,7 @@ import FilterBar from '../../../components/FilterBar/FilterBar';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import TitleBar from '../../../components/TitleBar/TitleBar';
 import { useGetServicesListQuery } from './servicesApiSlice';
+import { useLocation } from 'react-router-dom';
 
 const ServicesListContainer = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -18,11 +19,17 @@ const ServicesListContainer = () => {
     refetch();
   };
 
+  const searchTerm = useLocation().state;
+
   const {
     data: servicesListData,
     isFetching: isServicesListDataLoading,
     refetch,
-  } = useGetServicesListQuery({ page: currentPage, pageSize: 6 });
+  } = useGetServicesListQuery({
+    page: currentPage,
+    pageSize: 6,
+    searchTerm: searchTerm,
+  });
 
   const servicesData = servicesListData?.services;
 

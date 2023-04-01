@@ -23,12 +23,22 @@ export const servicesApiSlice = createApi({
     return {
       getServicesList: builder.query<
         ServicesData,
-        { authorId?: number; pageSize?: number; page?: number }
+        {
+          authorId?: number;
+          pageSize?: number;
+          page?: number;
+          searchTerm?: string;
+        }
       >({
-        query: ({ authorId, pageSize, page }) => {
+        query: ({ authorId, pageSize, page, searchTerm }) => {
           let url = '/';
           if (authorId) {
             url += `?authorId=${authorId}`;
+          }
+          if (searchTerm) {
+            url += url.includes('?')
+              ? `&searchTerm=${searchTerm}`
+              : `?searchTerm=${searchTerm}`;
           }
           if (pageSize) {
             url += url.includes('?')
@@ -76,6 +86,7 @@ export const servicesApiSlice = createApi({
 
 export const {
   useGetServicesListQuery,
+  useLazyGetServicesListQuery,
   useGetSingleServiceQuery,
   useCreateServiceMutation,
   useUpdateServiceMutation,

@@ -26,7 +26,7 @@ const HomeCover = () => {
 
           <button
             onClick={handleClick}
-            className='flex flex-row-reverse items-center pl-28 absolute -right-16 -rotate-90 uppercase text-lightColor text-base font-ubuntu opacity-70 h-1 animate-bounce'
+            className='flex flex-row-reverse items-center pl-28 absolute -right-16 -rotate-90 uppercase text-lightColor text-base font-ubuntu opacity-70 h-1'
           >
             <p>saznaj više</p>
             <img src={arrow} alt='arrow' className='rotate-90 text-4xl pt-32' />

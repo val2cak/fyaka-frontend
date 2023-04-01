@@ -42,24 +42,8 @@ hr:after {
   position: relative;
 }
 
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateX(-10%);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-  }
-  50% {
-    transform: none;
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  }
-}
-.animate-bounce {
-  animation: bounce 3s infinite;
-  rotate: -90deg;
-}
-
 .MuiButtonBase-root.MuiPaginationItem-root {
-  color: #ffffff;
+  color: #fafafa;
   font-family: 'Ubuntu', 'sans-serif';
   font-weight: bold;
   font-size: 20px;
@@ -72,7 +56,7 @@ hr:after {
 
 .favorites-pagination .Mui-selected,
 .favorites-pagination .MuiPaginationItem-root:hover {
-  color: #ffffff !important;
+  color: #fafafa !important;
   background-color: #1a4645 !important;
 }
 

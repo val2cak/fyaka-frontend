@@ -6,10 +6,13 @@ import { getUserFromStorage } from '../../../services/storage';
 import { User } from '../../../types/typeDefinitions';
 import { Pagination } from '@mui/material';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const ServicesListContainer = () => {
   const userJson: string | null = getUserFromStorage();
   const user: User | null = userJson ? JSON.parse(userJson).user : null;
+
+  const searchTerm = useLocation().state;
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -29,6 +32,7 @@ const ServicesListContainer = () => {
     authorId: user.id,
     page: currentPage,
     pageSize: 8,
+    searchTerm: searchTerm,
   });
 
   const servicesData = servicesListData?.services;

@@ -1,10 +1,26 @@
+import { useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
-  const locationPathname = useLocation().pathname;
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const flag = locationPathname === '/favorites' ? 1 : 0;
+  const location = useLocation();
+
+  const navigateTo = useNavigate();
+
+  const flag = location.pathname === '/favorites' ? 1 : 0;
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearch = async () => {
+    if (location.pathname === '/' || location.pathname === '/services-list')
+      navigateTo('/services-list', { state: searchTerm });
+    if (location.pathname === '/my-services')
+      navigateTo('/my-services', { state: searchTerm });
+  };
 
   return (
     <div
@@ -21,8 +37,10 @@ const SearchBar = () => {
             ? 'placeholder-lightColor text-lightColor'
             : 'placeholder-darkColor text-darkColor'
         }`}
+        onChange={handleInputChange}
+        defaultValue={location.state}
       />
-      <button className='absolute text-lg right-5'>
+      <button onClick={handleSearch} className='absolute text-lg right-5'>
         <AiOutlineSearch
           className={`${flag ? 'text-lightColor' : 'text-darkColor'}`}
         />
