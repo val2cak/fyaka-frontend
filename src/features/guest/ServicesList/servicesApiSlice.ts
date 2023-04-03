@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import {
+  Lookup,
   NewService,
   ServiceProps,
   UpdateService,
@@ -79,6 +80,9 @@ export const servicesApiSlice = createApi({
         }),
         invalidatesTags: ['Services-List'],
       }),
+      getCategories: builder.query<Lookup[], void>({
+        query: () => `${process.env.REACT_APP_BASE_URL}/categories`,
+      }),
     };
   },
 });
@@ -90,4 +94,5 @@ export const {
   useCreateServiceMutation,
   useUpdateServiceMutation,
   useDeleteServiceMutation,
+  useGetCategoriesQuery,
 } = servicesApiSlice;

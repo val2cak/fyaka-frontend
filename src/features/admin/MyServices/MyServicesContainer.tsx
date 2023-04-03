@@ -35,7 +35,7 @@ const ServicesListContainer = () => {
     searchTerm: searchTerm,
   });
 
-  const servicesData = servicesListData?.services;
+  const servicesData = servicesListData ? servicesListData.services : [];
 
   return (
     <main className='bg-secondaryColor h-full w-full flex flex-col'>
@@ -51,7 +51,7 @@ const ServicesListContainer = () => {
 
       <div className='flex flex-col px-56 gap-8 pb-8'>
         {!isServicesListDataLoading && (
-          <div className='flex flex-wrap flex-start gap-5 items-center flex-row  w-full'>
+          <div className='flex flex-wrap flex-start gap-4 items-center flex-row  w-full'>
             {servicesData.map((item, index) => (
               <ServiceCard key={index} {...item} />
             ))}

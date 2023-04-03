@@ -13,6 +13,7 @@ import {
   useGetSingleFavoriteQuery,
   useRemoveFavoriteMutation,
 } from '../../admin/Favorites/favoritesApiSlice';
+import { useGetCategoriesQuery } from '../ServicesList/servicesApiSlice';
 
 const SingleServiceCard: FC<ServiceProps> = ({
   id,
@@ -23,8 +24,12 @@ const SingleServiceCard: FC<ServiceProps> = ({
   price,
   date,
   people,
+  categoryId,
 }) => {
   const navigateTo = useNavigate();
+
+  const { data: categoriesData, isFetching: isCategoriesDataLoading } =
+    useGetCategoriesQuery();
 
   const [favorite, setFavorite] = useState(false);
 
@@ -89,7 +94,7 @@ const SingleServiceCard: FC<ServiceProps> = ({
         <ul className='font-ubuntu font-bold text-primaryColor text-base flex flex-col gap-8 w-2/5'>
           <li>autor</li>
           <li>naslov</li>
-          {/* <li>kategorija</li> */}
+          <li>kategorija</li>
           <li>opis</li>
           <li>lokacija</li>
           <li>cijena usluge</li>
@@ -100,7 +105,11 @@ const SingleServiceCard: FC<ServiceProps> = ({
         <ul className='font-raleway text-base flex flex-col gap-8'>
           <li>{author.username}</li>
           <li>{title}</li>
-          {/* <li>{category}</li> */}
+          {!isCategoriesDataLoading && (
+            <li>
+              {categoriesData.find((item) => item.id === categoryId).name}
+            </li>
+          )}
           <li>{description}</li>
 
           <li>{location}</li>

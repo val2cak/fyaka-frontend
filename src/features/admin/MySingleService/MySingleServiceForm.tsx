@@ -1,16 +1,21 @@
 import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DatePickerElement from '../../../components/Form/DatePickerElement';
+import DropdownElement from '../../../components/Form/DropdownElement';
 
 import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
-import { ServiceProps } from '../../../types/typeDefinitions';
+import { Lookup, ServiceProps } from '../../../types/typeDefinitions';
 import {
   useDeleteServiceMutation,
+  useGetCategoriesQuery,
   useUpdateServiceMutation,
 } from '../../guest/ServicesList/servicesApiSlice';
 
 const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
+  const { data: categoriesData, isFetching: isCategoriesDataLoading } =
+    useGetCategoriesQuery();
+
   const navigateTo = useNavigate();
 
   const [formData, setFormData] = useState<ServiceProps>(data);
@@ -71,6 +76,10 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
       }
   };
 
+  const handleCategoryChange = (item: Lookup) => {
+    setFormData({ ...formData, categoryId: item.id });
+  };
+
   return (
     <div className='bg-secondaryColor rounded-lg py-12 px-32 flex flex-col gap-8'>
       <div className='flex flex-row justify-evenly gap-10'>
@@ -99,22 +108,22 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
             }}
           />
 
-          {/* <InputElement
-            label={'kategorija'}
-            value={service.category}
-            placeholder={'kategorija'}
-            labelClasses={'text-primaryColor'}
-            inputClasses={
-              'placeholder-primaryColor bg-lightColor text-darkColor'
-            }
-          /> */}
+          {!isCategoriesDataLoading && (
+            <DropdownElement
+              label={'kategorija'}
+              labelClasses={'text-primaryColor'}
+              handleCategorySelect={handleCategoryChange}
+              data={categoriesData}
+              selectedId={formData?.categoryId}
+            />
+          )}
 
           <TextElement
             label={'opis'}
             placeholder={'opis'}
             labelClasses={'text-primaryColor'}
             textClasses={
-              'placeholder-primaryColor h-[184px] bg-lightColor text-darkColor'
+              'placeholder-primaryColor bg-lightColor text-darkColor'
             }
             textProps={{
               onChange: handleFormInputChange('description'),

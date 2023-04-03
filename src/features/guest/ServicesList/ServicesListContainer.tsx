@@ -27,11 +27,11 @@ const ServicesListContainer = () => {
     refetch,
   } = useGetServicesListQuery({
     page: currentPage,
-    pageSize: 6,
+    pageSize: 9,
     searchTerm: searchTerm,
   });
 
-  const servicesData = servicesListData?.services;
+  const servicesData = servicesListData ? servicesListData.services : [];
 
   return (
     <main className='bg-secondaryColor h-full w-full flex flex-col'>

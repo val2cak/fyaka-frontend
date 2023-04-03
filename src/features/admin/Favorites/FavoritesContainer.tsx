@@ -36,7 +36,7 @@ const FavoritesContainer = () => {
     searchTerm: searchTerm,
   });
 
-  const favoritesData = favoritesListData?.favorites;
+  const favoritesData = favoritesListData ? favoritesListData.favorites : [];
 
   return (
     <main className='bg-lightColor h-full w-full flex flex-col'>
@@ -52,7 +52,7 @@ const FavoritesContainer = () => {
 
       <div className='flex flex-col px-56 gap-8 pb-8'>
         {!isFavoritesListDataLoading && (
-          <div className='flex flex-wrap flex-start gap-5 items-center flex-row  w-full'>
+          <div className='flex flex-wrap flex-start gap-4 items-center flex-row  w-full'>
             {favoritesData.map((item, index) => (
               <ServiceCard
                 id={item.service.id}
@@ -64,6 +64,7 @@ const FavoritesContainer = () => {
                 location={item.service.location}
                 description={item.service.description}
                 people={item.service.people}
+                categoryId={item.service.categoryId}
               />
             ))}
           </div>

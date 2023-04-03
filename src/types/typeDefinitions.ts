@@ -28,6 +28,7 @@ export interface ServiceProps {
     username: string;
     email: string;
   };
+  categoryId: number;
 }
 
 export interface FavoriteProps {
@@ -45,6 +46,7 @@ export interface NewService {
   date: Date;
   people: number;
   authorId: number;
+  categoryId: number;
 }
 
 export interface UpdateService {
@@ -56,6 +58,7 @@ export interface UpdateService {
   date: Date;
   people: number;
   authorId: number;
+  categoryId: number;
 }
 
 export interface ReviewProps {
@@ -73,4 +76,9 @@ export interface Favorite {
 export interface NewFavorite {
   userId: number;
   serviceId: number;
+}
+
+export interface Lookup {
+  id: number;
+  name: string;
 }

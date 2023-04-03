@@ -1,17 +1,24 @@
-import { FC, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DatePickerElement from '../../../components/Form/DatePickerElement';
+import DropdownElement from '../../../components/Form/DropdownElement';
 
 import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
 import { getUserFromStorage } from '../../../services/storage';
-import { NewService, ServiceProps, User } from '../../../types/typeDefinitions';
-import { useCreateServiceMutation } from '../../guest/ServicesList/servicesApiSlice';
+import { Lookup, NewService, User } from '../../../types/typeDefinitions';
+import {
+  useCreateServiceMutation,
+  useGetCategoriesQuery,
+} from '../../guest/ServicesList/servicesApiSlice';
 
 const LookingForServiceForm = () => {
   const navigateTo = useNavigate();
 
   const [createService] = useCreateServiceMutation();
+
+  const { data: categoriesData, isFetching: isCategoriesDataLoading } =
+    useGetCategoriesQuery();
 
   const userJson: string | null = getUserFromStorage();
   const user: User | null = userJson ? JSON.parse(userJson).user : null;
@@ -61,86 +68,97 @@ const LookingForServiceForm = () => {
       }
     };
 
+  const handleCategoryChange = (item: Lookup) => {
+    setFormData({ ...formData, categoryId: item.id });
+  };
+
   return (
     <div className='bg-secondaryColor rounded-lg py-12 px-32 flex flex-col gap-8'>
-      <div className='grid grid-cols-2 gap-8'>
-        <InputElement
-          label={'autor'}
-          placeholder={'autor'}
-          labelClasses={'text-primaryColor'}
-          inputClasses={'placeholder-primaryColor bg-lightColor'}
-          inputProps={{ disabled: true, value: user.username }}
-        />
+      <div className='flex flex-row justify-evenly gap-10'>
+        <div className='w-1/2 flex flex-col gap-6'>
+          <InputElement
+            label={'autor'}
+            placeholder={'autor'}
+            labelClasses={'text-primaryColor'}
+            inputClasses={'placeholder-primaryColor bg-lightColor'}
+            inputProps={{ disabled: true, value: user.username }}
+          />
 
-        <InputElement
-          label={'lokacija'}
-          placeholder={'lokacija'}
-          labelClasses={'text-primaryColor'}
-          inputClasses={'placeholder-primaryColor'}
-          inputProps={{
-            onChange: handleFormInputChange('location'),
-          }}
-        />
+          <InputElement
+            label={'naslov'}
+            placeholder={'naslov'}
+            labelClasses={'text-primaryColor'}
+            inputClasses={'placeholder-primaryColor'}
+            inputProps={{
+              onChange: handleFormInputChange('title'),
+            }}
+          />
 
-        <InputElement
-          label={'naslov'}
-          placeholder={'naslov'}
-          labelClasses={'text-primaryColor'}
-          inputClasses={'placeholder-primaryColor'}
-          inputProps={{
-            onChange: handleFormInputChange('title'),
-          }}
-        />
+          {!isCategoriesDataLoading && (
+            <DropdownElement
+              label={'kategorija'}
+              labelClasses={'text-primaryColor'}
+              handleCategorySelect={handleCategoryChange}
+              data={categoriesData}
+              selectedId={formData?.categoryId}
+            />
+          )}
 
-        <DatePickerElement
-          label={'vrijeme obavljanja'}
-          labelClasses={'text-primaryColor'}
-          inputClasses={
-            '!placeholder-primaryColor bg-lightColor !color-primaryColor'
-          }
-          inputProps={{
-            onChange: handleDateChange,
-          }}
-        />
+          <TextElement
+            label={'opis'}
+            placeholder={'opis'}
+            labelClasses={'text-primaryColor'}
+            textClasses={'placeholder-primaryColor'}
+            textProps={{
+              onChange: handleFormInputChange('description'),
+            }}
+          />
+        </div>
 
-        {/* <InputElement
-          label={'kategorija'}
-          placeholder={'kategorija'}
-          labelClasses={'text-primaryColor'}
-          inputClasses={'placeholder-primaryColor'}
-        /> */}
+        <div className='w-1/2 flex flex-col gap-6'>
+          <InputElement
+            label={'lokacija'}
+            placeholder={'lokacija'}
+            labelClasses={'text-primaryColor'}
+            inputClasses={'placeholder-primaryColor'}
+            inputProps={{
+              onChange: handleFormInputChange('location'),
+            }}
+          />
 
-        <InputElement
-          label={'broj osoba'}
-          placeholder={'broj osoba'}
-          labelClasses={'text-primaryColor'}
-          inputClasses={'placeholder-primaryColor'}
-          inputProps={{
-            onChange: handleFormInputChange('people'),
-            type: 'number',
-          }}
-        />
+          <DatePickerElement
+            label={'vrijeme obavljanja'}
+            labelClasses={'text-primaryColor'}
+            inputClasses={
+              '!placeholder-primaryColor bg-lightColor !color-primaryColor'
+            }
+            inputProps={{
+              onChange: handleDateChange,
+            }}
+          />
 
-        <InputElement
-          label={'cijena usluge (€)'}
-          placeholder={'cijena usluge'}
-          labelClasses={'text-primaryColor'}
-          inputClasses={`placeholder-primaryColor`}
-          inputProps={{
-            onChange: handleFormInputChange('price'),
-            type: 'number',
-          }}
-        />
+          <InputElement
+            label={'broj osoba'}
+            placeholder={'broj osoba'}
+            labelClasses={'text-primaryColor'}
+            inputClasses={'placeholder-primaryColor'}
+            inputProps={{
+              onChange: handleFormInputChange('people'),
+              type: 'number',
+            }}
+          />
 
-        <TextElement
-          label={'opis'}
-          placeholder={'opis'}
-          labelClasses={'text-primaryColor'}
-          textClasses={'placeholder-primaryColor'}
-          textProps={{
-            onChange: handleFormInputChange('description'),
-          }}
-        />
+          <InputElement
+            label={'cijena usluge (€)'}
+            placeholder={'cijena usluge'}
+            labelClasses={'text-primaryColor'}
+            inputClasses={`placeholder-primaryColor`}
+            inputProps={{
+              onChange: handleFormInputChange('price'),
+              type: 'number',
+            }}
+          />
+        </div>
       </div>
 
       <div className='flex justify-center items-center pt-4'>
