@@ -45,11 +45,17 @@ const DropdownMenu: FC<Props> = ({
     >
       <div
         onClick={() => setOpen(!open)}
-        className='flex items-center justify-between hover:cursor-pointer text-primaryColor'
+        className='flex items-center justify-between hover:cursor-pointer'
       >
-        <p>{selectedItem ? selectedItem.name : placeholder}</p>
+        <p
+          className={`${selectedItem ? 'text-darkColor' : 'text-primaryColor'}`}
+        >
+          {selectedItem ? selectedItem.name : placeholder}
+        </p>
 
-        <DropdownIcon className={`${open && 'rotate-180'} text-md`} />
+        <DropdownIcon
+          className={`${open && 'rotate-180'} text-md text-primaryColor`}
+        />
       </div>
 
       <div

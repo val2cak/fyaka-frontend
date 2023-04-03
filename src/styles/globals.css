@@ -63,3 +63,18 @@ hr:after {
 .favorites-pagination .MuiPaginationItem-root {
   color: #1a4645;
 }
+
+.MuiInputBase-root.MuiOutlinedInput-root {
+  height: 64px !important;
+  border-radius: 0.5rem;
+  font-family: Raleway, sans-serif;
+  padding-right: 1.25rem;
+}
+
+.MuiInputBase-input.MuiOutlinedInput-input {
+  padding-left: 1.25rem;
+}
+
+.MuiInputBase-input.MuiOutlinedInput-input:focus {
+  outline: 10px #f58800 !important;
+}

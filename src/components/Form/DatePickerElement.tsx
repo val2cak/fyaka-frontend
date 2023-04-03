@@ -22,10 +22,10 @@ const DatePickerElement: FC<Props> = ({
       <label className={`font-ubuntu text-base font-bold ${labelClasses}`}>
         {label}
       </label>
-      <div className='w-full relative'>
+      <div className='w-full !flex !items-center'>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DateTimePicker
-            className={`w-full h-16 p-5 rounded-lg font-raleway ${inputClasses}`}
+            className={`w-full rounded-lg ${inputClasses} date-picker`}
             format='dd.MM.yyyy. HH:mm'
             {...inputProps}
             renderInput={(params) => <TextField {...params} />}
