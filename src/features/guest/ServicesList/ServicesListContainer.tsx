@@ -27,7 +27,7 @@ const ServicesListContainer = () => {
     refetch,
   } = useGetServicesListQuery({
     page: currentPage,
-    pageSize: 9,
+    pageSize: 6,
     searchTerm: searchTerm,
   });
 
@@ -51,7 +51,7 @@ const ServicesListContainer = () => {
         </Fragment>
 
         {!isServicesListDataLoading && (
-          <div className='flex flex-col justify-start gap-8 w-3/4'>
+          <div className='flex flex-col gap-8 w-3/4 justify-between'>
             <div className='flex flex-wrap flex-start gap-5'>
               {servicesData.map((item, index) => (
                 <ServiceCard key={index} {...item} />
