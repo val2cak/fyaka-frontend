@@ -1,8 +1,7 @@
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
 import { TextField } from '@mui/material';
 import { FC } from 'react';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 interface Props {
   label: string;

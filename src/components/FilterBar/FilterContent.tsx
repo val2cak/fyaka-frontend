@@ -1,8 +1,10 @@
-import { Slider } from '@mui/material';
+import { Slider, TextField } from '@mui/material';
+import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { FC, useEffect, useState } from 'react';
-
 import { useGetServicesListQuery } from '../../features/guest/ServicesList/servicesApiSlice';
 import { Filters } from '../../types/typeDefinitions';
+import DatePickerElement from '../Form/DatePickerElement';
 
 interface Props {
   name: string;
@@ -65,14 +67,48 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     }
   };
 
+  const [minDate, setMinDate] = useState<Date | null>(null);
+  const [maxDate, setMaxDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    const earliestDate = servicesData.reduce(
+      (earliest: Date, service: any) =>
+        earliest > new Date(service.date) ? new Date(service.date) : earliest,
+      new Date()
+    );
+
+    const latestDate = servicesData.reduce(
+      (latest: Date, service: any) =>
+        latest < new Date(service.date) ? new Date(service.date) : latest,
+      new Date(0)
+    );
+
+    setMinDate(earliestDate);
+    setMaxDate(latestDate);
+  }, [servicesData]);
+
+  const handleMinDateChange = (date: Date | null) => {
+    if (date) {
+      setMinDate(date);
+    }
+  };
+
+  const handleMaxDateChange = (date: Date | null) => {
+    if (date) {
+      setMaxDate(date);
+    }
+  };
+
   useEffect(() => {
     setFilters({
       ...filters,
       minPrice: minPrice,
       maxPrice: maxPrice,
       people: people,
+      minDate: minDate,
+      maxDate: maxDate,
     });
-  }, [setFilters, minPrice, maxPrice, people]);
+  }, [setFilters, minPrice, maxPrice, people, minDate, maxDate]);
 
   return (
     <>
@@ -117,7 +153,31 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
             </div>
           )}
 
-          {name === 'vrijeme obavljanja' && <></>}
+          {name === 'vrijeme obavljanja' && (
+            <div className='flex flex-col gap-4'>
+              <DatePickerElement
+                label={'OD'}
+                labelClasses={'text-primaryColor'}
+                inputClasses={
+                  '!placeholder-primaryColor bg-transparent !fill-lightColor date-filter'
+                }
+                inputProps={{
+                  onChange: handleMinDateChange,
+                }}
+              />
+
+              <DatePickerElement
+                label={'DO'}
+                labelClasses={'text-primaryColor'}
+                inputClasses={
+                  '!placeholder-primaryColor bg-transparent !fill-lightColor date-filter'
+                }
+                inputProps={{
+                  onChange: handleMaxDateChange,
+                }}
+              />
+            </div>
+          )}
 
           {name === 'ocjena korisnika' && <></>}
 

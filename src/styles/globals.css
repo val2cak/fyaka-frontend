@@ -67,7 +67,7 @@ hr:after {
 .MuiInputBase-root.MuiOutlinedInput-root {
   height: 64px !important;
   border-radius: 0.5rem;
-  font-family: Raleway, sans-serif;
+  font-family: Ubuntu, sans-serif;
   padding-right: 1.25rem;
 }
 
@@ -75,6 +75,16 @@ hr:after {
   padding-left: 1.25rem;
 }
 
-.MuiInputBase-input.MuiOutlinedInput-input:focus {
-  outline: 10px #f58800 !important;
+.date-filter .MuiInputBase-root.MuiOutlinedInput-root {
+  border: 1px solid #fafafa !important;
+  color: #fafafa;
+  font-weight: 500;
+}
+
+.date-filter .MuiButtonBase-root {
+  color: #fafafa;
+}
+
+.date-filter .MuiInputBase-input.MuiOutlinedInput-input {
+  width: 160px;
 }

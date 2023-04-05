@@ -43,12 +43,12 @@ const ServicesListContainer = () => {
           <TitleBar title={'popis usluga'} />
         </div>
 
-        <div className='w-full pl-44 absolute -bottom-8'>
+        <div className='w-full pl-40 absolute -bottom-8'>
           <SearchBar />
         </div>
       </div>
 
-      <div className='flex flex-row px-44 gap-5 pb-8 w-full'>
+      <div className='flex flex-row px-40 gap-5 pb-8 w-full'>
         <Fragment>
           <FilterBar filters={filters} setFilters={setFilters} />
         </Fragment>
