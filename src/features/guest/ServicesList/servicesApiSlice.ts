@@ -29,9 +29,28 @@ export const servicesApiSlice = createApi({
           pageSize?: number;
           page?: number;
           searchTerm?: string;
+          minPrice?: number;
+          maxPrice?: number;
+          minDate?: Date;
+          maxDate?: Date;
+          categoryId?: number;
+          location?: string;
+          people?: number;
         }
       >({
-        query: ({ authorId, pageSize, page, searchTerm }) => {
+        query: ({
+          authorId,
+          pageSize,
+          page,
+          searchTerm,
+          minPrice,
+          maxPrice,
+          minDate,
+          maxDate,
+          categoryId,
+          location,
+          people,
+        }) => {
           const queryParams = new URLSearchParams();
           if (authorId) {
             queryParams.append('authorId', authorId.toString());
@@ -44,6 +63,27 @@ export const servicesApiSlice = createApi({
           }
           if (page) {
             queryParams.append('page', page.toString());
+          }
+          if (minPrice) {
+            queryParams.append('minPrice', minPrice.toString());
+          }
+          if (maxPrice) {
+            queryParams.append('maxPrice', maxPrice.toString());
+          }
+          if (minDate) {
+            queryParams.append('minDate', minDate.toString());
+          }
+          if (maxDate) {
+            queryParams.append('maxDate', maxDate.toString());
+          }
+          if (categoryId) {
+            queryParams.append('categoryId', categoryId.toString());
+          }
+          if (location) {
+            queryParams.append('location', location.toString());
+          }
+          if (people) {
+            queryParams.append('people', people.toString());
           }
           const queryString = queryParams.toString();
           const encodedQueryString = queryString ? queryString : '';

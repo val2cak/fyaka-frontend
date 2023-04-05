@@ -13,39 +13,41 @@ const FilterContent: FC<Props> = ({ filter }) => {
 
   const servicesData = servicesListData?.services ?? [];
 
-  const minPrice = Math.min(...servicesData?.map((item) => item.price)) ?? 0;
-  const maxPrice = Math.max(...servicesData?.map((item) => item.price)) ?? 0;
+  const minDataPrice =
+    Math.min(...servicesData?.map((item) => item.price)) ?? 0;
+  const maxDataPrice =
+    Math.max(...servicesData?.map((item) => item.price)) ?? 0;
 
-  const [minValue, setMinValue] = useState(minPrice);
-  const [maxValue, setMaxValue] = useState(maxPrice);
+  const [minPrice, setMinPrice] = useState(minDataPrice);
+  const [maxPrice, setMaxPrice] = useState(maxDataPrice);
 
   const handleMinInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value);
     if (isNaN(value)) {
-      setMinValue(0);
+      setMinPrice(0);
     } else {
-      setMinValue(value);
+      setMinPrice(value);
     }
   };
 
   const handleMaxInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value);
     if (isNaN(value)) {
-      setMaxValue(0);
+      setMaxPrice(0);
     } else {
-      setMaxValue(value);
+      setMaxPrice(value);
     }
   };
 
   const handleSliderChange = (event: any, newValue: number | number[]) => {
-    setMinValue(newValue[0] as number);
-    setMaxValue(newValue[1] as number);
+    setMinPrice(newValue[0] as number);
+    setMaxPrice(newValue[1] as number);
   };
 
   useEffect(() => {
-    setMinValue(minPrice);
-    setMaxValue(maxPrice);
-  }, [minPrice, maxPrice]);
+    setMinPrice(minDataPrice);
+    setMaxPrice(maxDataPrice);
+  }, [minDataPrice, maxDataPrice]);
 
   const [people, setPeople] = useState(0);
 
@@ -72,7 +74,7 @@ const FilterContent: FC<Props> = ({ filter }) => {
                     €
                   </span>
                   <input
-                    value={minValue}
+                    value={minPrice}
                     onChange={handleMinInputChange}
                     className={`border rounded-lg p-2 px-5 flex flex-nowrap bg-transparent text-lightColor w-20 pr-7`}
                   />
@@ -83,7 +85,7 @@ const FilterContent: FC<Props> = ({ filter }) => {
                     €
                   </span>
                   <input
-                    value={maxValue}
+                    value={maxPrice}
                     onChange={handleMaxInputChange}
                     className='border rounded-lg px-5 p-2 flex flex-nowrap bg-transparent text-lightColor w-20 pr-7'
                   />
@@ -94,9 +96,9 @@ const FilterContent: FC<Props> = ({ filter }) => {
                 getAriaLabel={() => 'Price range'}
                 valueLabelDisplay='auto'
                 step={10}
-                value={[minValue, maxValue]}
-                min={minPrice}
-                max={maxPrice}
+                value={[minPrice, maxPrice]}
+                min={minDataPrice}
+                max={maxDataPrice}
                 onChange={handleSliderChange}
                 sx={{ color: '#FAFAFA' }}
               />
