@@ -7,9 +7,11 @@ import SearchBar from '../../../components/SearchBar/SearchBar';
 import TitleBar from '../../../components/TitleBar/TitleBar';
 import { useGetServicesListQuery } from './servicesApiSlice';
 import { useLocation } from 'react-router-dom';
+import { Filters } from '../../../types/typeDefinitions';
 
 const ServicesListContainer = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [filters, setFilters] = useState<Filters>();
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -29,6 +31,7 @@ const ServicesListContainer = () => {
     page: currentPage,
     pageSize: 6,
     searchTerm: searchTerm,
+    filters: filters,
   });
 
   const servicesData = servicesListData ? servicesListData.services : [];
@@ -47,7 +50,7 @@ const ServicesListContainer = () => {
 
       <div className='flex flex-row px-44 gap-5 pb-8 w-full'>
         <Fragment>
-          <FilterBar />
+          <FilterBar filters={filters} setFilters={setFilters} />
         </Fragment>
 
         {!isServicesListDataLoading && (

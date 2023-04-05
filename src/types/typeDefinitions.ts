@@ -82,3 +82,13 @@ export interface Lookup {
   id: number;
   name: string;
 }
+
+export interface Filters {
+  minPrice?: number;
+  maxPrice?: number;
+  minDate?: Date;
+  maxDate?: Date;
+  categoryId?: number;
+  location?: string;
+  people?: number;
+}

@@ -2,12 +2,15 @@ import { Slider } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
 
 import { useGetServicesListQuery } from '../../features/guest/ServicesList/servicesApiSlice';
+import { Filters } from '../../types/typeDefinitions';
 
 interface Props {
-  filter: string;
+  name: string;
+  filters: Filters;
+  setFilters: (item: Filters) => void;
 }
 
-const FilterContent: FC<Props> = ({ filter }) => {
+const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
   const { data: servicesListData, isFetching: isServicesListDataLoading } =
     useGetServicesListQuery({});
 
@@ -62,11 +65,20 @@ const FilterContent: FC<Props> = ({ filter }) => {
     }
   };
 
+  useEffect(() => {
+    setFilters({
+      ...filters,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+      people: people,
+    });
+  }, [setFilters, minPrice, maxPrice, people]);
+
   return (
     <>
       {!isServicesListDataLoading && (
         <>
-          {filter === 'cijena' && (
+          {name === 'cijena' && (
             <div className='flex flex-col w-full gap-4'>
               <div className='flex flex-row justify-between w-full'>
                 <div className='relative'>
@@ -105,15 +117,15 @@ const FilterContent: FC<Props> = ({ filter }) => {
             </div>
           )}
 
-          {filter === 'vrijeme obavljanja' && <></>}
+          {name === 'vrijeme obavljanja' && <></>}
 
-          {filter === 'ocjena korisnika' && <></>}
+          {name === 'ocjena korisnika' && <></>}
 
-          {filter === 'kategorija' && <></>}
+          {name === 'kategorija' && <></>}
 
-          {filter === 'lokacija' && <></>}
+          {name === 'lokacija' && <></>}
 
-          {filter === 'broj osoba' && (
+          {name === 'broj osoba' && (
             <>
               <input
                 value={people}

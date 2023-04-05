@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import {
+  Filters,
   Lookup,
   NewService,
   ServiceProps,
@@ -29,28 +30,10 @@ export const servicesApiSlice = createApi({
           pageSize?: number;
           page?: number;
           searchTerm?: string;
-          minPrice?: number;
-          maxPrice?: number;
-          minDate?: Date;
-          maxDate?: Date;
-          categoryId?: number;
-          location?: string;
-          people?: number;
+          filters?: Filters;
         }
       >({
-        query: ({
-          authorId,
-          pageSize,
-          page,
-          searchTerm,
-          minPrice,
-          maxPrice,
-          minDate,
-          maxDate,
-          categoryId,
-          location,
-          people,
-        }) => {
+        query: ({ authorId, pageSize, page, searchTerm, filters }) => {
           const queryParams = new URLSearchParams();
           if (authorId) {
             queryParams.append('authorId', authorId.toString());
@@ -64,26 +47,28 @@ export const servicesApiSlice = createApi({
           if (page) {
             queryParams.append('page', page.toString());
           }
-          if (minPrice) {
-            queryParams.append('minPrice', minPrice.toString());
-          }
-          if (maxPrice) {
-            queryParams.append('maxPrice', maxPrice.toString());
-          }
-          if (minDate) {
-            queryParams.append('minDate', minDate.toString());
-          }
-          if (maxDate) {
-            queryParams.append('maxDate', maxDate.toString());
-          }
-          if (categoryId) {
-            queryParams.append('categoryId', categoryId.toString());
-          }
-          if (location) {
-            queryParams.append('location', location.toString());
-          }
-          if (people) {
-            queryParams.append('people', people.toString());
+          if (filters) {
+            if (filters.minPrice) {
+              queryParams.append('minPrice', filters.minPrice.toString());
+            }
+            if (filters.maxPrice) {
+              queryParams.append('maxPrice', filters.maxPrice.toString());
+            }
+            if (filters.minDate) {
+              queryParams.append('minDate', filters.minDate.toString());
+            }
+            if (filters.maxDate) {
+              queryParams.append('maxDate', filters.maxDate.toString());
+            }
+            if (filters.categoryId) {
+              queryParams.append('categoryId', filters.categoryId.toString());
+            }
+            if (filters.location) {
+              queryParams.append('location', filters.location.toString());
+            }
+            if (filters.people) {
+              queryParams.append('people', filters.people.toString());
+            }
           }
           const queryString = queryParams.toString();
           const encodedQueryString = queryString ? queryString : '';
