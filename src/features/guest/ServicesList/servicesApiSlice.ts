@@ -61,7 +61,14 @@ export const servicesApiSlice = createApi({
               queryParams.append('maxDate', filters.maxDate.toString());
             }
             if (filters.categoryId) {
-              queryParams.append('categoryId', filters.categoryId.toString());
+              Array.isArray(filters.categoryId)
+                ? filters.categoryId.map((catId) =>
+                    queryParams.append('categoryId', catId.toString())
+                  )
+                : queryParams.append(
+                    'categoryId',
+                    filters.categoryId.toString()
+                  );
             }
             if (filters.location) {
               queryParams.append('location', filters.location.toString());

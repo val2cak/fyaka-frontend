@@ -88,3 +88,13 @@ hr:after {
 .date-filter .MuiInputBase-input.MuiOutlinedInput-input {
   width: 160px;
 }
+
+.filter-checkbox .MuiTypography-root {
+  font-family: Ubuntu, sans-serif;
+  color: #fafafa;
+  font-weight: 500 !important;
+}
+
+.filter-checkbox .MuiSvgIcon-root {
+  color: #fafafa;
+}

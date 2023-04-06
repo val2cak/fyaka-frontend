@@ -88,7 +88,7 @@ export interface Filters {
   maxPrice?: number;
   minDate?: Date;
   maxDate?: Date;
-  categoryId?: number;
+  categoryId?: number[] | number;
   location?: string;
   people?: number;
 }

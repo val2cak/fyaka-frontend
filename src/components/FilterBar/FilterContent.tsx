@@ -1,9 +1,11 @@
-import { Slider, TextField } from '@mui/material';
-import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { FC, useEffect, useState } from 'react';
-import { useGetServicesListQuery } from '../../features/guest/ServicesList/servicesApiSlice';
-import { Filters } from '../../types/typeDefinitions';
+import { Checkbox, FormControlLabel, FormGroup, Slider } from '@mui/material';
+import { FC, useEffect, useMemo, useState } from 'react';
+
+import {
+  useGetCategoriesQuery,
+  useGetServicesListQuery,
+} from '../../features/guest/ServicesList/servicesApiSlice';
+import { Filters, Lookup } from '../../types/typeDefinitions';
 import DatePickerElement from '../Form/DatePickerElement';
 
 interface Props {
@@ -16,7 +18,12 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
   const { data: servicesListData, isFetching: isServicesListDataLoading } =
     useGetServicesListQuery({});
 
-  const servicesData = servicesListData?.services ?? [];
+  const { data: categoriesData, isFetching: isCategoriesDataLoading } =
+    useGetCategoriesQuery();
+
+  const servicesData = useMemo(() => {
+    return servicesListData?.services ?? [];
+  }, [servicesListData]);
 
   const minDataPrice =
     Math.min(...servicesData?.map((item) => item.price)) ?? 0;
@@ -99,6 +106,21 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     }
   };
 
+  const [category, setCategory] = useState<Lookup[]>([]);
+
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const categoryId = parseInt(event.target.value, 10);
+    const checked = event.target.checked;
+    if (checked) {
+      setCategory([
+        ...category,
+        categoriesData.find((item) => item.id === categoryId),
+      ]);
+    } else {
+      setCategory(category.filter((item) => item.id !== categoryId));
+    }
+  };
+
   useEffect(() => {
     setFilters({
       ...filters,
@@ -107,8 +129,9 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
       people: people,
       minDate: minDate,
       maxDate: maxDate,
+      categoryId: category?.map((item) => item.id),
     });
-  }, [setFilters, minPrice, maxPrice, people, minDate, maxDate]);
+  }, [setFilters, minPrice, maxPrice, people, minDate, maxDate, category]);
 
   return (
     <>
@@ -179,11 +202,31 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
             </div>
           )}
 
-          {name === 'ocjena korisnika' && <></>}
+          {name === 'ocjena korisnika' && <div>USKORO!</div>}
 
-          {name === 'kategorija' && <></>}
+          {name === 'kategorija' && !isCategoriesDataLoading && (
+            <FormGroup className='w-[250px]'>
+              {categoriesData.map((item) => {
+                const checked = category?.some((cat) => cat.id === item.id);
+                return (
+                  <FormControlLabel
+                    key={item.id}
+                    control={
+                      <Checkbox
+                        checked={checked}
+                        onChange={handleCategoryChange}
+                        value={item.id}
+                      />
+                    }
+                    label={item.name}
+                    className='filter-checkbox'
+                  />
+                );
+              })}
+            </FormGroup>
+          )}
 
-          {name === 'lokacija' && <></>}
+          {name === 'lokacija' && <div>USKORO!</div>}
 
           {name === 'broj osoba' && (
             <>
