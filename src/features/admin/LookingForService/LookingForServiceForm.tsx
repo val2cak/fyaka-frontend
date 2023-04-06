@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AutocompleteElement from '../../../components/Form/AutocompleteElement';
 import DatePickerElement from '../../../components/Form/DatePickerElement';
 import DropdownElement from '../../../components/Form/DropdownElement';
 
@@ -40,6 +41,10 @@ const LookingForServiceForm = () => {
 
   const handleDateChange = (newValue: Date) => {
     setFormData({ ...formData, date: newValue });
+  };
+
+  const handleLocationChange = (value) => {
+    setFormData({ ...formData, location: value });
   };
 
   const handleFormInputChange =
@@ -116,13 +121,10 @@ const LookingForServiceForm = () => {
         </div>
 
         <div className='w-1/2 flex flex-col gap-6'>
-          <InputElement
+          <AutocompleteElement
             label={'lokacija'}
-            placeholder={'lokacija'}
-            labelClasses={'text-primaryColor'}
-            inputClasses={'placeholder-primaryColor'}
             inputProps={{
-              onChange: handleFormInputChange('location'),
+              onChange: handleLocationChange,
             }}
           />
 

@@ -4,6 +4,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { authApiSlice } from '../features/auth/authApiSlice';
 import { servicesApiSlice } from '../features/guest/ServicesList/servicesApiSlice';
 import { favoritesApiSlice } from '../features/admin/Favorites/favoritesApiSlice';
+import { locationsApiSlice } from '../components/Locations/locationsSlice';
 //
 
 // STATE SLICE
@@ -16,12 +17,14 @@ export const store = configureStore({
     userState: authStateSliceReducer,
     [servicesApiSlice.reducerPath]: servicesApiSlice.reducer,
     [favoritesApiSlice.reducerPath]: favoritesApiSlice.reducer,
+    [locationsApiSlice.reducerPath]: locationsApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(
       authApiSlice.middleware,
       servicesApiSlice.middleware,
-      favoritesApiSlice.middleware
+      favoritesApiSlice.middleware,
+      locationsApiSlice.middleware
     ),
 });
 

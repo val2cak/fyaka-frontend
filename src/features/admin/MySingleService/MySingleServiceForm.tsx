@@ -1,8 +1,9 @@
 import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import AutocompleteElement from '../../../components/Form/AutocompleteElement';
 import DatePickerElement from '../../../components/Form/DatePickerElement';
 import DropdownElement from '../../../components/Form/DropdownElement';
-
 import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
 import { Lookup, ServiceProps } from '../../../types/typeDefinitions';
@@ -80,6 +81,10 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
     setFormData({ ...formData, categoryId: item.id });
   };
 
+  const handleLocationChange = (value) => {
+    setFormData({ ...formData, location: value });
+  };
+
   return (
     <div className='bg-secondaryColor rounded-lg py-12 px-32 flex flex-col gap-8'>
       <div className='flex flex-row justify-evenly gap-10'>
@@ -134,17 +139,14 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
         </div>
 
         <div className='w-1/2 flex flex-col gap-6'>
-          <InputElement
+          <AutocompleteElement
             label={'lokacija'}
-            placeholder={'lokacija'}
-            labelClasses={'text-primaryColor'}
-            inputClasses={
-              'placeholder-primaryColor bg-lightColor text-darkColor'
-            }
             inputProps={{
-              onChange: handleFormInputChange('location'),
-              defaultValue: data.location,
-              type: 'text',
+              onChange: handleLocationChange,
+              defaultValue: {
+                name: data.location.split(',')[0],
+                adminName1: data.location.split(',')[1],
+              },
             }}
           />
 

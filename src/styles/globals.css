@@ -98,3 +98,7 @@ hr:after {
 .filter-checkbox .MuiSvgIcon-root {
   color: #fafafa;
 }
+
+.autocomplete .MuiSvgIcon-root {
+  display: none;
+}

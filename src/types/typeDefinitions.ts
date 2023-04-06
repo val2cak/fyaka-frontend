@@ -92,3 +92,14 @@ export interface Filters {
   location?: string;
   people?: number;
 }
+
+export interface Location {
+  name: string;
+  adminName1: string;
+  adminName2?: string;
+  countryName?: string;
+}
+
+export interface Locations {
+  geonames: Location[];
+}

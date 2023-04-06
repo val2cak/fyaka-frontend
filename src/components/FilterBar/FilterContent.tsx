@@ -45,7 +45,7 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
   const handleMaxInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value);
     if (isNaN(value)) {
-      setMaxPrice(0);
+      setMaxPrice(undefined);
     } else {
       setMaxPrice(value);
     }
@@ -61,14 +61,14 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     setMaxPrice(maxDataPrice);
   }, [minDataPrice, maxDataPrice]);
 
-  const [people, setPeople] = useState(0);
+  const [people, setPeople] = useState<number>();
 
   const handlePeopleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const value = parseInt(event.target.value);
     if (isNaN(value)) {
-      setPeople(0);
+      setPeople(undefined);
     } else {
       setPeople(value);
     }
@@ -180,7 +180,7 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
             <div className='flex flex-col gap-4'>
               <DatePickerElement
                 label={'OD'}
-                labelClasses={'text-primaryColor'}
+                labelClasses={'text-primaryColor text-sm'}
                 inputClasses={
                   '!placeholder-primaryColor bg-transparent !fill-lightColor date-filter'
                 }
@@ -191,7 +191,7 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
 
               <DatePickerElement
                 label={'DO'}
-                labelClasses={'text-primaryColor'}
+                labelClasses={'text-primaryColor text-sm'}
                 inputClasses={
                   '!placeholder-primaryColor bg-transparent !fill-lightColor date-filter'
                 }
@@ -205,7 +205,7 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
           {name === 'ocjena korisnika' && <div>USKORO!</div>}
 
           {name === 'kategorija' && !isCategoriesDataLoading && (
-            <FormGroup className='w-[250px]'>
+            <FormGroup className='w-[225px]'>
               {categoriesData.map((item) => {
                 const checked = category?.some((cat) => cat.id === item.id);
                 return (
@@ -233,7 +233,8 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
               <input
                 value={people}
                 onChange={handlePeopleInputChange}
-                className={`border rounded-lg p-2 px-5 flex flex-nowrap bg-transparent text-lightColor w-20`}
+                className={`border rounded-lg p-2 px-5 flex flex-nowrap bg-transparent text-lightColor w-[130px]`}
+                type='number'
               />
             </>
           )}
