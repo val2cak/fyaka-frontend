@@ -7,6 +7,7 @@ import {
 } from '../../features/guest/ServicesList/servicesApiSlice';
 import { Filters, Lookup } from '../../types/typeDefinitions';
 import DatePickerElement from '../Form/DatePickerElement';
+import LocationsAutocomplete from '../Locations/LocationsAutocomplete';
 
 interface Props {
   name: string;
@@ -121,6 +122,12 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     }
   };
 
+  const [location, setLocation] = useState('');
+
+  const handleLocationChange = (value) => {
+    setLocation(value);
+  };
+
   useEffect(() => {
     setFilters({
       ...filters,
@@ -130,8 +137,18 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
       minDate: minDate,
       maxDate: maxDate,
       categoryId: category?.map((item) => item.id),
+      location: location,
     });
-  }, [setFilters, minPrice, maxPrice, people, minDate, maxDate, category]);
+  }, [
+    setFilters,
+    minPrice,
+    maxPrice,
+    people,
+    minDate,
+    maxDate,
+    category,
+    location,
+  ]);
 
   return (
     <>
@@ -226,7 +243,14 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
             </FormGroup>
           )}
 
-          {name === 'lokacija' && <div>USKORO!</div>}
+          {name === 'lokacija' && (
+            <LocationsAutocomplete
+              inputProps={{ onChange: handleLocationChange }}
+              className={
+                'bg-transparent !text-lightColor border border-lightColor autocomplete-filter'
+              }
+            />
+          )}
 
           {name === 'broj osoba' && (
             <>

@@ -60,7 +60,7 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
         authorId: data.author.id,
       }).unwrap();
 
-      navigateTo('/my-services');
+      navigateTo(-1);
     } catch (error: any) {
       console.log(error);
     }
@@ -71,7 +71,7 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
       try {
         deleteService(data.id).unwrap();
 
-        navigateTo('/my-services');
+        navigateTo(-1);
       } catch (error: any) {
         console.log(error);
       }
@@ -145,7 +145,7 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
               onChange: handleLocationChange,
               defaultValue: {
                 name: data.location.split(',')[0],
-                adminName1: data.location.split(',')[1],
+                adminName1: data.location.split(', ')[1],
               },
             }}
           />

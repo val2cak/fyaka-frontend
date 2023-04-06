@@ -4,9 +4,10 @@ import { useGetLocationsQuery } from './locationsSlice';
 
 interface Props {
   inputProps?: any;
+  className?: string;
 }
 
-const LocationsAutocomplete: FC<Props> = ({ inputProps }) => {
+const LocationsAutocomplete: FC<Props> = ({ inputProps, className }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const {
@@ -24,6 +25,9 @@ const LocationsAutocomplete: FC<Props> = ({ inputProps }) => {
 
   const handleClear = () => {
     setSearchTerm('');
+    if (inputProps?.onChange) {
+      inputProps.onChange('');
+    }
     refetch();
   };
 
@@ -32,12 +36,12 @@ const LocationsAutocomplete: FC<Props> = ({ inputProps }) => {
       setSearchTerm(
         `${inputProps.defaultValue.name}, ${inputProps.defaultValue.adminName1}`
       );
-  }, [inputProps.defaultValue]);
+  }, [inputProps?.defaultValue]);
 
   return (
     <Autocomplete
       id='croatia-areas-autocomplete'
-      className='w-full bg-lightColor rounded-lg font-raleway placeholder-primaryColor text-primaryColor autocomplete'
+      className={`w-full bg-lightColor rounded-lg font-raleway placeholder-primaryColor text-primaryColor autocomplete ${className}`}
       options={locationsData?.geonames ?? []}
       defaultValue={inputProps?.defaultValue}
       renderInput={(params) => (
@@ -60,10 +64,9 @@ const LocationsAutocomplete: FC<Props> = ({ inputProps }) => {
       )}
       clearOnEscape
       onChange={(event, value) => {
-        if (!value) {
+        if (!value || value === undefined || value === null) {
           handleClear();
-        }
-        if (inputProps) {
+        } else if (inputProps?.onChange) {
           inputProps.onChange(`${value.name}, ${value.adminName1}`);
         }
       }}

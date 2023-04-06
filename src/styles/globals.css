@@ -99,6 +99,14 @@ hr:after {
   color: #fafafa;
 }
 
-.autocomplete .MuiSvgIcon-root {
+.autocomplete .MuiAutocomplete-popupIndicator .MuiSvgIcon-root {
   display: none;
+}
+
+.autocomplete-filter .MuiInputBase-input.MuiOutlinedInput-input {
+  color: #fafafa !important;
+}
+
+.autocomplete-filter .MuiSvgIcon-root {
+  color: #fafafa;
 }
