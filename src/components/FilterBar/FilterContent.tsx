@@ -5,7 +5,7 @@ import {
   useGetCategoriesQuery,
   useGetServicesListQuery,
 } from '../../features/guest/ServicesList/servicesApiSlice';
-import { Filters, Lookup } from '../../types/typeDefinitions';
+import { Filters, Location, Lookup } from '../../types/typeDefinitions';
 import DatePickerElement from '../Form/DatePickerElement';
 import LocationsAutocomplete from '../Locations/LocationsAutocomplete';
 
@@ -82,17 +82,17 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     const earliestDate = servicesData.reduce(
       (earliest: Date, service: any) =>
         earliest > new Date(service.date) ? new Date(service.date) : earliest,
-      new Date()
+      undefined
     );
 
     const latestDate = servicesData.reduce(
       (latest: Date, service: any) =>
         latest < new Date(service.date) ? new Date(service.date) : latest,
-      new Date(0)
+      undefined
     );
 
-    setMinDate(earliestDate);
-    setMaxDate(latestDate);
+    earliestDate && setMinDate(earliestDate);
+    latestDate && setMaxDate(latestDate);
   }, [servicesData]);
 
   const handleMinDateChange = (date: Date | null) => {
@@ -123,10 +123,27 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
   };
 
   const [location, setLocation] = useState('');
+  const [defaultLocation, setDefaultLocation] = useState<Location>();
 
   const handleLocationChange = (value) => {
     setLocation(value);
   };
+
+  useEffect(() => {
+    location !== '' &&
+      setDefaultLocation({
+        name: location.split(',')[0],
+        adminName1: location.split(', ')[1],
+      });
+  }, [location]);
+
+  const [defaultMinDate, setDefaultMinDate] = useState<Date>();
+  const [defaultMaxDate, setDefaultMaxDate] = useState<Date>();
+
+  useEffect(() => {
+    minDate !== null && setDefaultMinDate(minDate);
+    maxDate !== null && setDefaultMaxDate(maxDate);
+  }, [minDate, maxDate]);
 
   useEffect(() => {
     if (name === 'cijena')
@@ -206,7 +223,7 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
             </div>
           )}
 
-          {name === 'vrijeme obavljanja' && (
+          {name === 'vrijeme obavljanja' && !isServicesListDataLoading && (
             <div className='flex flex-col gap-4'>
               <DatePickerElement
                 label={'OD'}
@@ -216,6 +233,7 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
                 }
                 inputProps={{
                   onChange: handleMinDateChange,
+                  defaultValue: new Date(defaultMinDate),
                 }}
               />
 
@@ -227,6 +245,7 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
                 }
                 inputProps={{
                   onChange: handleMaxDateChange,
+                  defaultValue: new Date(defaultMaxDate),
                 }}
               />
             </div>
@@ -258,7 +277,10 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
 
           {name === 'lokacija' && (
             <LocationsAutocomplete
-              inputProps={{ onChange: handleLocationChange }}
+              inputProps={{
+                onChange: handleLocationChange,
+                defaultValue: defaultLocation,
+              }}
               className={
                 'bg-transparent !text-lightColor border border-lightColor autocomplete-filter'
               }

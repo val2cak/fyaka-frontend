@@ -61,6 +61,7 @@ const FilterBar: FC<Props> = ({ filters, setFilters }) => {
 
       <button
         onClick={handleReset}
+        disabled={filters ? false : true}
         className='flex flex-col uppercase text-primaryColor items-center justify-start w-full p-4 px-12'
       >
         poništi filtere
