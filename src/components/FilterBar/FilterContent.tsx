@@ -129,16 +129,29 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
   };
 
   useEffect(() => {
-    setFilters({
-      ...filters,
-      minPrice: minPrice,
-      maxPrice: maxPrice,
-      people: people,
-      minDate: minDate,
-      maxDate: maxDate,
-      categoryId: category?.map((item) => item.id),
-      location: location,
-    });
+    if (name === 'cijena')
+      setFilters({ ...filters, minPrice: minPrice, maxPrice: maxPrice });
+    else if (name === 'vrijeme obavljanja')
+      setFilters({
+        ...filters,
+        minDate: minDate,
+        maxDate: maxDate,
+      });
+    else if (name === 'kategorija')
+      setFilters({
+        ...filters,
+        categoryId: category?.map((item) => item.id),
+      });
+    else if (name === 'lokacija')
+      setFilters({
+        ...filters,
+        location: location,
+      });
+    else if (name === 'broj osoba')
+      setFilters({
+        ...filters,
+        people: people,
+      });
   }, [
     setFilters,
     minPrice,

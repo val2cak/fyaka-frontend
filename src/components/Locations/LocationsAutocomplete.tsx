@@ -36,7 +36,7 @@ const LocationsAutocomplete: FC<Props> = ({ inputProps, className }) => {
       setSearchTerm(
         `${inputProps.defaultValue.name}, ${inputProps.defaultValue.adminName1}`
       );
-  }, [inputProps?.defaultValue]);
+  }, []);
 
   return (
     <Autocomplete
@@ -62,7 +62,6 @@ const LocationsAutocomplete: FC<Props> = ({ inputProps, className }) => {
           )}
         </li>
       )}
-      clearOnEscape
       onChange={(event, value) => {
         if (!value || value === undefined || value === null) {
           handleClear();

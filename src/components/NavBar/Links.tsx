@@ -1,7 +1,6 @@
 import { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { useAppSelector } from '../../app/hooks';
 import { Routes } from '../../routes/Routes';
 import { getUserFromStorage } from '../../services/storage';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
