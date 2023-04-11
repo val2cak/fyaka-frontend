@@ -6,7 +6,6 @@ const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const location = useLocation();
-
   const navigateTo = useNavigate();
 
   const flag = location.pathname === '/favorites' ? 1 : 0;
@@ -17,11 +16,11 @@ const SearchBar = () => {
 
   const handleSearch = async () => {
     if (location.pathname === '/' || location.pathname === '/services-list')
-      navigateTo('/services-list', { state: searchTerm });
+      navigateTo('/services-list', { state: { search: searchTerm } });
     else if (location.pathname === '/my-services')
-      navigateTo('/my-services', { state: searchTerm });
+      navigateTo('/my-services', { state: { search: searchTerm } });
     else if (location.pathname === '/favorites')
-      navigateTo('/favorites', { state: searchTerm });
+      navigateTo('/favorites', { state: { search: searchTerm } });
   };
 
   return (
@@ -40,7 +39,11 @@ const SearchBar = () => {
             : 'placeholder-darkColor text-darkColor'
         }`}
         onChange={handleInputChange}
-        defaultValue={location.state}
+        defaultValue={
+          location.state !== null && location.state.search
+            ? location.state.search
+            : ''
+        }
         onKeyDown={(event) => (event.key === 'Enter' ? handleSearch() : '')}
       />
       <button onClick={handleSearch} className='absolute text-lg right-5'>

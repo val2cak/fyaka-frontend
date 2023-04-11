@@ -6,9 +6,9 @@ import SingleServiceCard from './SingleServiceCard';
 import { useGetSingleServiceQuery } from '../ServicesList/servicesApiSlice';
 
 const SingleServiceContainer = () => {
-  const locationPathname = useLocation().pathname;
+  const location = useLocation();
 
-  const flag = locationPathname.includes('/favorites') ? 1 : 0;
+  const flag = location.pathname.includes('/favorites') ? 1 : 0;
 
   const navigateTo = useNavigate();
 

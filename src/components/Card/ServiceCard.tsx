@@ -8,7 +8,6 @@ import { ServiceProps } from '../../types/typeDefinitions';
 
 const ServiceCard: FC<ServiceProps> = ({
   id,
-  author,
   title,
   date,
   price,
@@ -16,12 +15,12 @@ const ServiceCard: FC<ServiceProps> = ({
 }) => {
   const navigateTo = useNavigate();
 
-  const locationPathname = useLocation().pathname;
+  const locationHook = useLocation();
 
   const flag =
-    locationPathname === '/my-services'
+    locationHook.pathname === '/my-services'
       ? 1
-      : locationPathname === '/favorites'
+      : locationHook.pathname === '/favorites'
       ? 2
       : 0;
 
@@ -44,12 +43,12 @@ const ServiceCard: FC<ServiceProps> = ({
         </div>
       )}
       <div className='flex flex-col items-start'>
-        <p className='text-base font-bold'>{title}</p>
+        <p className='text-base font-bold'>{title.slice(0, 20)}</p>
         <p className='text-sm font-bold'>
           {format(new Date(date), 'dd.MM.yyyy. H:mm')} h
         </p>
         <p className='text-md text-primaryColor font-medium'>{price} €</p>
-        <p className='text-sm'>{location}</p>
+        <p className='text-sm'>{location.split(',')[0]}</p>
         <p className='uppercase text-base text-primaryColor flex items-center justify-center gap-2 font-ubuntu font-light'>
           {flag === 1 ? <span>uredi</span> : <span>saznaj više</span>}
           <ArrowRightIcon />

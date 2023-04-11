@@ -12,9 +12,14 @@ const ServicesListContainer = () => {
   const userJson: string | null = getUserFromStorage();
   const user: User | null = userJson ? JSON.parse(userJson).user : null;
 
-  const searchTerm = useLocation().state;
+  const location = useLocation();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const searchTerm =
+    location.state !== null && location.state.search
+      ? location.state.search
+      : '';
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,

@@ -13,6 +13,8 @@ const ServicesListContainer = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filters, setFilters] = useState<Filters>();
 
+  const location = useLocation();
+
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -21,7 +23,10 @@ const ServicesListContainer = () => {
     refetch();
   };
 
-  const searchTerm = useLocation().state;
+  const searchTerm =
+    location.state !== null && location.state.search
+      ? location.state.search
+      : '';
 
   const {
     data: servicesListData,

@@ -13,6 +13,8 @@ const FavoritesContainer = () => {
   const userJson: string | null = getUserFromStorage();
   const user: User | null = userJson ? JSON.parse(userJson).user : null;
 
+  const location = useLocation();
+
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const handlePageChange = (
@@ -23,7 +25,10 @@ const FavoritesContainer = () => {
     refetch();
   };
 
-  const searchTerm = useLocation().state;
+  const searchTerm =
+    location.state !== null && location.state.search
+      ? location.state.search
+      : '';
 
   const {
     data: favoritesListData,
