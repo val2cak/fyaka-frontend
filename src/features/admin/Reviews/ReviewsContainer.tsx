@@ -7,16 +7,35 @@ import arrow from '../../../assets/shapes/arrow-right-orange.png';
 import { useGetReviewsQuery } from './reviewsApiSlice';
 import { getUserFromStorage } from '../../../services/storage';
 import { User, ReadReview } from '../../../types/typeDefinitions';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const ReviewsContainer = () => {
   const userJson: string | null = getUserFromStorage();
   const user: User | null = userJson ? JSON.parse(userJson).user : null;
 
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
   const [average, setAverage] = useState<number | null>(null);
 
-  const { data: reviewsData, isFetching: isReviewsDataLoading } =
-    useGetReviewsQuery(user.id);
+  const {
+    data: reviewsListData,
+    isFetching: isReviewsDataLoading,
+    refetch,
+  } = useGetReviewsQuery({ userId: user.id, page: currentPage, pageSize: 6 });
+
+  const handlePageDown = () => {
+    setCurrentPage(currentPage - 1);
+    refetch();
+  };
+
+  const handlePageUp = () => {
+    setCurrentPage(currentPage + 1);
+    refetch();
+  };
+
+  const reviewsData = useMemo(() => {
+    return reviewsListData ? reviewsListData.reviews : [];
+  }, [reviewsListData]);
 
   const calculateAverageRating = (reviews: ReadReview[]): number | null => {
     if (reviews.length === 0) {
@@ -33,7 +52,7 @@ const ReviewsContainer = () => {
 
   return (
     <main>
-      <TitleBar title={'ocjene'} />
+      <TitleBar title={'recenzije'} />
 
       <div className='flex flex-col px-32 py-8 gap-4 w-full'>
         <div className='flex justify-between'>
@@ -51,7 +70,7 @@ const ReviewsContainer = () => {
             {!isReviewsDataLoading && (
               <>
                 <div className='text-sm font-bold flex justify-center items-center gap-2'>
-                  <div className='font-bold'>{average}</div>
+                  <div className='font-bold'>{average.toFixed(1)}</div>
                   <Rating
                     name='read-only'
                     value={average}
@@ -62,14 +81,14 @@ const ReviewsContainer = () => {
                 </div>
 
                 <div className='uppercase font-medium text-sm'>
-                  broj ocjena korisnika: {reviewsData.length}
+                  broj recenzija korisnika: {reviewsData.length}
                 </div>
               </>
             )}
           </div>
 
           <button className='button !text-sm bg-secondaryColor text-lightColor !w-auto uppercase'>
-            ostavi ocjenu
+            ostavi recenziju
           </button>
         </div>
 
@@ -82,18 +101,34 @@ const ReviewsContainer = () => {
         )}
 
         <div className='w-full flex justify-center gap-16 pt-4'>
-          <button className='transition ease-in-out delay-150 hover:-translate-x-4 duration-300'>
+          <button
+            className={`${
+              currentPage === 1
+                ? 'opacity-70'
+                : 'transition ease-in-out delay-150 hover:-translate-x-4 duration-300'
+            }`}
+            onClick={handlePageDown}
+            disabled={currentPage === 1}
+          >
             <img
               src={arrow}
               alt='arrow left'
-              className='object-fill h-18 w-36 -rotate-180'
+              className='object-fill h-16 w-28 -rotate-180'
             />
           </button>
-          <button className='transition ease-in-out delay-150 hover:translate-x-4 duration-300'>
+          <button
+            className={`${
+              currentPage === reviewsListData?.totalPages
+                ? 'opacity-70'
+                : 'transition ease-in-out delay-150 hover:translate-x-4 duration-300'
+            }`}
+            onClick={handlePageUp}
+            disabled={currentPage === reviewsListData?.totalPages}
+          >
             <img
               src={arrow}
               alt='arrow right'
-              className='object-fill h-18 w-36'
+              className='object-fill h-16 w-28'
             />
           </button>
         </div>
