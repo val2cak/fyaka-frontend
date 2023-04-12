@@ -61,8 +61,20 @@ export interface UpdateService {
   categoryId: number;
 }
 
-export interface ReviewProps {
-  author: string;
+export interface WriteReview {
+  userId: number;
+  authorId: number;
+  rating: number;
+  text: string;
+}
+
+export interface ReadReview {
+  id: number;
+  userId: number;
+  author: {
+    id: number;
+    username: string;
+  };
   rating: number;
   text: string;
 }

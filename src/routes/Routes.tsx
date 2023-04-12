@@ -18,7 +18,7 @@ import GetStartedContainer from '../features/auth/GetStarted/GetStartedContainer
 import LoginRegisterContainer from '../features/auth/LoginRegister/LoginRegisterContainer';
 import SingleServiceContainer from '../features/guest/SingleService/SingleServiceContainer';
 import ProfileContainer from '../features/admin/Profile/ProfileContainer';
-import RatingsContainer from '../features/admin/Ratings/RatingsContainer';
+import ReviewsContainer from '../features/admin/Reviews/ReviewsContainer';
 import MyServicesContainer from '../features/admin/MyServices/MyServicesContainer';
 import FavoritesContainer from '../features/admin/Favorites/FavoritesContainer';
 import MessagesContainer from '../features/admin/Messages/MessagesContainer';
@@ -103,10 +103,10 @@ export let Routes: CustomRouteObject[] = [
                 element: <ProfileContainer />,
               },
               {
-                path: 'ratings',
+                path: 'reviews',
                 name: 'Ocjene',
                 icon: RatingsIcon,
-                element: <RatingsContainer />,
+                element: <ReviewsContainer />,
               },
               {
                 path: 'my-services',

@@ -1,14 +1,14 @@
 import { FC } from 'react';
 import { Rating } from '@mui/material';
 
-import { ReviewProps } from '../../types/typeDefinitions';
+import { ReadReview } from '../../types/typeDefinitions';
 
-const RatingCard: FC<ReviewProps> = ({ rating, author, text }) => {
+const ReviewCard: FC<ReadReview> = ({ rating, author, text }) => {
   return (
     <div className='bg-lightGrayColor rounded-lg font-ubuntu flex flex-col items-start justify-start w-[400px] h-[250px] p-8'>
-      <p className='text-base font-bold text-primaryColor'>{author}</p>
+      <p className='text-base font-bold text-primaryColor'>{author.username}</p>
       <p className='text-base font-bold flex justify-center items-center gap-2'>
-        <div className='font-bold'>{rating}</div>
+        <div className='font-bold'>{rating.toFixed(1)}</div>
         <Rating
           name='read-only'
           value={rating}
@@ -22,4 +22,4 @@ const RatingCard: FC<ReviewProps> = ({ rating, author, text }) => {
   );
 };
 
-export default RatingCard;
+export default ReviewCard;
