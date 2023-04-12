@@ -110,3 +110,26 @@ hr:after {
 .autocomplete-filter .MuiSvgIcon-root {
   color: #fafafa;
 }
+
+.Toastify__toast {
+  font-family: Ubuntu, sans-serif !important;
+  color: #fafafa !important;
+  border-radius: 0.5em !important;
+  padding-left: 0.25rem !important;
+}
+
+.Toastify__toast-theme--light.Toastify__toast--info,
+.Toastify__toast-theme--light.Toastify__toast--warning {
+  background: rgba(45, 156, 219, 0.9) !important;
+  padding-left: 0;
+}
+
+.Toastify__toast-theme--light.Toastify__toast--error {
+  background: rgba(234, 67, 53, 0.9);
+  padding-left: 0;
+}
+
+.Toastify__toast-theme--light.Toastify__toast--success {
+  background: rgba(26, 70, 69, 0.9);
+  padding-left: 0;
+}

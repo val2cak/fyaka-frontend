@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from '../../../app/hooks';
 import InputElement from '../../../components/Form/InputElement';
+import useNotifications from '../../../hooks/useNotifications';
 import { setUserToStorage } from '../../../services/storage';
 import { User } from '../../../types/typeDefinitions';
 import { useLoginUserMutation } from '../authApiSlice';
@@ -48,14 +49,37 @@ const LoginForm = () => {
       }
     };
 
+  const { handleUserActionNotification, handlePromiseNotification } =
+    useNotifications();
+
   const handleFormSubmit = async (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
 
     try {
-      loginUser({ username: userName, password: password }).unwrap();
+      handlePromiseNotification(
+        loginUser({ username: userName, password: password }).unwrap(),
+        {
+          success: {
+            message: 'Dobrodošli!',
+            type: 'success',
+          },
+          pending: {
+            message: 'Logiranje...',
+            type: 'info',
+          },
+          error: {
+            message: 'Nešto je pošlo po zlu!',
+            type: 'error',
+          },
+        }
+      );
     } catch (error: any) {
-      console.log(error.data.message);
+      handleUserActionNotification({
+        message: error.data.message,
+        autoClose: 2500,
+        type: 'error',
+      });
     }
   };
 

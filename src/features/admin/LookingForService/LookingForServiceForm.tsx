@@ -6,6 +6,7 @@ import DropdownElement from '../../../components/Form/DropdownElement';
 
 import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
+import useNotifications from '../../../hooks/useNotifications';
 import { getUserFromStorage } from '../../../services/storage';
 import { Lookup, NewService, User } from '../../../types/typeDefinitions';
 import {
@@ -26,16 +27,39 @@ const LookingForServiceForm = () => {
 
   const [formData, setFormData] = useState<NewService>();
 
+  const { handleUserActionNotification, handlePromiseNotification } =
+    useNotifications();
+
   const handlePublish = () => {
     try {
-      createService({
-        ...formData,
-        authorId: user.id,
-      })
-        .unwrap()
-        .then(() => navigateTo('/services-list'));
+      handlePromiseNotification(
+        createService({
+          ...formData,
+          authorId: user.id,
+        })
+          .unwrap()
+          .then(() => navigateTo('/services-list')),
+        {
+          success: {
+            message: 'Usluga dodana!',
+            type: 'success',
+          },
+          pending: {
+            message: 'Učitavanje...',
+            type: 'info',
+          },
+          error: {
+            message: 'Nešto je pošlo po zlu!',
+            type: 'error',
+          },
+        }
+      );
     } catch (error: any) {
-      console.log(error);
+      handleUserActionNotification({
+        message: error.data.message,
+        autoClose: 2500,
+        type: 'error',
+      });
     }
   };
 

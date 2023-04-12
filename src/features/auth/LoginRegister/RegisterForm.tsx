@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import InputElement from '../../../components/Form/InputElement';
+import useNotifications from '../../../hooks/useNotifications';
 import { useRegisterUserMutation } from '../authApiSlice';
 
 const RegisterForm = () => {
@@ -48,18 +49,41 @@ const RegisterForm = () => {
       }
     };
 
+  const { handleUserActionNotification, handlePromiseNotification } =
+    useNotifications();
+
   const handleFormSubmit = async (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
 
     try {
-      registerUser({
-        email: email,
-        username: username,
-        password: password,
-      }).unwrap();
+      handlePromiseNotification(
+        registerUser({
+          email: email,
+          username: username,
+          password: password,
+        }).unwrap(),
+        {
+          success: {
+            message: 'Uspješno ste se registrirali!',
+            type: 'success',
+          },
+          pending: {
+            message: 'Registriranje...',
+            type: 'info',
+          },
+          error: {
+            message: 'Nešto je pošlo po zlu!',
+            type: 'error',
+          },
+        }
+      );
     } catch (error: any) {
-      console.log(error.data.message);
+      handleUserActionNotification({
+        message: error.data.message,
+        autoClose: 2500,
+        type: 'error',
+      });
     }
   };
 

@@ -14,6 +14,7 @@ import {
   useRemoveFavoriteMutation,
 } from '../../admin/Favorites/favoritesApiSlice';
 import { useGetCategoriesQuery } from '../ServicesList/servicesApiSlice';
+import useNotifications from '../../../hooks/useNotifications';
 
 const SingleServiceCard: FC<ServiceProps> = ({
   id,
@@ -49,18 +50,61 @@ const SingleServiceCard: FC<ServiceProps> = ({
 
   const [removeFavorite] = useRemoveFavoriteMutation();
 
+  const { handleUserActionNotification, handlePromiseNotification } =
+    useNotifications();
+
   const handleClickFavorite = () => {
     if (favorite === false) {
       try {
-        addFavorite({ serviceId: id, userId: user.id }).unwrap();
+        handlePromiseNotification(
+          addFavorite({ serviceId: id, userId: user.id }).unwrap(),
+          {
+            success: {
+              message: 'Dodano u favorite!',
+              type: 'success',
+            },
+            pending: {
+              message: 'Učitavanje...',
+              type: 'info',
+            },
+            error: {
+              message: 'Nešto je pošlo po zlu!',
+              type: 'error',
+            },
+          }
+        );
       } catch (error: any) {
-        console.log(error);
+        handleUserActionNotification({
+          message: error.data.message,
+          autoClose: 2500,
+          type: 'error',
+        });
       }
     } else {
       try {
-        removeFavorite({ serviceId: id, userId: user.id }).unwrap();
+        handlePromiseNotification(
+          removeFavorite({ serviceId: id, userId: user.id }).unwrap(),
+          {
+            success: {
+              message: 'Uklonjeno iz favorita!',
+              type: 'success',
+            },
+            pending: {
+              message: 'Učitavanje...',
+              type: 'info',
+            },
+            error: {
+              message: 'Nešto je pošlo po zlu!',
+              type: 'error',
+            },
+          }
+        );
       } catch (error: any) {
-        console.log(error);
+        handleUserActionNotification({
+          message: error.data.message,
+          autoClose: 2500,
+          type: 'error',
+        });
       }
     }
 

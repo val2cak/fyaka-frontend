@@ -10,6 +10,7 @@ import { CustomRouteObject } from '../../types/typeDefinitions';
 import { removeUserFromStorage } from '../../services/storage';
 import { useAppDispatch } from '../../app/hooks';
 import { logoutUser } from '../../features/auth/authStateSlice';
+import useNotifications from '../../hooks/useNotifications';
 
 interface Props {
   routes: CustomRouteObject[];
@@ -23,11 +24,18 @@ const ProfileMenu: FC<Props> = ({ routes, setIsLoggedIn }) => {
 
   const navigateTo = useNavigate();
 
+  const { handleUserActionNotification } = useNotifications();
+
   const handleLogout = () => {
     removeUserFromStorage();
     dispatch(logoutUser());
     navigateTo('/');
     setIsLoggedIn(false);
+    handleUserActionNotification({
+      message: 'Doviđenja!',
+      autoClose: 2500,
+      type: 'success',
+    });
   };
 
   return (

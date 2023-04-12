@@ -103,3 +103,8 @@ export interface Location {
 export interface Locations {
   geonames: Location[];
 }
+
+export interface ToastContentInterface {
+  typeOfToast: string;
+  toastBody: string | any;
+}

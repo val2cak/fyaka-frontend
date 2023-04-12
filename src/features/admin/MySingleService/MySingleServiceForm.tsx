@@ -6,6 +6,7 @@ import DatePickerElement from '../../../components/Form/DatePickerElement';
 import DropdownElement from '../../../components/Form/DropdownElement';
 import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
+import useNotifications from '../../../hooks/useNotifications';
 import { Lookup, ServiceProps } from '../../../types/typeDefinitions';
 import {
   useDeleteServiceMutation,
@@ -52,28 +53,68 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
 
   const [deleteService] = useDeleteServiceMutation();
 
+  const { handleUserActionNotification, handlePromiseNotification } =
+    useNotifications();
+
   const handleSave = () => {
     try {
-      updateService({
-        ...formData,
-        id: data.id,
-        authorId: data.author.id,
-      }).unwrap();
+      handlePromiseNotification(
+        updateService({
+          ...formData,
+          id: data.id,
+          authorId: data.author.id,
+        }).unwrap(),
+        {
+          success: {
+            message: 'Usluga ažurirana!',
+            type: 'success',
+          },
+          pending: {
+            message: 'Učitavanje...',
+            type: 'info',
+          },
+          error: {
+            message: 'Nešto je pošlo po zlu!',
+            type: 'error',
+          },
+        }
+      );
 
       navigateTo(-1);
     } catch (error: any) {
-      console.log(error);
+      handleUserActionNotification({
+        message: error.data.message,
+        autoClose: 2500,
+        type: 'error',
+      });
     }
   };
 
   const handleDelete = () => {
     if (window.confirm('Sigurno želite izbrisati uslugu?'))
       try {
-        deleteService(data.id).unwrap();
+        handlePromiseNotification(deleteService(data.id).unwrap(), {
+          success: {
+            message: 'Usluga izbrisana!',
+            type: 'success',
+          },
+          pending: {
+            message: 'Učitavanje...',
+            type: 'info',
+          },
+          error: {
+            message: 'Nešto je pošlo po zlu!',
+            type: 'error',
+          },
+        });
 
         navigateTo(-1);
       } catch (error: any) {
-        console.log(error);
+        handleUserActionNotification({
+          message: error.data.message,
+          autoClose: 2500,
+          type: 'error',
+        });
       }
   };
 
