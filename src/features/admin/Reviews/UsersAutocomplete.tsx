@@ -1,5 +1,7 @@
 import { Autocomplete, TextField } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
+import { getUserFromStorage } from '../../../services/storage';
+import { User } from '../../../types/typeDefinitions';
 import { useGetUsersQuery } from '../../auth/authApiSlice';
 
 interface Props {
@@ -9,6 +11,9 @@ interface Props {
 }
 
 const UsersAutocomplete: FC<Props> = ({ inputProps, className, label }) => {
+  let userJson: string | null = getUserFromStorage();
+  let user: User = userJson && JSON.parse(userJson).user;
+
   const [searchTerm, setSearchTerm] = useState('');
 
   const {
@@ -43,9 +48,11 @@ const UsersAutocomplete: FC<Props> = ({ inputProps, className, label }) => {
       </label>
 
       <Autocomplete
-        id='croatia-areas-autocomplete'
+        id='users-autocomplete'
         className={`w-full bg-lightColor rounded-lg font-raleway placeholder-primaryColor text-primaryColor autocomplete ${className}`}
-        options={usersData ?? []}
+        options={
+          usersData ? usersData.filter((item) => item.id !== user.id) : []
+        }
         defaultValue={inputProps?.defaultValue}
         renderInput={(params) => (
           <TextField
@@ -63,7 +70,7 @@ const UsersAutocomplete: FC<Props> = ({ inputProps, className, label }) => {
           if (!value || value === undefined || value === null) {
             handleClear();
           } else if (inputProps?.onChange) {
-            inputProps.onChange(`${value.username}`);
+            inputProps.onChange(value);
           }
         }}
       />

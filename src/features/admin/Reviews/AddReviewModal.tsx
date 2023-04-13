@@ -1,19 +1,81 @@
 import { Rating } from '@mui/material';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { TfiClose as CloseIcon } from 'react-icons/tfi';
 
 import TextElement from '../../../components/Form/TextElement';
 import Modal from '../../../components/Modal/Modal';
+import { getUserFromStorage } from '../../../services/storage';
+import { User, WriteReview } from '../../../types/typeDefinitions';
 import UsersAutocomplete from './UsersAutocomplete';
+import { useCreateReviewMutation } from './reviewsApiSlice';
+import useNotifications from '../../../hooks/useNotifications';
 
 interface Props {
   isOpen: boolean;
   closeModal: () => void;
-  // addNewReview: (userId: number) => Promise<string | undefined>;
 }
 
 const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
-  const handleUserChange = () => {};
+  const userJson: string | null = getUserFromStorage();
+  const user: User | null = userJson ? JSON.parse(userJson).user : null;
+
+  const [reviewData, setReviewData] = useState<WriteReview>({
+    userId: undefined,
+    authorId: user.id,
+    rating: 0,
+    text: '',
+  });
+
+  const handleUserChange = (value: User) => {
+    setReviewData({ ...reviewData, userId: value.id });
+  };
+
+  const handleInputChange =
+    (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (name === 'text')
+        setReviewData({ ...reviewData, text: event.target.value });
+
+      if (name === 'rating')
+        setReviewData({
+          ...reviewData,
+          rating: parseFloat(event.target.value),
+        });
+    };
+
+  const { handleUserActionNotification, handlePromiseNotification } =
+    useNotifications();
+
+  const [createReview] = useCreateReviewMutation();
+
+  const handleSubmit = () => {
+    try {
+      handlePromiseNotification(
+        createReview(reviewData)
+          .unwrap()
+          .then(() => closeModal()),
+        {
+          success: {
+            message: 'Recenzija dodana!',
+            type: 'success',
+          },
+          pending: {
+            message: 'Učitavanje...',
+            type: 'info',
+          },
+          error: {
+            message: 'Nešto je pošlo po zlu!',
+            type: 'error',
+          },
+        }
+      );
+    } catch (error: any) {
+      handleUserActionNotification({
+        message: error.data.message,
+        autoClose: 2500,
+        type: 'error',
+      });
+    }
+  };
 
   return (
     <Modal isOpen={isOpen}>
@@ -23,6 +85,12 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
           <button
             onClick={() => {
               closeModal();
+              setReviewData({
+                userId: undefined,
+                authorId: user.id,
+                rating: 0,
+                text: '',
+              });
             }}
           >
             <CloseIcon />
@@ -43,11 +111,17 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
             </label>
             <div className='flex items-center gap-2'>
               <input
-                value={1}
-                className={`border rounded-lg p-2 px-5 flex flex-nowrap bg-transparent text-lightColor w-[130px]`}
+                value={reviewData.rating}
+                className={`border rounded-lg p-2 px-5 flex flex-nowrap bg-transparent`}
                 type='number'
+                onChange={handleInputChange('rating')}
               />
-              <Rating value={1} size='medium' precision={0.5} />
+              <Rating
+                value={reviewData.rating}
+                onChange={handleInputChange('rating')}
+                size='medium'
+                precision={0.5}
+              />
             </div>
           </div>
 
@@ -56,16 +130,29 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
             placeholder={'napiši recenziju'}
             labelClasses={'text-primaryColor'}
             textClasses={'placeholder-primaryColor'}
+            textProps={{
+              onChange: handleInputChange('text'),
+              defaultValue: reviewData.text,
+            }}
           />
         </div>
 
         <div className='absolute w-full flex justify-center gap-5 bottom-5 pr-10'>
-          <button className='button bg-primaryColor text-lightColor !w-auto !text-base'>
+          <button
+            onClick={handleSubmit}
+            className='button bg-primaryColor text-lightColor !w-auto !text-base'
+          >
             spremi
           </button>
           <button
             onClick={() => {
               closeModal();
+              setReviewData({
+                userId: undefined,
+                authorId: user.id,
+                rating: 0,
+                text: '',
+              });
             }}
             className='button bg-redColor text-lightColor !w-auto !text-base'
           >
