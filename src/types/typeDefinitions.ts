@@ -9,10 +9,10 @@ export interface CustomRouteObject extends NonIndexRouteObject {
 }
 
 export interface User {
-  id: number;
+  id?: number;
   username: string;
-  token: string;
-  tokenExpiry: Date;
+  token?: string;
+  tokenExpiry?: Date;
 }
 
 export interface ServiceProps {

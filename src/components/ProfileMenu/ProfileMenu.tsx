@@ -50,7 +50,7 @@ const ProfileMenu: FC<Props> = ({ routes, setIsLoggedIn }) => {
       {open && (
         <ul
           onMouseLeave={() => setOpen(false)}
-          className='absolute z-[1000] bg-primaryColor pb-16 pt-4 px-24 right-0 top-16 bg-opacity-90 flex flex-col gap-2 items-start'
+          className='absolute z-[10] bg-primaryColor pb-16 pt-4 px-24 right-0 top-16 bg-opacity-90 flex flex-col gap-2 items-start'
         >
           {routes
             .filter((route) => !route.invisible)

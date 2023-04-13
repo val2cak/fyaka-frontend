@@ -1,8 +1,4 @@
-export interface User {
-  username: string;
-  token: string;
-  tokenExpiry: Date;
-}
+import { User } from '../types/typeDefinitions';
 
 export function getUserFromStorage(): string | null {
   return localStorage.getItem('@user');

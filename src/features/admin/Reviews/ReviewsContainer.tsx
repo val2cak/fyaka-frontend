@@ -8,6 +8,7 @@ import { useGetReviewsQuery } from './reviewsApiSlice';
 import { getUserFromStorage } from '../../../services/storage';
 import { User, ReadReview } from '../../../types/typeDefinitions';
 import { useEffect, useMemo, useState } from 'react';
+import AddReviewModal from './AddReviewModal';
 
 const ReviewsContainer = () => {
   const userJson: string | null = getUserFromStorage();
@@ -16,6 +17,16 @@ const ReviewsContainer = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const [average, setAverage] = useState<number | null>(null);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = async () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const {
     data: reviewsListData,
@@ -52,6 +63,8 @@ const ReviewsContainer = () => {
 
   return (
     <main>
+      <AddReviewModal isOpen={showModal} closeModal={closeModal} />
+
       <TitleBar title={'recenzije'} />
 
       <div className='flex flex-col px-32 py-8 gap-4 w-full'>
@@ -70,7 +83,7 @@ const ReviewsContainer = () => {
             {!isReviewsDataLoading && (
               <>
                 <div className='text-sm font-bold flex justify-center items-center gap-2'>
-                  <div className='font-bold'>{average.toFixed(1)}</div>
+                  <div className='font-bold'>{average?.toFixed(1)}</div>
                   <Rating
                     name='read-only'
                     value={average}
@@ -87,7 +100,10 @@ const ReviewsContainer = () => {
             )}
           </div>
 
-          <button className='button !text-sm bg-secondaryColor text-lightColor !w-auto uppercase'>
+          <button
+            onClick={openModal}
+            className='button !text-sm bg-secondaryColor text-lightColor !w-auto uppercase'
+          >
             ostavi recenziju
           </button>
         </div>

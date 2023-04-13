@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { generateHeaders } from '../../services/generateHeaders';
+import { User } from '../../types/typeDefinitions';
 
 const authApiHeaders = {
   'Content-Type': 'application/json',
@@ -16,25 +17,32 @@ interface RegisterData extends LoginData {
   email: string;
 }
 
-interface User {
-  username: string;
-  token: string;
-  tokenExpiry: Date;
-}
-
 export const authApiSlice = createApi({
   reducerPath: 'Auth-Api-Slice',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_BASE_URL}`,
+    baseUrl: `${process.env.REACT_APP_BASE_URL}/users`,
     prepareHeaders: (headers) => generateHeaders(headers),
   }),
+  tagTypes: ['Users-List'],
 
   endpoints(builder) {
     return {
+      getUsers: builder.query<User[], string>({
+        query: (searchTerm?: string) => {
+          const queryParams = new URLSearchParams();
+          if (searchTerm) {
+            queryParams.append('searchTerm', encodeURI(searchTerm));
+          }
+          const queryString = queryParams.toString();
+          const encodedQueryString = queryString ? queryString : '';
+          return encodedQueryString ? `?${encodedQueryString}` : ``;
+        },
+        providesTags: ['Users-List'],
+      }),
       loginUser: builder.mutation<User, LoginData>({
         query: ({ ...credentials }) => ({
-          url: `http://localhost:8000/api/users/login`,
+          url: `/login`,
           method: 'POST',
           body: credentials,
           headers: authApiHeaders,
@@ -43,7 +51,7 @@ export const authApiSlice = createApi({
       //
       registerUser: builder.mutation<User, RegisterData>({
         query: ({ ...credentials }) => ({
-          url: `http://localhost:8000/api/users/register`,
+          url: `/register`,
           method: 'POST',
           body: credentials,
           headers: authApiHeaders,
@@ -53,4 +61,8 @@ export const authApiSlice = createApi({
   },
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation } = authApiSlice;
+export const {
+  useLoginUserMutation,
+  useRegisterUserMutation,
+  useGetUsersQuery,
+} = authApiSlice;
