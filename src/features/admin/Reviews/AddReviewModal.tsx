@@ -35,11 +35,20 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
       if (name === 'text')
         setReviewData({ ...reviewData, text: event.target.value });
 
-      if (name === 'rating')
-        setReviewData({
-          ...reviewData,
-          rating: parseFloat(event.target.value),
-        });
+      if (name === 'rating') {
+        const value = parseFloat(event.target.value);
+
+        if (isNaN(value))
+          setReviewData({
+            ...reviewData,
+            rating: 0,
+          });
+        else
+          setReviewData({
+            ...reviewData,
+            rating: value,
+          });
+      }
     };
 
   const { handleUserActionNotification, handlePromiseNotification } =
@@ -79,7 +88,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
 
   return (
     <Modal isOpen={isOpen}>
-      <div className='bg-lightColor w-[500px] h-[525px] rounded-lg opacity-95 p-5 flex flex-col gap-5 relative'>
+      <div className='bg-lightColor w-[500px] h-[525px] rounded-lg opacity-95 p-8 flex flex-col gap-4 relative'>
         <header className='flex justify-between items-center text-primaryColor text-base'>
           <h3 className='font-ubuntu text-lg font-medium'>ostavi recenziju</h3>
           <button
@@ -97,7 +106,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
           </button>
         </header>
 
-        <div className='flex flex-col gap-5'>
+        <div className='flex flex-col gap-2'>
           <UsersAutocomplete
             label='korisnik'
             inputProps={{
@@ -109,11 +118,10 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
             <label className='font-ubuntu text-base font-bold text-primaryColor'>
               ocjena
             </label>
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-4'>
               <input
                 value={reviewData.rating}
-                className={`border rounded-lg p-2 px-5 flex flex-nowrap bg-transparent`}
-                type='number'
+                className={`rounded-lg p-2 px-5 flex flex-nowrap bg-transparent border-[0.5px] border-grayColor h-[64px] w-[100px]`}
                 onChange={handleInputChange('rating')}
               />
               <Rating
@@ -127,9 +135,11 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
 
           <TextElement
             label={'recenzija'}
-            placeholder={'napiši recenziju'}
+            placeholder={'napiši recenziju...'}
             labelClasses={'text-primaryColor'}
-            textClasses={'placeholder-primaryColor'}
+            textClasses={
+              'placeholder-[#b1b1b1] !font-ubuntu bg-transparent border-[0.5px] border-grayColor font-normal'
+            }
             textProps={{
               onChange: handleInputChange('text'),
               defaultValue: reviewData.text,
