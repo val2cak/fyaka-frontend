@@ -6,7 +6,7 @@ import {
   useGetServicesListQuery,
 } from '../../features/guest/ServicesList/servicesApiSlice';
 import { Filters, Location, Lookup } from '../../types/typeDefinitions';
-import DatePickerElement from '../Form/DatePickerElement';
+import DateTimePickerElement from '../Form/DateTimePickerElement';
 import LocationsAutocomplete from '../Locations/LocationsAutocomplete';
 
 interface Props {
@@ -225,7 +225,7 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
 
           {name === 'vrijeme obavljanja' && !isServicesListDataLoading && (
             <div className='flex flex-col gap-4'>
-              <DatePickerElement
+              <DateTimePickerElement
                 label={'OD'}
                 labelClasses={'text-primaryColor text-sm'}
                 inputClasses={
@@ -237,7 +237,7 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
                 }}
               />
 
-              <DatePickerElement
+              <DateTimePickerElement
                 label={'DO'}
                 labelClasses={'text-primaryColor text-sm'}
                 inputClasses={

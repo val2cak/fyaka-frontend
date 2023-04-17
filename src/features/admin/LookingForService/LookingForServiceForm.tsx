@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AutocompleteElement from '../../../components/Form/AutocompleteElement';
-import DatePickerElement from '../../../components/Form/DatePickerElement';
+import DateTimePickerElement from '../../../components/Form/DateTimePickerElement';
 import DropdownElement from '../../../components/Form/DropdownElement';
 
 import InputElement from '../../../components/Form/InputElement';
@@ -83,9 +83,6 @@ const LookingForServiceForm = () => {
         case 'location':
           setFormData({ ...formData, location: event.target.value });
           break;
-        case 'date':
-          setFormData({ ...formData, date: new Date(event.target.value) });
-          break;
         case 'people':
           setFormData({ ...formData, people: Number(event.target.value) });
           break;
@@ -126,8 +123,9 @@ const LookingForServiceForm = () => {
           {!isCategoriesDataLoading && (
             <DropdownElement
               label={'kategorija'}
+              placeholder={'kategorija'}
               labelClasses={'text-primaryColor'}
-              handleCategorySelect={handleCategoryChange}
+              handleSelect={handleCategoryChange}
               data={categoriesData}
               selectedId={formData?.categoryId}
             />
@@ -152,7 +150,7 @@ const LookingForServiceForm = () => {
             }}
           />
 
-          <DatePickerElement
+          <DateTimePickerElement
             label={'vrijeme obavljanja'}
             labelClasses={'text-primaryColor'}
             inputClasses={

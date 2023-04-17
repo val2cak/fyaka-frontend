@@ -1,4 +1,4 @@
-import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
+import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
 import { TextField } from '@mui/material';
 import { FC } from 'react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -10,7 +10,7 @@ interface Props {
   inputProps?: any;
 }
 
-const DatePickerElement: FC<Props> = ({
+const DateTimePickerElement: FC<Props> = ({
   label,
   labelClasses,
   inputClasses,
@@ -23,9 +23,9 @@ const DatePickerElement: FC<Props> = ({
       </label>
       <div className='w-full !flex !items-center'>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
+          <DateTimePicker
             className={`w-full rounded-lg ${inputClasses} date-picker`}
-            format='dd.MM.yyyy.'
+            format='dd.MM.yyyy. HH:mm'
             {...inputProps}
             renderInput={(params) => <TextField {...params} />}
           />
@@ -35,4 +35,4 @@ const DatePickerElement: FC<Props> = ({
   );
 };
 
-export default DatePickerElement;
+export default DateTimePickerElement;

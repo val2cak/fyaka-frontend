@@ -4,16 +4,18 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 interface Props {
   label: string;
+  placeholder: string;
   labelClasses?: string;
-  handleCategorySelect: (item: Lookup) => void;
+  handleSelect: (item: Lookup) => void;
   data: Lookup[];
   selectedId: number;
 }
 
 const DropdownElement: FC<Props> = ({
   label,
+  placeholder,
   labelClasses,
-  handleCategorySelect,
+  handleSelect,
   data,
   selectedId,
 }) => {
@@ -25,9 +27,9 @@ const DropdownElement: FC<Props> = ({
 
       <DropdownMenu
         selectedItem={data.find((item) => item.id === selectedId)}
-        onSelect={handleCategorySelect}
+        onSelect={handleSelect}
         items={data}
-        placeholder={'kategorija'}
+        placeholder={placeholder}
       />
     </div>
   );

@@ -24,7 +24,7 @@ export const authApiSlice = createApi({
     baseUrl: `${process.env.REACT_APP_BASE_URL}/users`,
     prepareHeaders: (headers) => generateHeaders(headers),
   }),
-  tagTypes: ['Users-List'],
+  tagTypes: ['Users-List', 'Single-User'],
 
   endpoints(builder) {
     return {
@@ -39,6 +39,18 @@ export const authApiSlice = createApi({
           return encodedQueryString ? `?${encodedQueryString}` : ``;
         },
         providesTags: ['Users-List'],
+      }),
+      getSingleUser: builder.query<User, number>({
+        query: (id: number) => `/${id}`,
+        providesTags: ['Single-User'],
+      }),
+      updateUser: builder.mutation({
+        query: (updatedUser: User) => ({
+          url: `/${updatedUser.id}`,
+          method: 'PUT',
+          body: { ...updatedUser },
+        }),
+        invalidatesTags: ['Single-User'],
       }),
       loginUser: builder.mutation<User, LoginData>({
         query: ({ ...credentials }) => ({
@@ -65,4 +77,6 @@ export const {
   useLoginUserMutation,
   useRegisterUserMutation,
   useGetUsersQuery,
+  useGetSingleUserQuery,
+  useUpdateUserMutation,
 } = authApiSlice;

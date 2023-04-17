@@ -6,9 +6,10 @@ import placeholder from '../../../assets/vectors/profile-placeholder.png';
 import arrow from '../../../assets/shapes/arrow-right-orange.png';
 import { useGetReviewsQuery } from './reviewsApiSlice';
 import { getUserFromStorage } from '../../../services/storage';
-import { User, ReadReview } from '../../../types/typeDefinitions';
+import { User } from '../../../types/typeDefinitions';
 import { useEffect, useMemo, useState } from 'react';
 import AddReviewModal from './AddReviewModal';
+import { useGetSingleUserQuery } from '../../auth/authApiSlice';
 
 const ReviewsContainer = () => {
   const userJson: string | null = getUserFromStorage();
@@ -16,7 +17,14 @@ const ReviewsContainer = () => {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const [average, setAverage] = useState<number | null>(null);
+  const [averageRating, setAverageRating] = useState<number | null>(null);
+
+  const { data: userData, isFetching: isUserDataLoading } =
+    useGetSingleUserQuery(user.id);
+
+  useEffect(() => {
+    !isUserDataLoading && setAverageRating(userData?.rating);
+  }, [userData, isUserDataLoading]);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -48,19 +56,6 @@ const ReviewsContainer = () => {
     return reviewsListData ? reviewsListData.reviews : [];
   }, [reviewsListData]);
 
-  const calculateAverageRating = (reviews: ReadReview[]): number | null => {
-    if (reviews.length === 0) {
-      return null;
-    }
-
-    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-    return totalRating / reviews.length;
-  };
-
-  useEffect(() => {
-    !isReviewsDataLoading && setAverage(calculateAverageRating(reviewsData));
-  }, [isReviewsDataLoading, reviewsData]);
-
   return (
     <main>
       <AddReviewModal isOpen={showModal} closeModal={closeModal} />
@@ -83,10 +78,10 @@ const ReviewsContainer = () => {
             {!isReviewsDataLoading && (
               <>
                 <div className='text-sm font-bold flex justify-center items-center gap-2'>
-                  <div className='font-bold'>{average?.toFixed(1)}</div>
+                  <div className='font-bold'>{averageRating?.toFixed(1)}</div>
                   <Rating
                     name='read-only'
-                    value={average}
+                    value={averageRating}
                     readOnly
                     size='medium'
                     precision={0.1}
