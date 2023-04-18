@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import placeholder from '../../../assets/vectors/profile-placeholder.png';
 import UploadImage from '../../../components/UploadImage/UploadImage';
 import useNotifications from '../../../hooks/useNotifications';
@@ -10,26 +10,18 @@ interface Props {
 }
 
 const ProfileImage: FC<Props> = ({ id, imageUrl }) => {
-  const [imageUploadUrl, setImageUploadUrl] = useState('');
-
-  const handleUpload = (filename: string) => {
-    setImageUploadUrl(filename);
-    handleUpdate();
-  };
-
   const { handleUserActionNotification, handlePromiseNotification } =
     useNotifications();
 
   const [updateUser] = useUpdateUserMutation();
 
-  const handleUpdate = () => {
+  const handleUpdate = async (fileUrl: string) => {
     try {
-      handlePromiseNotification(
+      await handlePromiseNotification(
         updateUser({
           id: id,
-          imageUrl: imageUploadUrl,
+          imageUrl: fileUrl,
         }).unwrap(),
-
         {
           success: {
             message: 'Profilna slika uspješno ažurirana!',
@@ -54,6 +46,10 @@ const ProfileImage: FC<Props> = ({ id, imageUrl }) => {
     }
   };
 
+  const handleUpload = (fileUrl: string) => {
+    handleUpdate(fileUrl);
+  };
+
   return (
     <div className='flex flex-col justify-center items-center gap-5'>
       <div className='rounded-full w-[300px] h-[300px]'>
@@ -62,6 +58,7 @@ const ProfileImage: FC<Props> = ({ id, imageUrl }) => {
           onError={(event: any) => {
             event.target.src = placeholder;
           }}
+          className='rounded-full'
           alt='profile'
         />
       </div>

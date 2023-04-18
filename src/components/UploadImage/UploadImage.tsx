@@ -1,28 +1,16 @@
-import * as React from 'react';
 import { init, Client, PickerOptions } from 'filestack-js';
+import { FC, useMemo } from 'react';
 
 interface Props {
-  onSave: (filename: string) => void;
+  onSave: (fileUrl: string) => void;
 }
 
 const apiKey = process.env.REACT_APP_FILESTACK_API_KEY;
 
-const UploadImage: React.FC<Props> = ({ onSave }) => {
-  const client = React.useMemo(() => {
+const UploadImage: FC<Props> = ({ onSave }) => {
+  const client = useMemo(() => {
     return init(apiKey) as Client;
   }, []);
-
-  React.useEffect(() => {
-    client.on('uploadStart', (res) => {
-      console.log('Upload started:', res);
-    });
-
-    client.on('uploadDone', (res) => {
-      console.log('Upload done:', res);
-      const filename = res.filesUploaded[0].filename;
-      onSave(filename);
-    });
-  }, [client, onSave]);
 
   const handleFileUpload = () => {
     const pickerOptions: PickerOptions = {
@@ -35,9 +23,7 @@ const UploadImage: React.FC<Props> = ({ onSave }) => {
         },
       },
       onUploadDone: (res) => {
-        const filename = res.filesUploaded[0].filename;
-        console.log(filename);
-        onSave(filename);
+        onSave(res.filesUploaded[0]?.url);
       },
     };
 
