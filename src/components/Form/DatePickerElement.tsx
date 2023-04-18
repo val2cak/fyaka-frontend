@@ -27,7 +27,7 @@ const DatePickerElement: FC<Props> = ({
             className={`w-full rounded-lg ${inputClasses} date-picker`}
             format='dd.MM.yyyy.'
             {...inputProps}
-            renderInput={(params) => <TextField {...params} />}
+            textField={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
       </div>

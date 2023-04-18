@@ -10,8 +10,8 @@ export interface CustomRouteObject extends NonIndexRouteObject {
 
 export interface User {
   id?: number;
-  username: string;
-  email: string;
+  username?: string;
+  email?: string;
   token?: string;
   tokenExpiry?: Date;
   rating?: number | null;
