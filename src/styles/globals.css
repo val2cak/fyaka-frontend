@@ -178,7 +178,8 @@ hr:after {
   scale: 1.1;
 }
 
-.fsp-header-icon {
+.fsp-header-icon,
+.fsp-icon--webcam-stop {
   width: 25px !important;
   height: 25px !important;
   background-size: cover !important;
@@ -199,11 +200,78 @@ hr:after {
 }
 
 .fsp-navbar--webcam,
-.fsp-icon--webcam {
+.fsp-icon--webcam,
+.fsp-icon--webcam-stop {
   background-image: url('../assets/icons/CameraIcon.svg') !important;
 }
 
 .fsp-navbar--url,
 .fsp-icon--url {
   background-image: url('../assets/icons/LinkIcon.svg') !important;
+}
+
+.fsp-button {
+  background-color: #1a4645 !important;
+  text-transform: uppercase;
+  color: #fafafa !important;
+  font-weight: bold !important;
+}
+
+.fsp-button--cancel {
+  background-color: #ea4335 !important;
+  color: #fafafa !important;
+}
+
+.fsp-select-labels {
+  background-image: url('../assets/icons/UploadIcon.svg') !important;
+}
+
+.fsp-transformer__go-back {
+  background-image: url('../assets/icons/BackIcon.svg') !important;
+  width: 25px !important;
+  height: 25px !important;
+  background-size: cover !important;
+}
+
+.fst-sidebar__option--active {
+  color: #1a4645 !important;
+}
+
+.fst-icon--crop-blue,
+.fst-icon--crop-black,
+.fst-icon--circle-blue,
+.fst-icon--circle-black,
+.fst-icon--rotate-blue,
+.fst-icon--rotate-black {
+  width: 25px !important;
+  height: 25px !important;
+  background-size: cover !important;
+}
+
+.fst-icon--crop-blue {
+  background-image: url('../assets/icons/CropIconOrange.svg') !important;
+}
+
+.fst-icon--crop-black {
+  background-image: url('../assets/icons/CropIconGreen.svg') !important;
+}
+
+.fst-icon--circle-blue {
+  background-image: url('../assets/icons/CircleIconOrange.svg') !important;
+}
+
+.fst-icon--circle-black {
+  background-image: url('../assets/icons/CircleIconGreen.svg') !important;
+}
+
+.fst-icon--rotate-blue {
+  background-image: url('../assets/icons/RotateIconOrange.svg') !important;
+}
+
+.fst-icon--rotate-black {
+  background-image: url('../assets/icons/RotateIconGreen.svg') !important;
+}
+
+.fst-sidebar__option--active {
+  color: #f58800 !important;
 }
