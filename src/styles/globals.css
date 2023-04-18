@@ -133,3 +133,77 @@ hr:after {
   background: rgba(26, 70, 69, 0.9);
   padding-left: 0;
 }
+
+.fsp-modal {
+  border-radius: 0.5rem !important;
+  font-family: Ubuntu, sans-serif !important;
+  background-color: #f2f2f2 !important;
+}
+
+.fsp-modal__sidebar {
+  border-top-left-radius: 0.5rem !important;
+  border-bottom-left-radius: 0.5rem !important;
+  background-color: #1a4645 !important;
+  text-transform: uppercase;
+  color: #fafafa;
+}
+
+.fsp-source-list__item:focus {
+  box-shadow: none;
+}
+
+.fsp-source-list__item:hover {
+  background-color: #f58800 !important;
+  color: #fafafa !important;
+}
+
+.fsp-source-list__item--active {
+  background-color: #f58800 !important;
+}
+
+.fsp-modal__body {
+  border-top-right-radius: 0.5rem !important;
+}
+
+.fsp-header {
+  background-color: #f58800 !important;
+}
+
+.fsp-picker__close-button {
+  background-image: url('../assets/icons/CloseIcon.svg') !important;
+  opacity: 1 !important;
+}
+
+.fsp-picker__close-button:hover {
+  scale: 1.1;
+}
+
+.fsp-header-icon {
+  width: 25px !important;
+  height: 25px !important;
+  background-size: cover !important;
+}
+
+.fsp-icon--local_file_system,
+.fsp-icon--webcam,
+.fsp-icon--url {
+  width: 22px !important;
+  height: 22px !important;
+  background-size: cover !important;
+  margin: 0 19px !important;
+}
+
+.fsp-navbar--local_file_system,
+.fsp-icon--local_file_system {
+  background-image: url('../assets/icons/DeviceIcon.svg') !important;
+}
+
+.fsp-navbar--webcam,
+.fsp-icon--webcam {
+  background-image: url('../assets/icons/CameraIcon.svg') !important;
+}
+
+.fsp-navbar--url,
+.fsp-icon--url {
+  background-image: url('../assets/icons/LinkIcon.svg') !important;
+}
