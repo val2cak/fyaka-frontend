@@ -9,6 +9,8 @@ import { User, WriteReview } from '../../../types/typeDefinitions';
 import UsersAutocomplete from './UsersAutocomplete';
 import { useCreateReviewMutation } from './reviewsApiSlice';
 import useNotifications from '../../../hooks/useNotifications';
+import { useParams } from 'react-router-dom';
+import InputElement from '../../../components/Form/InputElement';
 
 interface Props {
   isOpen: boolean;
@@ -19,8 +21,10 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
   const userJson: string | null = getUserFromStorage();
   const user: User | null = userJson ? JSON.parse(userJson).user : null;
 
+  const { id } = useParams();
+
   const [reviewData, setReviewData] = useState<WriteReview>({
-    userId: undefined,
+    userId: parseInt(id) ?? undefined,
     authorId: user.id,
     rating: 0,
     text: '',
@@ -61,7 +65,15 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
       handlePromiseNotification(
         createReview(reviewData)
           .unwrap()
-          .then(() => closeModal()),
+          .then(() => {
+            closeModal();
+            setReviewData({
+              userId: parseInt(id) ?? undefined,
+              authorId: user.id,
+              rating: 0,
+              text: '',
+            });
+          }),
         {
           success: {
             message: 'Recenzija dodana!',
@@ -88,14 +100,18 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
 
   return (
     <Modal isOpen={isOpen}>
-      <div className='bg-lightColor w-[500px] h-[525px] rounded-lg opacity-95 p-8 flex flex-col gap-4 relative'>
+      <div
+        className={`bg-lightColor w-[500px] ${
+          id ? 'h-[425px]' : 'h-[525px]'
+        } rounded-lg opacity-95 p-8 flex flex-col gap-4 relative`}
+      >
         <header className='flex justify-between items-center text-primaryColor text-base'>
           <h3 className='font-ubuntu text-lg font-medium'>ostavi recenziju</h3>
           <button
             onClick={() => {
               closeModal();
               setReviewData({
-                userId: undefined,
+                userId: parseInt(id) ?? undefined,
                 authorId: user.id,
                 rating: 0,
                 text: '',
@@ -107,12 +123,14 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
         </header>
 
         <div className='flex flex-col gap-2'>
-          <UsersAutocomplete
-            label='korisnik'
-            inputProps={{
-              onChange: handleUserChange,
-            }}
-          />
+          {!id && (
+            <UsersAutocomplete
+              label='korisnik'
+              inputProps={{
+                onChange: handleUserChange,
+              }}
+            />
+          )}
 
           <div className='flex flex-col'>
             <label className='font-ubuntu text-base font-bold text-primaryColor'>
@@ -142,7 +160,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
             }
             textProps={{
               onChange: handleInputChange('text'),
-              defaultValue: reviewData.text,
+              value: reviewData.text,
             }}
           />
         </div>
@@ -158,7 +176,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
             onClick={() => {
               closeModal();
               setReviewData({
-                userId: undefined,
+                userId: parseInt(id) ?? undefined,
                 authorId: user.id,
                 rating: 0,
                 text: '',

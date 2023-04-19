@@ -75,6 +75,18 @@ export let Routes: CustomRouteObject[] = [
             invisible: true,
             element: <SingleServiceContainer />,
           },
+          {
+            path: 'user-profile/:id',
+            name: 'Profil korisnika',
+            invisible: true,
+            element: <ProfileContainer />,
+          },
+          {
+            path: 'user-reviews/:id',
+            name: 'Recenzije korisnika',
+            invisible: true,
+            element: <ReviewsContainer />,
+          },
         ],
       },
       {
@@ -98,7 +110,7 @@ export let Routes: CustomRouteObject[] = [
             children: [
               {
                 path: 'profile',
-                name: 'Profil',
+                name: 'profil',
                 icon: ProfileIcon,
                 element: <ProfileContainer />,
               },

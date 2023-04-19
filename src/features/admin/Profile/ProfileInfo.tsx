@@ -13,8 +13,13 @@ import {
   RiArrowRightSLine as ArrowIcon,
 } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 
-const ProfileInfo: FC<User> = ({
+interface Props extends User {
+  isMine: boolean;
+}
+
+const ProfileInfo: FC<Props> = ({
   id,
   username,
   email,
@@ -24,6 +29,7 @@ const ProfileInfo: FC<User> = ({
   fullName,
   gender,
   dateOfBirth,
+  isMine,
 }) => {
   const [userData, setUserData] = useState<User>();
 
@@ -118,6 +124,7 @@ const ProfileInfo: FC<User> = ({
               type: 'text',
               defaultValue: username,
               onChange: handleDataChange('username'),
+              disabled: !isMine,
             }}
           />
 
@@ -125,11 +132,12 @@ const ProfileInfo: FC<User> = ({
             label={'ime i prezime'}
             placeholder={'ime i prezime'}
             labelClasses={'text-primaryColor'}
-            inputClasses={'placeholder-primaryColor w-[300px]'}
+            inputClasses={'placeholder-primaryColor w-[300px] bg-lightColor'}
             inputProps={{
               type: 'text',
               defaultValue: fullName,
               onChange: handleDataChange('fullName'),
+              disabled: !isMine,
             }}
           />
 
@@ -140,7 +148,11 @@ const ProfileInfo: FC<User> = ({
               ukupna ocjena
             </label>
             <button
-              onClick={() => navigateTo('/reviews')}
+              onClick={() =>
+                isMine
+                  ? navigateTo('/reviews')
+                  : navigateTo(`/user-reviews/${id}`)
+              }
               className='flex bg-lightColor px-5 py-3 rounded-lg justify-between items-center h-[64px] transition ease-in-out delay-50 hover:scale-[1.025] duration-300'
             >
               <div className='flex gap-2'>
@@ -166,60 +178,93 @@ const ProfileInfo: FC<User> = ({
             label={'broj telefona'}
             placeholder={'09x xxx xxxx'}
             labelClasses={'text-primaryColor'}
-            inputClasses={'placeholder-primaryColor w-[300px]'}
+            inputClasses={'placeholder-primaryColor w-[300px] bg-lightColor'}
             inputProps={{
               type: 'text',
               defaultValue: phoneNumber,
               onChange: handleDataChange('phoneNumber'),
+              disabled: !isMine,
             }}
           />
 
-          <DropdownElement
-            label={'spol'}
-            placeholder={'spol'}
-            labelClasses={'text-primaryColor'}
-            handleSelect={handleGenderChange}
-            data={genderTypes}
-            selectedId={
-              userData?.gender !== null && !userData?.gender
-                ? genderTypes.find((item) => item.name === gender)?.id
-                : genderTypes.find((item) => item.name === userData?.gender)?.id
-            }
-          />
+          {isMine ? (
+            <DropdownElement
+              label={'spol'}
+              placeholder={'spol'}
+              labelClasses={'text-primaryColor'}
+              handleSelect={handleGenderChange}
+              data={genderTypes}
+              selectedId={
+                userData?.gender !== null && !userData?.gender
+                  ? genderTypes.find((item) => item.name === gender)?.id
+                  : genderTypes.find((item) => item.name === userData?.gender)
+                      ?.id
+              }
+            />
+          ) : (
+            <InputElement
+              label={'spol'}
+              placeholder={'spol'}
+              labelClasses={'text-primaryColor'}
+              inputClasses={'placeholder-primaryColor w-[300px] bg-lightColor'}
+              inputProps={{
+                type: 'text',
+                defaultValue: gender,
+                disabled: true,
+              }}
+            />
+          )}
 
-          <DatePickerElement
-            label={'datum rođenja'}
-            labelClasses={'text-primaryColor'}
-            inputClasses={'placeholder-primaryColor bg-lightColor w-[300px]'}
-            inputProps={{
-              type: 'text',
-              defaultValue:
-                dateOfBirth && dateOfBirth !== null && new Date(dateOfBirth),
-              onChange: handleDateChange,
-            }}
-          />
+          {isMine ? (
+            <DatePickerElement
+              label={'datum rođenja'}
+              labelClasses={'text-primaryColor'}
+              inputClasses={'placeholder-primaryColor bg-lightColor w-[300px]'}
+              inputProps={{
+                type: 'text',
+                defaultValue:
+                  dateOfBirth && dateOfBirth !== null && new Date(dateOfBirth),
+                onChange: handleDateChange,
+              }}
+            />
+          ) : (
+            <InputElement
+              label={'datum rođenja'}
+              placeholder={'datum rođenja'}
+              labelClasses={'text-primaryColor'}
+              inputClasses={'placeholder-primaryColor w-[300px] bg-lightColor'}
+              inputProps={{
+                type: 'text',
+                defaultValue: format(new Date(dateOfBirth), 'dd.MM.yyyy.'),
+                disabled: true,
+              }}
+            />
+          )}
 
           <TextElement
             label={'biografija'}
             placeholder={'napiši nešto o sebi...'}
             labelClasses={'text-primaryColor'}
-            textClasses={'placeholder-primaryColor w-[300px]'}
+            textClasses={'placeholder-primaryColor w-[300px] bg-lightColor'}
             textProps={{
               type: 'text',
               defaultValue: biography,
               onChange: handleDataChange('biography'),
+              disabled: !isMine,
             }}
           />
         </div>
       </div>
 
-      <button
-        onClick={handleUpdate}
-        disabled={userData ? false : true}
-        className='button text-lightColor bg-primaryColor !w-auto'
-      >
-        spremi promjene
-      </button>
+      {isMine && (
+        <button
+          onClick={handleUpdate}
+          disabled={userData ? false : true}
+          className='button text-lightColor bg-primaryColor !w-auto'
+        >
+          spremi promjene
+        </button>
+      )}
     </div>
   );
 };

@@ -10,17 +10,26 @@ import { User } from '../../../types/typeDefinitions';
 import { useEffect, useMemo, useState } from 'react';
 import AddReviewModal from './AddReviewModal';
 import { useGetSingleUserQuery } from '../../auth/authApiSlice';
+import { useParams, useNavigate } from 'react-router-dom';
+import { IoArrowUndoCircleSharp as ArrowBackIcon } from 'react-icons/io5';
 
 const ReviewsContainer = () => {
   const userJson: string | null = getUserFromStorage();
   const user: User | null = userJson ? JSON.parse(userJson).user : null;
 
+  const navigateTo = useNavigate();
+
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const [averageRating, setAverageRating] = useState<number | null>(null);
 
-  const { data: userData, isFetching: isUserDataLoading } =
-    useGetSingleUserQuery(user.id);
+  const { id } = useParams();
+
+  const {
+    data: userData,
+    isFetching: isUserDataLoading,
+    refetch: refetchUserData,
+  } = useGetSingleUserQuery(id ? parseInt(id) : user.id);
 
   useEffect(() => {
     !isUserDataLoading && setAverageRating(userData?.rating);
@@ -34,13 +43,19 @@ const ReviewsContainer = () => {
 
   const closeModal = () => {
     setShowModal(false);
+    refetch();
+    refetchUserData();
   };
 
   const {
     data: reviewsListData,
     isFetching: isReviewsDataLoading,
     refetch,
-  } = useGetReviewsQuery({ userId: user.id, page: currentPage, pageSize: 6 });
+  } = useGetReviewsQuery({
+    userId: id ? parseInt(id) : user.id,
+    page: currentPage,
+    pageSize: 6,
+  });
 
   const handlePageDown = () => {
     setCurrentPage(currentPage - 1);
@@ -60,14 +75,27 @@ const ReviewsContainer = () => {
     <main>
       <AddReviewModal isOpen={showModal} closeModal={closeModal} />
 
-      <TitleBar title={'recenzije'} />
+      <TitleBar title={id ? 'recenzije korisnika' : 'recenzije'} />
+
+      {id && (
+        <button
+          onClick={() => navigateTo(-1)}
+          className='text-primaryColor text-3xl m-3 absolute transition ease-in-out delay-50 hover:scale-110 duration-300'
+        >
+          <ArrowBackIcon />
+        </button>
+      )}
 
       <div className='flex flex-col px-32 py-8 gap-4 w-full'>
         <div className='flex justify-between'>
           <div className='flex gap-8 justify-start items-center'>
             <div className='w-[50px] h-[50px]'>
               <img
-                src={placeholder}
+                src={
+                  userData?.imageUrl !== null && userData?.imageUrl
+                    ? userData?.imageUrl
+                    : placeholder
+                }
                 onError={(event: any) => {
                   event.target.src = placeholder;
                 }}
@@ -89,22 +117,24 @@ const ReviewsContainer = () => {
                 </div>
 
                 <div className='uppercase font-medium text-sm'>
-                  broj recenzija korisnika: {reviewsData.length}
+                  broj recenzija korisnika: {reviewsListData?.totalCount}
                 </div>
               </>
             )}
           </div>
 
-          <button
-            onClick={openModal}
-            className='button !text-sm bg-secondaryColor text-lightColor !w-auto uppercase'
-          >
-            ostavi recenziju
-          </button>
+          {user && (
+            <button
+              onClick={openModal}
+              className='button !text-sm bg-secondaryColor text-lightColor !w-auto uppercase'
+            >
+              ostavi recenziju
+            </button>
+          )}
         </div>
 
         {!isReviewsDataLoading && (
-          <div className='flex flex-wrap justify-start items-center flex-row gap-4 w-full'>
+          <div className='flex flex-wrap justify-start items-center flex-row gap-5 w-full'>
             {reviewsData.map((item, index) => (
               <ReviewCard key={index} {...item} />
             ))}

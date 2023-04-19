@@ -7,9 +7,10 @@ import { useUpdateUserMutation } from '../../auth/authApiSlice';
 interface Props {
   id: number;
   imageUrl: string;
+  isMine: boolean;
 }
 
-const ProfileImage: FC<Props> = ({ id, imageUrl }) => {
+const ProfileImage: FC<Props> = ({ id, imageUrl, isMine }) => {
   const { handleUserActionNotification, handlePromiseNotification } =
     useNotifications();
 
@@ -54,7 +55,7 @@ const ProfileImage: FC<Props> = ({ id, imageUrl }) => {
     <div className='flex flex-col justify-center items-center gap-5'>
       <div className='rounded-full w-[300px] h-[300px]'>
         <img
-          src={imageUrl}
+          src={imageUrl !== null && imageUrl ? imageUrl : placeholder}
           onError={(event: any) => {
             event.target.src = placeholder;
           }}
@@ -63,7 +64,7 @@ const ProfileImage: FC<Props> = ({ id, imageUrl }) => {
         />
       </div>
 
-      <UploadImage onSave={handleUpload} />
+      {isMine && <UploadImage onSave={handleUpload} />}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { WriteReview, ReadReview } from '../../../types/typeDefinitions';
 interface ReviewsData {
   reviews: ReadReview[];
   totalPages: number;
+  totalCount: number;
 }
 
 export const reviewsApiSlice = createApi({
