@@ -8,6 +8,11 @@ import { Lookup, User } from '../../../types/typeDefinitions';
 import { useUpdateUserMutation } from '../../auth/authApiSlice';
 import genderTypes from '../../../types/genderTypes';
 import DropdownElement from '../../../components/Form/DropdownElement';
+import {
+  RiUserStarFill as ReviewsIcon,
+  RiArrowRightSLine as ArrowIcon,
+} from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileInfo: FC<User> = ({
   id,
@@ -21,6 +26,8 @@ const ProfileInfo: FC<User> = ({
   dateOfBirth,
 }) => {
   const [userData, setUserData] = useState<User>();
+
+  const navigateTo = useNavigate();
 
   const { handleUserActionNotification, handlePromiseNotification } =
     useNotifications();
@@ -132,16 +139,25 @@ const ProfileInfo: FC<User> = ({
             >
               ukupna ocjena
             </label>
-            <div className='flex bg-lightColor p-3 rounded-lg justify-start items-center gap-2 h-[64px]'>
-              <div className='font-bold'>{rating?.toFixed(1) ?? null}</div>
-              <Rating
-                name='read-only'
-                value={rating}
-                readOnly
-                size='medium'
-                precision={0.5}
-              />
-            </div>
+            <button
+              onClick={() => navigateTo('/reviews')}
+              className='flex bg-lightColor px-5 py-3 rounded-lg justify-between items-center h-[64px] transition ease-in-out delay-50 hover:scale-[1.025] duration-300'
+            >
+              <div className='flex gap-2'>
+                <div className='font-bold'>{rating?.toFixed(1) ?? null}</div>
+                <Rating
+                  name='read-only'
+                  value={rating}
+                  readOnly
+                  size='medium'
+                  precision={0.5}
+                />
+              </div>
+              <div className='flex text-base text-secondaryColor items-center'>
+                <ReviewsIcon />
+                <ArrowIcon className='text-md' />
+              </div>
+            </button>
           </div>
         </div>
 

@@ -54,7 +54,7 @@ const DropdownMenu: FC<Props> = ({
         </p>
 
         <DropdownIcon
-          className={`${open && 'rotate-180'} text-md text-primaryColor`}
+          className={`${open && 'rotate-180'} text-md text-secondaryColor`}
         />
       </div>
 

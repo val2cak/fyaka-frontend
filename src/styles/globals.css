@@ -275,3 +275,13 @@ hr:after {
 .fst-sidebar__option--active {
   color: #f58800 !important;
 }
+
+.fsp-picker__close-button {
+  margin-right: 8px;
+  margin-top: 4px;
+}
+
+.fsp-transformer__go-back {
+  margin-left: 8px;
+  margin-top: 4px;
+}

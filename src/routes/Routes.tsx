@@ -104,7 +104,7 @@ export let Routes: CustomRouteObject[] = [
               },
               {
                 path: 'reviews',
-                name: 'Ocjene',
+                name: 'recenzije',
                 icon: RatingsIcon,
                 element: <ReviewsContainer />,
               },

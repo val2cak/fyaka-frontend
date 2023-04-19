@@ -31,6 +31,7 @@ const UploadImage: FC<Props> = ({ onSave }) => {
         Circle: 'Zaokruži',
         Rotate: 'Rotiraj',
         Next: 'Dalje',
+        Upload: 'Prijenos',
         'Select Files to Upload': 'Odaberite datoteku za prijenos',
         'or Drag and Drop, Copy and Paste Files':
           'ili povucite i ispustite, kopirajte i zalijepite datoteku',
