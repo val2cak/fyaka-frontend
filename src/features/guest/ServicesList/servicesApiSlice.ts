@@ -76,6 +76,9 @@ export const servicesApiSlice = createApi({
             if (filters.people) {
               queryParams.append('people', filters.people.toString());
             }
+            if (filters.userRating) {
+              queryParams.append('userRating', filters.userRating.toString());
+            }
           }
           const queryString = queryParams.toString();
           const encodedQueryString = queryString ? queryString : '';

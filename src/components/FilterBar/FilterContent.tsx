@@ -15,6 +15,8 @@ interface Props {
   setFilters: (item: Filters) => void;
 }
 
+const userRatingsList = [5.0, 4.0, 3.0, 2.0, 1.0];
+
 const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
   const { data: servicesListData, isFetching: isServicesListDataLoading } =
     useGetServicesListQuery({});
@@ -145,6 +147,19 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     maxDate !== null && setDefaultMaxDate(maxDate);
   }, [minDate, maxDate]);
 
+  const [userRating, setUserRating] = useState<number>();
+
+  const handleUserRatingChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const checked = event.target.checked;
+    if (checked) {
+      setUserRating(parseInt(event.target.value));
+    } else {
+      setUserRating(undefined);
+    }
+  };
+
   useEffect(() => {
     if (name === 'cijena')
       setFilters({ ...filters, minPrice: minPrice, maxPrice: maxPrice });
@@ -169,6 +184,11 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
         ...filters,
         people: people,
       });
+    else if (name === 'ocjena korisnika')
+      setFilters({
+        ...filters,
+        userRating: userRating,
+      });
   }, [
     setFilters,
     minPrice,
@@ -178,6 +198,7 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     maxDate,
     category,
     location,
+    userRating,
   ]);
 
   return (
@@ -251,7 +272,29 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
             </div>
           )}
 
-          {name === 'ocjena korisnika' && <div>USKORO!</div>}
+          {name === 'ocjena korisnika' && (
+            <FormGroup className='w-[225px]'>
+              {userRatingsList.map((item) => {
+                const checked = filters?.userRating === item;
+                return (
+                  <FormControlLabel
+                    key={item}
+                    control={
+                      <Checkbox
+                        checked={checked}
+                        onChange={handleUserRatingChange}
+                        value={item}
+                      />
+                    }
+                    label={
+                      item === 5.0 ? item?.toFixed(1) : `> ${item?.toFixed(1)}`
+                    }
+                    className='filter-checkbox'
+                  />
+                );
+              })}
+            </FormGroup>
+          )}
 
           {name === 'kategorija' && !isCategoriesDataLoading && (
             <FormGroup className='w-[225px]'>
@@ -293,7 +336,6 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
                 value={people}
                 onChange={handlePeopleInputChange}
                 className={`border rounded-lg p-2 px-5 flex flex-nowrap bg-transparent text-lightColor w-[130px]`}
-                type='number'
               />
             </>
           )}

@@ -111,6 +111,7 @@ export interface Filters {
   categoryId?: number[] | number;
   location?: string;
   people?: number;
+  userRating?: number;
 }
 
 export interface Location {
