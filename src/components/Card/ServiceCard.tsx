@@ -35,7 +35,7 @@ const ServiceCard: FC<ServiceProps> = ({
       }
       className={`w-[250px] h-[250px] ${
         flag === 2 ? 'bg-secondaryColor text-lightColor' : 'bg-lightColor'
-      } rounded-lg font-ubuntu flex flex-col items-center justify-center relative transition ease-in-out delay-50 hover:scale-105 duration-300`}
+      } rounded-lg font-ubuntu flex flex-col items-start pl-7 justify-center relative transition ease-in-out delay-50 hover:scale-105 duration-300`}
     >
       {flag === 2 && (
         <div className='absolute right-2 top-2 text-primaryColor text-md'>

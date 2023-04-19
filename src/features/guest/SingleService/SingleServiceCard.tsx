@@ -148,7 +148,11 @@ const SingleServiceCard: FC<ServiceProps> = ({
 
         <ul className='font-raleway text-base flex flex-col gap-8'>
           <li
-            onClick={() => navigateTo(`/user-profile/${author.id}`)}
+            onClick={() =>
+              user?.id === author.id
+                ? navigateTo(`/profile`)
+                : navigateTo(`/user-profile/${author.id}`)
+            }
             className='hover:cursor-pointer hover:text-primaryColor font-semibold text-grayColor'
           >
             {author.username}

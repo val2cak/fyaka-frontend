@@ -79,13 +79,21 @@ export let Routes: CustomRouteObject[] = [
             path: 'user-profile/:id',
             name: 'Profil korisnika',
             invisible: true,
-            element: <ProfileContainer />,
+            element: (
+              <ProtectedRoute>
+                <ProfileContainer />
+              </ProtectedRoute>
+            ),
           },
           {
             path: 'user-reviews/:id',
             name: 'Recenzije korisnika',
             invisible: true,
-            element: <ReviewsContainer />,
+            element: (
+              <ProtectedRoute>
+                <ReviewsContainer />
+              </ProtectedRoute>
+            ),
           },
         ],
       },
