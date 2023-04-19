@@ -41,10 +41,12 @@ const ReviewsContainer = () => {
     setShowModal(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (isSuccess?: boolean) => {
     setShowModal(false);
-    refetch();
-    refetchUserData();
+    if (isSuccess) {
+      refetch();
+      refetchUserData();
+    }
   };
 
   const {

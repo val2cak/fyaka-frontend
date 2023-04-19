@@ -10,11 +10,10 @@ import UsersAutocomplete from './UsersAutocomplete';
 import { useCreateReviewMutation } from './reviewsApiSlice';
 import useNotifications from '../../../hooks/useNotifications';
 import { useParams } from 'react-router-dom';
-import InputElement from '../../../components/Form/InputElement';
 
 interface Props {
   isOpen: boolean;
-  closeModal: () => void;
+  closeModal: (isSuccess?: boolean) => void;
 }
 
 const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
@@ -66,7 +65,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
         createReview(reviewData)
           .unwrap()
           .then(() => {
-            closeModal();
+            closeModal(true);
             setReviewData({
               userId: parseInt(id) ?? undefined,
               authorId: user.id,
@@ -109,7 +108,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
           <h3 className='font-ubuntu text-lg font-medium'>ostavi recenziju</h3>
           <button
             onClick={() => {
-              closeModal();
+              closeModal(false);
               setReviewData({
                 userId: parseInt(id) ?? undefined,
                 authorId: user.id,
@@ -174,7 +173,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
           </button>
           <button
             onClick={() => {
-              closeModal();
+              closeModal(false);
               setReviewData({
                 userId: parseInt(id) ?? undefined,
                 authorId: user.id,
