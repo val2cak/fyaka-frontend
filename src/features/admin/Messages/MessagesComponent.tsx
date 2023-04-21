@@ -39,6 +39,7 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
   const channelName = `chat-${user?.id}-${recipientId}`;
 
   const channel = ably.channels.get(channelName);
+  channel.setOptions({ params: { history: '100' } });
 
   useEffect(() => {
     const userJson: string | null = getUserFromStorage();
@@ -149,7 +150,7 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
 
   return (
     <div className='bg-lightColor h-full rounded-lg p-6 flex flex-col gap-4 relative'>
-      {!isRecipientDataLoading && (
+      {!isRecipientDataLoading && recipientId && (
         <div className='flex items-center gap-2'>
           <div className='w-[60px] h-[60px]'>
             <img
