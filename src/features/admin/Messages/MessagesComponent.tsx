@@ -1,10 +1,11 @@
 import Ably from 'ably';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { RiSendPlaneFill as SendIcon } from 'react-icons/ri';
 import { getUserFromStorage } from '../../../services/storage';
 import { User } from '../../../types/typeDefinitions';
 import { useGetSingleUserQuery } from '../../auth/authApiSlice';
 import placeholder from '../../../assets/vectors/profile-placeholder.png';
+import { format } from 'date-fns';
 
 const ably = new Ably.Realtime(process.env.REACT_APP_ABLY_API_KEY);
 
@@ -12,6 +13,7 @@ interface Message {
   text: string;
   senderId: number;
   recipientId: number;
+  timestamp: Date;
 }
 
 interface Props {
@@ -21,6 +23,8 @@ interface Props {
 const MessagesComponent: FC<Props> = ({ recipientId }) => {
   const userJson: string | null = getUserFromStorage();
   const user: User | null = userJson ? JSON.parse(userJson).user : null;
+
+  const inputRef = useRef(null);
 
   const { data: userData, isFetching: isUserDataLoading } =
     useGetSingleUserQuery(user?.id);
@@ -61,8 +65,11 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
     });
 
     // Subscribe to the channel to receive typing events
-    channel.subscribe('typing', () => {
+    recipientChannel.subscribe('typing', () => {
       setIsTyping(true);
+      setTimeout(() => {
+        setIsTyping(false);
+      }, 2000); // set isTyping to false after 2 seconds of no typing
     });
 
     // Retrieve the history of messages for the channel
@@ -73,11 +80,25 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
       }
 
       // Add the retrieved messages to the state
-      const messages = resultPage.items
+      const messages: Message[] = resultPage.items
         .reverse()
         .map((message) => message.data)
-        .filter((item) => item.hasOwnProperty('text'));
-      setMessages(messages);
+        .filter((item) => item?.hasOwnProperty('text'));
+      setMessages((prevMessages) => [...prevMessages, ...messages]);
+    });
+
+    recipientChannel.history((err, resultPage) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+
+      // Add the retrieved messages to the state
+      const retrievedMessages: Message[] = resultPage.items
+        .reverse()
+        .map((message) => message.data)
+        .filter((item) => item?.hasOwnProperty('text'));
+      setMessages((prevMessages) => [...prevMessages, ...retrievedMessages]);
     });
 
     // Unsubscribe from the channel when the component unmounts
@@ -94,6 +115,7 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
         text: messageInput,
         senderId: user?.id,
         recipientId: recipientId,
+        timestamp: new Date(Date.now()),
       };
       // Publish a message to the channel
       channel.publish('message', message);
@@ -115,10 +137,11 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
 
   function handleInputChange(event) {
     setMessageInput(event.target.value);
+    handleTyping();
   }
 
-  function handleTyping(event) {
-    if (event.target.value !== '') {
+  function handleTyping() {
+    if (inputRef.current.value !== '') {
       // Publish a typing event to the channel
       channel.publish('typing', null);
     }
@@ -140,59 +163,76 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
           <h3 className='font-ubuntu text-md font-medium'>
             {recipientData?.username}
           </h3>
+          {isTyping && (
+            <p className='opacity-30 text-sm font-normal'>tipka...</p>
+          )}
         </div>
       )}
 
       {!isUserDataLoading && !isRecipientDataLoading && (
-        <ul className='flex flex-col gap-5 overflow-y-auto mb-20 items-end pr-2'>
-          {messages?.map((message, index) => (
-            <div
-              className={`flex gap-4 w-full justify-end ${
-                message?.senderId === user?.id ? '' : 'flex-row-reverse'
-              }`}
-              key={index}
-            >
-              <li
-                className={`rounded-lg h-12 px-5 py-4 text-sm flex items-center w-fit ${
-                  message?.senderId === user?.id
-                    ? 'bg-grayColor text-lightColor'
-                    : 'bg-primaryColor text-lightColor'
-                }`}
-              >
-                {message?.text}
-              </li>
-              <div className='w-[50px] h-[50px]'>
-                <img
-                  src={
-                    message?.senderId !== user?.id
-                      ? recipientData?.imageUrl !== null &&
-                        recipientData?.imageUrl
-                        ? recipientData?.imageUrl
-                        : placeholder
-                      : userData?.imageUrl !== null && userData?.imageUrl
-                      ? userData?.imageUrl
-                      : placeholder
-                  }
-                  onError={(event: any) => {
-                    event.target.src = placeholder;
-                  }}
-                  alt='profile'
-                />
+        <ul className='flex flex-col gap-3 overflow-y-auto mb-20 items-end pr-2'>
+          {messages
+            ?.sort(
+              (a, b) =>
+                new Date(a.timestamp).valueOf() -
+                new Date(b.timestamp).valueOf()
+            )
+            ?.map((message, index) => (
+              <div className='flex flex-col w-full' key={index}>
+                <div
+                  className={`flex gap-4 justify-end ${
+                    message?.senderId === user?.id ? '' : 'flex-row-reverse'
+                  }`}
+                >
+                  <li
+                    className={`rounded-lg h-12 px-5 py-4 text-sm flex items-center w-fit ${
+                      message?.senderId === user?.id
+                        ? 'bg-grayColor text-lightColor'
+                        : 'bg-primaryColor text-lightColor'
+                    }`}
+                  >
+                    {message?.text}
+                  </li>
+                  <div className='w-[50px] h-[50px]'>
+                    <img
+                      src={
+                        message?.senderId !== user?.id
+                          ? recipientData?.imageUrl !== null &&
+                            recipientData?.imageUrl
+                            ? recipientData?.imageUrl
+                            : placeholder
+                          : userData?.imageUrl !== null && userData?.imageUrl
+                          ? userData?.imageUrl
+                          : placeholder
+                      }
+                      onError={(event: any) => {
+                        event.target.src = placeholder;
+                      }}
+                      alt='profile'
+                    />
+                  </div>
+                </div>
+
+                <p
+                  className={`flex justify-end text-sm opacity-30 text-grayColor ${
+                    message?.senderId === user?.id ? '' : 'flex-row-reverse'
+                  }`}
+                >
+                  {format(new Date(message?.timestamp), 'dd/MM/yyyy H:mm')}
+                </p>
               </div>
-            </div>
-          ))}
+            ))}
         </ul>
       )}
 
       <div className='flex flex-col absolute bottom-4 w-full'>
-        {isTyping && <p>Tipka...</p>}
-
         <div className='flex flex-row mr-12 bg-lightGrayColor text-darkColor h-16 rounded-lg justify-between items-center relative'>
           <input
             placeholder='napiši poruku...'
             className='bg-transparent font-raleway w-full h-full p-5 pr-16 text-base rounded-lg placeholder-darkColor text-darkColor'
             onChange={handleInputChange}
             value={messageInput}
+            ref={inputRef}
             onKeyDown={(event) =>
               event.key === 'Enter' ? handleSendMessage(event) : ''
             }
