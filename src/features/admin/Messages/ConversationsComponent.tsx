@@ -4,7 +4,7 @@ import { VscAdd as AddIcon } from 'react-icons/vsc';
 import { useGetUsersQuery } from '../../auth/authApiSlice';
 import { getUserFromStorage } from '../../../services/storage';
 import { User } from '../../../types/typeDefinitions';
-import placeholder from '../../../assets/vectors/profile-placeholder.png';
+import placeholder from '../../../assets/vectors/placeholder-transparent.png';
 
 interface Props {
   recipientId: number;
@@ -102,7 +102,11 @@ const ConversationsComponent: FC<Props> = ({ recipientId, setRecipientId }) => {
             key={index}
             onClick={() => setRecipientId(item?.id)}
           >
-            <div className='w-[50px] h-[50px]'>
+            <div
+              className={`w-[50px] h-[50px] rounded-full hover:bg-lightColor ${
+                recipientId === item?.id ? 'bg-lightColor' : 'bg-primaryColor'
+              }`}
+            >
               <img
                 src={item?.imageUrl ?? placeholder}
                 onError={(event: any) => {
