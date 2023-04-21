@@ -53,13 +53,13 @@ const ProfileImage: FC<Props> = ({ id, imageUrl, isMine }) => {
 
   return (
     <div className='flex flex-col justify-center items-center gap-5'>
-      <div className='rounded-full w-[300px] h-[300px]'>
+      <div className='rounded-full w-[350px] h-[350px]'>
         <img
           src={imageUrl !== null && imageUrl ? imageUrl : placeholder}
           onError={(event: any) => {
             event.target.src = placeholder;
           }}
-          className='rounded-full'
+          className='rounded-full w-[350px] h-[350px]'
           alt='profile'
         />
       </div>

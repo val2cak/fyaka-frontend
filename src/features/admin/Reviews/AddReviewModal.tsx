@@ -137,7 +137,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
             </label>
             <div className='flex items-center gap-4'>
               <input
-                value={reviewData.rating}
+                defaultValue={reviewData.rating ?? 0}
                 className={`rounded-lg p-2 px-5 flex flex-nowrap bg-transparent border-[0.5px] border-grayColor h-[64px] w-[100px]`}
                 onChange={handleInputChange('rating')}
               />
