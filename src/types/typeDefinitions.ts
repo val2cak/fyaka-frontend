@@ -129,3 +129,10 @@ export interface ToastContentInterface {
   typeOfToast: string;
   toastBody: string | any;
 }
+
+export interface Message {
+  text: string;
+  senderId: number;
+  recipientId: number;
+  timestamp: Date;
+}

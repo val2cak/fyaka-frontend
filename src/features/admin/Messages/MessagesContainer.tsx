@@ -1,14 +1,10 @@
 import { useState } from 'react';
 import TitleBar from '../../../components/TitleBar/TitleBar';
-import { getUserFromStorage } from '../../../services/storage';
-import { User } from '../../../types/typeDefinitions';
+
 import ConversationsComponent from './ConversationsComponent';
 import MessagesComponent from './MessagesComponent';
 
 const MessagesContainer = () => {
-  const userJson: string | null = getUserFromStorage();
-  const user: User | null = userJson ? JSON.parse(userJson).user : null;
-
   const [recipientId, setRecipientId] = useState<number>();
 
   return (

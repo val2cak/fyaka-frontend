@@ -2,19 +2,12 @@ import Ably from 'ably';
 import { FC, useEffect, useRef, useState } from 'react';
 import { RiSendPlaneFill as SendIcon } from 'react-icons/ri';
 import { getUserFromStorage } from '../../../services/storage';
-import { User } from '../../../types/typeDefinitions';
+import { Message, User } from '../../../types/typeDefinitions';
 import { useGetSingleUserQuery } from '../../auth/authApiSlice';
 import placeholder from '../../../assets/vectors/profile-placeholder.png';
 import { format } from 'date-fns';
 
 const ably = new Ably.Realtime(process.env.REACT_APP_ABLY_API_KEY);
-
-interface Message {
-  text: string;
-  senderId: number;
-  recipientId: number;
-  timestamp: Date;
-}
 
 interface Props {
   recipientId: number;
@@ -37,23 +30,22 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
   const [isTyping, setIsTyping] = useState(false);
 
   const channelName = `chat-${user?.id}-${recipientId}`;
-
   const channel = ably.channels.get(channelName);
-  channel.setOptions({ params: { history: '100' } });
+  channel?.setOptions({ params: { history: '100' } });
 
   useEffect(() => {
+    setMessages([]);
+
     const userJson: string | null = getUserFromStorage();
     const user: User | null = userJson ? JSON.parse(userJson).user : null;
 
     const channelName = `chat-${user?.id}-${recipientId}`;
-    const channel = ably.channels.get(channelName, {
-      params: { history: '100' },
-    });
+    const channel = ably.channels.get(channelName);
+    channel?.setOptions({ params: { history: '100' } });
 
     const recipientChannelName = `chat-${recipientId}-${user?.id}`;
-    const recipientChannel = ably.channels.get(recipientChannelName, {
-      params: { history: '100' },
-    });
+    const recipientChannel = ably.channels.get(recipientChannelName);
+    recipientChannel?.setOptions({ params: { history: '100' } });
 
     // Subscribe to the channel to receive messages from yourself
     channel.subscribe('message', (message) => {
@@ -152,13 +144,14 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
     <div className='bg-lightColor h-full rounded-lg p-6 flex flex-col gap-4 relative'>
       {!isRecipientDataLoading && recipientId && (
         <div className='flex items-center gap-2'>
-          <div className='w-[60px] h-[60px]'>
+          <div className='w-[60px] h-[60px] rounded-full'>
             <img
               src={recipientData?.imageUrl ?? placeholder}
               onError={(event: any) => {
                 event.target.src = placeholder;
               }}
               alt='profile'
+              className='w-[60px] h-[60px] rounded-full'
             />
           </div>
           <h3 className='font-ubuntu text-md font-medium'>
@@ -194,7 +187,7 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
                   >
                     {message?.text}
                   </li>
-                  <div className='w-[50px] h-[50px]'>
+                  <div className='w-[50px] h-[50px] rounded-full'>
                     <img
                       src={
                         message?.senderId !== user?.id
@@ -210,6 +203,7 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
                         event.target.src = placeholder;
                       }}
                       alt='profile'
+                      className='w-[50px] h-[50px] rounded-full'
                     />
                   </div>
                 </div>
@@ -237,9 +231,11 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
             onKeyDown={(event) =>
               event.key === 'Enter' ? handleSendMessage(event) : ''
             }
+            disabled={!recipientId ? true : false}
           />
           <button
             onClick={handleSendMessage}
+            disabled={!recipientId ? true : false}
             className='absolute text-lg right-5'
           >
             <SendIcon className='text-primaryColor' />
