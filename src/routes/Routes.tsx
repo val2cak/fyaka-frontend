@@ -25,6 +25,7 @@ import MessagesContainer from '../features/admin/Messages/MessagesContainer';
 import SettingsContainer from '../features/admin/Settings/SettingsContainer';
 import MySingleServiceContainer from '../features/admin/MySingleService/MySingleServiceContainer';
 import { CustomRouteObject } from '../types/typeDefinitions';
+import NotFoundContainer from '../features/guest/NotFound/NotFoundContainer';
 
 export let Routes: CustomRouteObject[] = [
   {
@@ -167,6 +168,11 @@ export let Routes: CustomRouteObject[] = [
             ],
           },
         ],
+      },
+      {
+        path: '*',
+        name: 'Stranica nije pronađena',
+        element: <NotFoundContainer />,
       },
     ],
   },
