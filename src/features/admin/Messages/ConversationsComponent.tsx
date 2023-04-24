@@ -97,7 +97,7 @@ const ConversationsComponent: FC<Props> = ({ recipientId, setRecipientId }) => {
   };
 
   return (
-    <div className='bg-lightColor h-full rounded-lg p-6 flex flex-col gap-8'>
+    <div className='bg-lightColor h-full rounded-lg p-6 flex flex-col gap-4'>
       <div className='flex justify-between items-center'>
         <h3 className='font-ubuntu text-lg font-medium'>razgovori</h3>
         <button
@@ -108,11 +108,7 @@ const ConversationsComponent: FC<Props> = ({ recipientId, setRecipientId }) => {
         </button>
       </div>
 
-      {addNew ? (
-        <UsersAutocomplete inputProps={{ onChange: handleAddNew }} />
-      ) : (
-        <div>search</div>
-      )}
+      {addNew && <UsersAutocomplete inputProps={{ onChange: handleAddNew }} />}
 
       <div className='flex flex-col gap-3 overflow-y-auto'>
         {conversations?.length ? (

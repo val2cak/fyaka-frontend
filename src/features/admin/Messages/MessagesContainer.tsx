@@ -1,11 +1,16 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import TitleBar from '../../../components/TitleBar/TitleBar';
 
 import ConversationsComponent from './ConversationsComponent';
 import MessagesComponent from './MessagesComponent';
 
 const MessagesContainer = () => {
-  const [recipientId, setRecipientId] = useState<number>();
+  const location = useLocation();
+
+  const locationRecipientId = location?.state?.recipientId;
+
+  const [recipientId, setRecipientId] = useState<number>(locationRecipientId);
 
   return (
     <main className='bg-secondaryColor'>

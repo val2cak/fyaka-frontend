@@ -181,7 +181,12 @@ const SingleServiceCard: FC<ServiceProps> = ({
             uredi
           </button>
         ) : (
-          <button className='button bg-primaryColor text-lightColor'>
+          <button
+            className='button bg-primaryColor text-lightColor'
+            onClick={() =>
+              navigateTo('/messages', { state: { recipientId: author?.id } })
+            }
+          >
             pošalji poruku
           </button>
         )}
