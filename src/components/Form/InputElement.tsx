@@ -19,7 +19,7 @@ const InputElement: FC<Props> = ({
   inputClasses,
   inputProps,
 }) => {
-  const flag = label === 'lozinka' || label === 'ponovi lozinku';
+  const flag = label.includes('lozink');
   const [visible, setVisible] = useState(false);
 
   return (
@@ -38,7 +38,7 @@ const InputElement: FC<Props> = ({
         {flag && (
           <button
             onClick={() => setVisible(!visible)}
-            className='absolute right-4 top-0 bottom-0 mx-auto my-0 text-lightColor text-md'
+            className={`absolute right-4 top-0 bottom-0 mx-auto my-0 text-md ${inputClasses}`}
           >
             {visible ? <VisibleIcon /> : <NotVisibleIcon />}
           </button>
