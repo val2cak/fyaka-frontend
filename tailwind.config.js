@@ -36,6 +36,7 @@ module.exports = {
         homeCover: "url('../assets/vectors/home.png')",
         login: "url('../assets/vectors/login.png')",
         notFound: "url('../assets/vectors/not-found.jpg')",
+        deleteAccount: "url('../assets/vectors/delete-account.png')",
       }),
       lineHeight: {
         3: '1.2rem',

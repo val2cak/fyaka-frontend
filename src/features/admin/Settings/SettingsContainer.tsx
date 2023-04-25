@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import TitleBar from '../../../components/TitleBar/TitleBar';
 import { Lookup } from '../../../types/typeDefinitions';
-import ChosenOptionComponent from './ChosenOptionComponent';
+import ChangeEmailComponent from './ChangeEmailComponent';
+import ChangePasswordComponent from './ChangePasswordComponent';
+import DeleteAccountComponent from './DeleteAccountComponent';
 import OptionsListComponent from './OptionsListComponent';
 
 const options: Lookup[] = [
@@ -26,7 +28,9 @@ const SettingsContainer = () => {
           />
         </div>
         <div className='w-2/3'>
-          <ChosenOptionComponent chosenId={chosenId} />
+          {chosenId === 1 && <ChangePasswordComponent />}
+          {chosenId === 2 && <ChangeEmailComponent />}
+          {chosenId === 3 && <DeleteAccountComponent />}
         </div>
       </div>
     </main>

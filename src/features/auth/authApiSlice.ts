@@ -76,6 +76,12 @@ export const authApiSlice = createApi({
         }),
         invalidatesTags: ['Single-User'],
       }),
+      deleteUser: builder.mutation<void, number>({
+        query: (id: number) => ({
+          url: `/${id}`,
+          method: 'DELETE',
+        }),
+      }),
     };
   },
 });
@@ -87,4 +93,5 @@ export const {
   useGetSingleUserQuery,
   useUpdateUserMutation,
   useChangePasswordMutation,
+  useDeleteUserMutation,
 } = authApiSlice;
