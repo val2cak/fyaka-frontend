@@ -3,7 +3,11 @@ import InputElement from '../../../components/Form/InputElement';
 import useNotifications from '../../../hooks/useNotifications';
 import { getUserFromStorage } from '../../../services/storage';
 import { ChangePassword, User } from '../../../types/typeDefinitions';
-import { useChangePasswordMutation } from '../../auth/authApiSlice';
+import {
+  useChangePasswordMutation,
+  useGetSingleUserQuery,
+  useUpdateUserMutation,
+} from '../../auth/authApiSlice';
 
 interface Props {
   chosenId: number;
@@ -12,6 +16,9 @@ interface Props {
 const ChosenOptionComponent: FC<Props> = ({ chosenId }) => {
   const userJson: string | null = getUserFromStorage();
   const user: User | null = userJson ? JSON.parse(userJson).user : null;
+
+  const { data: userData, isFetching: isUserDataLoading } =
+    useGetSingleUserQuery(user.id);
 
   const { handleUserActionNotification, handlePromiseNotification } =
     useNotifications();
@@ -43,7 +50,7 @@ const ChosenOptionComponent: FC<Props> = ({ chosenId }) => {
       }
     };
 
-  const handleChangePassword = () => {
+  const handlePasswordSubmit = () => {
     if (passwordData?.newPassword === passwordData?.repeatPassword)
       try {
         handlePromiseNotification(
@@ -55,7 +62,7 @@ const ChosenOptionComponent: FC<Props> = ({ chosenId }) => {
 
           {
             success: {
-              message: 'Lozinka uspješno promijenjena!',
+              message: 'Lozinka uspješno ažurirana!',
               type: 'success',
             },
             pending: {
@@ -85,6 +92,55 @@ const ChosenOptionComponent: FC<Props> = ({ chosenId }) => {
     else
       handleUserActionNotification({
         message: 'Ponovljena lozinka netočna!',
+        autoClose: 2500,
+        type: 'error',
+      });
+  };
+
+  const [updateUser] = useUpdateUserMutation();
+
+  const [newEmail, setNewEmail] = useState<string>('');
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewEmail(event.target.value);
+  };
+
+  const handleEmailSubmit = () => {
+    if (userData?.email !== newEmail)
+      try {
+        handlePromiseNotification(
+          updateUser({
+            id: user?.id,
+            email: newEmail,
+          }).unwrap(),
+
+          {
+            success: {
+              message: 'E-mail adresa uspješno ažurirana!',
+              type: 'success',
+            },
+            pending: {
+              message: 'Učitavanje...',
+              type: 'info',
+            },
+            error: {
+              message: 'Nešto je pošlo po zlu!',
+              type: 'error',
+            },
+          }
+        );
+
+        setNewEmail('');
+      } catch (error: any) {
+        handleUserActionNotification({
+          message: error.data.message,
+          autoClose: 2500,
+          type: 'error',
+        });
+      }
+    else
+      handleUserActionNotification({
+        message: 'Nova e-mail adresa ne smije biti jednaka staroj!',
         autoClose: 2500,
         type: 'error',
       });
@@ -128,7 +184,7 @@ const ChosenOptionComponent: FC<Props> = ({ chosenId }) => {
           </div>
 
           <button
-            onClick={handleChangePassword}
+            onClick={handlePasswordSubmit}
             className='button bg-primaryColor !w-auto place-self-center'
           >
             spremi promjene
@@ -136,16 +192,20 @@ const ChosenOptionComponent: FC<Props> = ({ chosenId }) => {
         </div>
       )}
 
-      {chosenId === 2 && (
+      {chosenId === 2 && !isUserDataLoading && (
         <div className='flex flex-col h-full justify-between'>
           <div className='flex flex-col gap-3 w-[400px]'>
             <InputElement
               label='stara e-mail adresa'
               placeholder={'stara@mail.hr'}
               labelClasses={'text-primaryColor'}
-              inputClasses={'placeholder:opacity-70 h-12 text-darkColor'}
+              inputClasses={
+                'placeholder:opacity-70 h-12 text-darkColor bg-lightColor'
+              }
               inputProps={{
                 type: 'email',
+                disabled: true,
+                value: userData?.email,
               }}
             />
 
@@ -156,11 +216,16 @@ const ChosenOptionComponent: FC<Props> = ({ chosenId }) => {
               inputClasses={'placeholder:opacity-70 h-12 text-darkColor'}
               inputProps={{
                 type: 'email',
+                onChange: handleEmailChange,
+                value: newEmail,
               }}
             />
           </div>
 
-          <button className='button bg-primaryColor !w-auto place-self-center'>
+          <button
+            onClick={handleEmailSubmit}
+            className='button bg-primaryColor !w-auto place-self-center'
+          >
             spremi promjene
           </button>
         </div>
