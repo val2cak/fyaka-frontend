@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { generateHeaders } from '../../services/generateHeaders';
-import { User } from '../../types/typeDefinitions';
+import { ChangePassword, User } from '../../types/typeDefinitions';
 
 const authApiHeaders = {
   'Content-Type': 'application/json',
@@ -60,7 +60,6 @@ export const authApiSlice = createApi({
           headers: authApiHeaders,
         }),
       }),
-      //
       registerUser: builder.mutation<User, RegisterData>({
         query: ({ ...credentials }) => ({
           url: `/register`,
@@ -68,6 +67,14 @@ export const authApiSlice = createApi({
           body: credentials,
           headers: authApiHeaders,
         }),
+      }),
+      changePassword: builder.mutation({
+        query: (data: ChangePassword) => ({
+          url: `change-password/${data.id}`,
+          method: 'PUT',
+          body: { ...data },
+        }),
+        invalidatesTags: ['Single-User'],
       }),
     };
   },
@@ -79,4 +86,5 @@ export const {
   useGetUsersQuery,
   useGetSingleUserQuery,
   useUpdateUserMutation,
+  useChangePasswordMutation,
 } = authApiSlice;

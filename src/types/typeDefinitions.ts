@@ -136,3 +136,10 @@ export interface Message {
   recipientId: number;
   timestamp: Date;
 }
+
+export interface ChangePassword {
+  id: number;
+  currentPassword: string;
+  newPassword: string;
+  repeatPassword?: string;
+}
