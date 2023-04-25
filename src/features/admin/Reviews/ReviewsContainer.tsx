@@ -91,7 +91,7 @@ const ReviewsContainer = () => {
       <div className='flex flex-col px-32 py-8 gap-4 w-full'>
         <div className='flex justify-between'>
           <div className='flex gap-8 justify-start items-center'>
-            <div className='w-[50px] h-[50px]'>
+            <div className='w-[50px] h-[50px] rounded-full'>
               <img
                 src={
                   userData?.imageUrl !== null && userData?.imageUrl
@@ -102,6 +102,7 @@ const ReviewsContainer = () => {
                   event.target.src = placeholder;
                 }}
                 alt='profile'
+                className='w-[50px] h-[50px] rounded-full'
               />
             </div>
 
