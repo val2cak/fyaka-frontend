@@ -25,8 +25,10 @@ const ServicesListContainer = () => {
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
-    setCurrentPage(value);
-    refetch();
+    if (currentPage !== value) {
+      setCurrentPage(value);
+      refetch();
+    }
   };
 
   const {
@@ -54,22 +56,26 @@ const ServicesListContainer = () => {
         </div>
       </div>
 
-      <div className='flex flex-col px-56 gap-8 pb-8'>
-        {!isServicesListDataLoading && (
-          <div className='flex flex-wrap flex-start gap-4 items-center flex-row  w-full'>
+      {!isServicesListDataLoading ? (
+        <div className='flex flex-col px-56 gap-8 pb-8 justify-between min-h-[620px]'>
+          <div className='flex flex-wrap flex-start gap-4 items-center flex-row w-full'>
             {servicesData.map((item, index) => (
               <ServiceCard key={index} {...item} />
             ))}
           </div>
-        )}
 
-        <Pagination
-          count={servicesListData?.totalPages ?? 1}
-          size='large'
-          page={currentPage}
-          onChange={handlePageChange}
-        />
-      </div>
+          <div className='flex justify-start'>
+            <Pagination
+              count={servicesListData?.totalPages ?? 1}
+              size='large'
+              page={currentPage}
+              onChange={handlePageChange}
+            />
+          </div>
+        </div>
+      ) : (
+        <div className='min-h-[620px]'></div>
+      )}
     </main>
   );
 };

@@ -21,8 +21,10 @@ const FavoritesContainer = () => {
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
-    setCurrentPage(value);
-    refetch();
+    if (currentPage !== value) {
+      setCurrentPage(value);
+      refetch();
+    }
   };
 
   const searchTerm =
@@ -55,9 +57,9 @@ const FavoritesContainer = () => {
         </div>
       </div>
 
-      <div className='flex flex-col px-56 gap-8 pb-8'>
-        {!isFavoritesListDataLoading && (
-          <div className='flex flex-wrap flex-start gap-4 items-center flex-row  w-full'>
+      {!isFavoritesListDataLoading ? (
+        <div className='flex flex-col px-56 gap-8 pb-8 justify-between min-h-[620px]'>
+          <div className='flex flex-wrap flex-start gap-4 items-center flex-row w-full'>
             {favoritesData.map((item, index) => (
               <ServiceCard
                 id={item.service.id}
@@ -73,15 +75,20 @@ const FavoritesContainer = () => {
               />
             ))}
           </div>
-        )}
-        <Pagination
-          count={favoritesListData?.totalPages ?? 1}
-          size='large'
-          className={'favorites-pagination'}
-          page={currentPage}
-          onChange={handlePageChange}
-        />
-      </div>
+
+          <div className='flex justify-start'>
+            <Pagination
+              count={favoritesListData?.totalPages ?? 1}
+              size='large'
+              className={'favorites-pagination'}
+              page={currentPage}
+              onChange={handlePageChange}
+            />
+          </div>
+        </div>
+      ) : (
+        <div className='min-h-[620px]'></div>
+      )}
     </main>
   );
 };
