@@ -12,6 +12,7 @@ import AddReviewModal from './AddReviewModal';
 import { useGetSingleUserQuery } from '../../auth/authApiSlice';
 import { useParams, useNavigate } from 'react-router-dom';
 import { IoArrowUndoCircleSharp as ArrowBackIcon } from 'react-icons/io5';
+import CustomLoader from '../../../components/Loader/CustomLoader';
 
 const ReviewsContainer = () => {
   const userJson: string | null = getUserFromStorage();
@@ -136,11 +137,15 @@ const ReviewsContainer = () => {
           )}
         </div>
 
-        {!isReviewsDataLoading && (
-          <div className='flex flex-wrap justify-start items-center flex-row gap-5 w-full'>
+        {!isReviewsDataLoading ? (
+          <div className='flex flex-wrap justify-start items-start flex-row gap-5 w-full min-h-[520px]'>
             {reviewsData.map((item, index) => (
               <ReviewCard key={index} {...item} />
             ))}
+          </div>
+        ) : (
+          <div className='flex justify-center items-center min-h-[520px]'>
+            <CustomLoader />
           </div>
         )}
 

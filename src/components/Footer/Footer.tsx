@@ -9,7 +9,7 @@ const Footer = () => {
   const flag =
     locationPathname === '/' ||
     locationPathname === '/looking-for-service' ||
-    locationPathname === '/ratings' ||
+    locationPathname === '/reviews' ||
     locationPathname === '/favorites' ||
     locationPathname === '/settings' ||
     locationPathname.includes('/my-services/')

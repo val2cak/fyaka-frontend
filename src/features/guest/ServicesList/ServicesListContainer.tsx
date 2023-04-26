@@ -8,6 +8,7 @@ import TitleBar from '../../../components/TitleBar/TitleBar';
 import { useGetServicesListQuery } from './servicesApiSlice';
 import { useLocation } from 'react-router-dom';
 import { Filters } from '../../../types/typeDefinitions';
+import CustomLoader from '../../../components/Loader/CustomLoader';
 
 const ServicesListContainer = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -78,7 +79,9 @@ const ServicesListContainer = () => {
             </div>
           </div>
         ) : (
-          <div className='w-3/4 min-h-[592px]'></div>
+          <div className='w-3/4 min-h-[592px] flex items-center justify-center'>
+            <CustomLoader />
+          </div>
         )}
       </div>
     </main>

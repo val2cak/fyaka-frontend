@@ -8,6 +8,7 @@ import SearchBar from '../../../components/SearchBar/SearchBar';
 import TitleBar from '../../../components/TitleBar/TitleBar';
 import { useGetFavoritesQuery } from './favoritesApiSlice';
 import { useLocation } from 'react-router-dom';
+import CustomLoader from '../../../components/Loader/CustomLoader';
 
 const FavoritesContainer = () => {
   const userJson: string | null = getUserFromStorage();
@@ -87,7 +88,9 @@ const FavoritesContainer = () => {
           </div>
         </div>
       ) : (
-        <div className='min-h-[620px]'></div>
+        <div className='min-h-[620px] flex items-center justify-center'>
+          <CustomLoader />
+        </div>
       )}
     </main>
   );

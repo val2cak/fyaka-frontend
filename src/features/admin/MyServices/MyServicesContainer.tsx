@@ -7,6 +7,7 @@ import { User } from '../../../types/typeDefinitions';
 import { Pagination } from '@mui/material';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import CustomLoader from '../../../components/Loader/CustomLoader';
 
 const ServicesListContainer = () => {
   const userJson: string | null = getUserFromStorage();
@@ -74,7 +75,9 @@ const ServicesListContainer = () => {
           </div>
         </div>
       ) : (
-        <div className='min-h-[620px]'></div>
+        <div className='min-h-[620px] flex items-center justify-center'>
+          <CustomLoader />
+        </div>
       )}
     </main>
   );

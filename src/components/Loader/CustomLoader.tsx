@@ -1,8 +1,22 @@
 const CustomLoader = (): JSX.Element => (
-  <div className='custom-loading'>
-    <div className='d1'></div>
-    <div className='d2'></div>
-  </div>
+  <>
+    <div className='loader-container'>
+      <div className='loader'>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </>
 );
 
 export default CustomLoader;
