@@ -72,7 +72,7 @@ export interface UpdateService {
 export interface WriteReview {
   userId: number;
   authorId: number;
-  rating: number;
+  rating: string;
   text: string;
 }
 

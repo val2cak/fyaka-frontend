@@ -43,7 +43,10 @@ export const reviewsApiSlice = createApi({
         query: (review: WriteReview) => ({
           url: '',
           method: 'POST',
-          body: review,
+          body: {
+            ...review,
+            rating: parseFloat(review.rating),
+          },
         }),
         invalidatesTags: ['Reviews-List'],
       }),

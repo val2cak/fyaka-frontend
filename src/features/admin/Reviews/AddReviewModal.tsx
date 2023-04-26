@@ -10,6 +10,7 @@ import UsersAutocomplete from './UsersAutocomplete';
 import { useCreateReviewMutation } from './reviewsApiSlice';
 import useNotifications from '../../../hooks/useNotifications';
 import { useParams } from 'react-router-dom';
+import InputElement from '../../../components/Form/InputElement';
 
 interface Props {
   isOpen: boolean;
@@ -25,7 +26,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
   const [reviewData, setReviewData] = useState<WriteReview>({
     userId: parseInt(id) ?? undefined,
     authorId: user.id,
-    rating: 0,
+    rating: '',
     text: '',
   });
 
@@ -39,18 +40,10 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
         setReviewData({ ...reviewData, text: event.target.value });
 
       if (name === 'rating') {
-        const value = parseFloat(event.target.value);
-
-        if (isNaN(value))
-          setReviewData({
-            ...reviewData,
-            rating: 0,
-          });
-        else
-          setReviewData({
-            ...reviewData,
-            rating: value,
-          });
+        setReviewData({
+          ...reviewData,
+          rating: event.target.value,
+        });
       }
     };
 
@@ -69,7 +62,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
             setReviewData({
               userId: parseInt(id) ?? undefined,
               authorId: user.id,
-              rating: 0,
+              rating: '',
               text: '',
             });
           }),
@@ -112,7 +105,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
               setReviewData({
                 userId: parseInt(id) ?? undefined,
                 authorId: user.id,
-                rating: 0,
+                rating: '',
                 text: '',
               });
             }}
@@ -132,20 +125,24 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
           )}
 
           <div className='flex flex-col'>
-            <label className='font-ubuntu text-base font-bold text-primaryColor'>
-              ocjena
-            </label>
             <div className='flex items-center gap-4'>
-              <input
-                value={reviewData.rating ?? 0}
-                className={`rounded-lg p-2 px-5 flex flex-nowrap bg-transparent border-[0.5px] border-grayColor h-[64px] w-[100px]`}
-                onChange={handleInputChange('rating')}
+              <InputElement
+                label='ocjena'
+                placeholder=''
+                inputClasses={`rounded-lg p-2 px-5 flex flex-nowrap bg-transparent border-[0.5px] border-grayColor h-[64px] w-[100px] !font-ubuntu`}
+                labelClasses='font-ubuntu text-base font-bold text-primaryColor'
+                inputProps={{
+                  onChange: handleInputChange('rating'),
+                  value: reviewData.rating,
+                  type: 'text',
+                }}
               />
               <Rating
-                value={reviewData.rating}
+                value={parseFloat(reviewData.rating)}
                 onChange={handleInputChange('rating')}
                 size='medium'
                 precision={0.5}
+                className='pt-8'
               />
             </div>
           </div>
@@ -177,7 +174,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
               setReviewData({
                 userId: parseInt(id) ?? undefined,
                 authorId: user.id,
-                rating: 0,
+                rating: '',
                 text: '',
               });
             }}
