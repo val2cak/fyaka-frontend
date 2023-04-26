@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InputElement from '../../../components/Form/InputElement';
 import useNotifications from '../../../hooks/useNotifications';
 import { getUserFromStorage } from '../../../services/storage';
@@ -22,8 +22,11 @@ const ChangeEmailComponent = () => {
 
   const [newEmail, setNewEmail] = useState<string>('');
 
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewEmail(event.target.value);
+    setHasUnsavedChanges(true);
   };
 
   const handleEmailSubmit = () => {
@@ -52,6 +55,7 @@ const ChangeEmailComponent = () => {
         );
 
         setNewEmail('');
+        setHasUnsavedChanges(false);
       } catch (error: any) {
         handleUserActionNotification({
           message: error.data.message,
@@ -66,6 +70,22 @@ const ChangeEmailComponent = () => {
         type: 'error',
       });
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (hasUnsavedChanges) {
+        event.preventDefault();
+        event.returnValue =
+          'Niste spremili promjene. Sigurno želite napustiti stranicu?';
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [hasUnsavedChanges]);
 
   return (
     <div className='bg-secondaryColor h-full rounded-lg p-6 flex flex-col gap-4 text-lightColor'>

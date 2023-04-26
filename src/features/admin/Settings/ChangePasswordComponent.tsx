@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InputElement from '../../../components/Form/InputElement';
 import useNotifications from '../../../hooks/useNotifications';
 import { getUserFromStorage } from '../../../services/storage';
@@ -16,7 +16,9 @@ const ChangePasswordComponent = () => {
 
   const [passwordData, setPasswordData] = useState<ChangePassword>();
 
-  const handlePasswordData =
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
+  const handlePasswordDataChange =
     (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
       switch (name) {
         case 'currentPassword':
@@ -37,6 +39,8 @@ const ChangePasswordComponent = () => {
         default:
           return '';
       }
+
+      setHasUnsavedChanges(true);
     };
 
   const handlePasswordSubmit = () => {
@@ -71,6 +75,8 @@ const ChangePasswordComponent = () => {
           currentPassword: '',
           repeatPassword: '',
         });
+
+        setHasUnsavedChanges(false);
       } catch (error: any) {
         handleUserActionNotification({
           message: error.data.message,
@@ -86,6 +92,22 @@ const ChangePasswordComponent = () => {
       });
   };
 
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (hasUnsavedChanges) {
+        event.preventDefault();
+        event.returnValue =
+          'Niste spremili promjene. Sigurno želite napustiti stranicu?';
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [hasUnsavedChanges]);
+
   return (
     <div className='bg-secondaryColor h-full rounded-lg p-6 flex flex-col gap-4 text-lightColor'>
       <div className='flex flex-col h-full justify-between'>
@@ -97,7 +119,7 @@ const ChangePasswordComponent = () => {
             inputClasses={'placeholder:opacity-70 h-12 text-darkColor'}
             inputProps={{
               value: passwordData?.currentPassword,
-              onChange: handlePasswordData('currentPassword'),
+              onChange: handlePasswordDataChange('currentPassword'),
             }}
           />
           <InputElement
@@ -107,7 +129,7 @@ const ChangePasswordComponent = () => {
             inputClasses={'placeholder:opacity-70 h-12 text-darkColor'}
             inputProps={{
               value: passwordData?.newPassword,
-              onChange: handlePasswordData('newPassword'),
+              onChange: handlePasswordDataChange('newPassword'),
             }}
           />
           <InputElement
@@ -117,7 +139,7 @@ const ChangePasswordComponent = () => {
             inputClasses={'placeholder:opacity-70 h-12 text-darkColor'}
             inputProps={{
               value: passwordData?.repeatPassword,
-              onChange: handlePasswordData('repeatPassword'),
+              onChange: handlePasswordDataChange('repeatPassword'),
             }}
           />
         </div>

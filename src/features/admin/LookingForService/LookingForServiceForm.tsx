@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AutocompleteElement from '../../../components/Form/AutocompleteElement';
 import DateTimePickerElement from '../../../components/Form/DateTimePickerElement';
@@ -27,6 +27,8 @@ const LookingForServiceForm = () => {
 
   const [formData, setFormData] = useState<NewService>();
 
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
   const { handleUserActionNotification, handlePromiseNotification } =
     useNotifications();
 
@@ -54,6 +56,8 @@ const LookingForServiceForm = () => {
           },
         }
       );
+
+      setHasUnsavedChanges(false);
     } catch (error: any) {
       handleUserActionNotification({
         message: error.data.message,
@@ -65,10 +69,12 @@ const LookingForServiceForm = () => {
 
   const handleDateChange = (newValue: Date) => {
     setFormData({ ...formData, date: newValue });
+    setHasUnsavedChanges(true);
   };
 
   const handleLocationChange = (value) => {
     setFormData({ ...formData, location: value });
+    setHasUnsavedChanges(true);
   };
 
   const handleFormInputChange =
@@ -92,11 +98,30 @@ const LookingForServiceForm = () => {
         default:
           return '';
       }
+
+      setHasUnsavedChanges(true);
     };
 
   const handleCategoryChange = (item: Lookup) => {
     setFormData({ ...formData, categoryId: item.id });
+    setHasUnsavedChanges(true);
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (hasUnsavedChanges) {
+        event.preventDefault();
+        event.returnValue =
+          'Niste spremili promjene. Sigurno želite napustiti stranicu?';
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [hasUnsavedChanges]);
 
   return (
     <div className='bg-secondaryColor rounded-lg py-12 px-32 flex flex-col gap-8'>

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import AutocompleteElement from '../../../components/Form/AutocompleteElement';
@@ -20,10 +20,13 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
 
   const navigateTo = useNavigate();
 
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
   const [formData, setFormData] = useState<ServiceProps>(data);
 
   const handleDateChange = (newValue: Date) => {
     setFormData({ ...formData, date: newValue });
+    setHasUnsavedChanges(true);
   };
 
   const handleFormInputChange =
@@ -47,6 +50,8 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
         default:
           return '';
       }
+
+      setHasUnsavedChanges(true);
     };
 
   const [updateService] = useUpdateServiceMutation();
@@ -80,6 +85,7 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
         }
       );
 
+      setHasUnsavedChanges(false);
       navigateTo(-1);
     } catch (error: any) {
       handleUserActionNotification({
@@ -120,11 +126,29 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
 
   const handleCategoryChange = (item: Lookup) => {
     setFormData({ ...formData, categoryId: item.id });
+    setHasUnsavedChanges(true);
   };
 
   const handleLocationChange = (value) => {
     setFormData({ ...formData, location: value });
+    setHasUnsavedChanges(true);
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (hasUnsavedChanges) {
+        event.preventDefault();
+        event.returnValue =
+          'Niste spremili promjene. Sigurno želite napustiti stranicu?';
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [hasUnsavedChanges]);
 
   return (
     <div className='bg-secondaryColor rounded-lg py-12 px-32 flex flex-col gap-8'>

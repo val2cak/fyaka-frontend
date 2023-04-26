@@ -1,5 +1,5 @@
 import { Rating } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import DatePickerElement from '../../../components/Form/DatePickerElement';
 import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
@@ -33,6 +33,8 @@ const ProfileInfo: FC<Props> = ({
 }) => {
   const [userData, setUserData] = useState<User>();
 
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
   const navigateTo = useNavigate();
 
   const { handleUserActionNotification, handlePromiseNotification } =
@@ -63,6 +65,8 @@ const ProfileInfo: FC<Props> = ({
           },
         }
       );
+
+      setHasUnsavedChanges(false);
     } catch (error: any) {
       handleUserActionNotification({
         message: error.data.message,
@@ -93,15 +97,37 @@ const ProfileInfo: FC<Props> = ({
         default:
           return '';
       }
+
+      setHasUnsavedChanges(true);
     };
 
   const handleDateChange = (newValue: Date) => {
     setUserData({ ...userData, dateOfBirth: newValue });
+
+    setHasUnsavedChanges(true);
   };
 
   const handleGenderChange = (newValue: Lookup) => {
     setUserData({ ...userData, gender: newValue.name });
+
+    setHasUnsavedChanges(true);
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (hasUnsavedChanges) {
+        event.preventDefault();
+        event.returnValue =
+          'Niste spremili promjene. Sigurno želite napustiti stranicu?';
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [hasUnsavedChanges]);
 
   return (
     <div className='flex flex-col gap-8 items-center'>
