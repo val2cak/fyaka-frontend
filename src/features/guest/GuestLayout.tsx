@@ -5,11 +5,15 @@ import Footer from '../../components/Footer/Footer';
 
 const GuestLayout = () => {
   return (
-    <>
+    <div className='min-h-screen m-0 flex flex-col'>
       <NavBar />
-      <Outlet />
+
+      <div className='flex-1 bg-lightColor'>
+        <Outlet />
+      </div>
+
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -19,8 +19,10 @@ const ServicesListContainer = () => {
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
-    setCurrentPage(value);
-    refetch();
+    if (currentPage !== value) {
+      setCurrentPage(value);
+      refetch();
+    }
   };
 
   const searchTerm =
@@ -53,13 +55,13 @@ const ServicesListContainer = () => {
         </div>
       </div>
 
-      <div className='flex flex-row px-40 gap-5 pb-8 w-full'>
+      <div className='flex flex-row h-full px-40 gap-8 pb-8 w-full'>
         <Fragment>
           <FilterBar filters={filters} setFilters={setFilters} />
         </Fragment>
 
-        {!isServicesListDataLoading && (
-          <div className='flex flex-col gap-8 w-3/4 justify-between'>
+        {!isServicesListDataLoading ? (
+          <div className='flex flex-col gap-8 w-3/4 justify-between min-h-[592px]'>
             <div className='flex flex-wrap gap-5'>
               {servicesData.map((item, index) => (
                 <ServiceCard key={index} {...item} />
@@ -75,6 +77,8 @@ const ServicesListContainer = () => {
               />
             </div>
           </div>
+        ) : (
+          <div className='w-3/4 min-h-[592px]'></div>
         )}
       </div>
     </main>

@@ -20,7 +20,7 @@ const Footer = () => {
     <main
       className={`font-raleway font-medium ${
         flag ? 'bg-secondaryColor' : 'bg-lightColor'
-      } flex flex-row justify-evenly p-12 bottom-0 w-full gap-10 text-base`}
+      } flex flex-row justify-evenly p-12 w-full h-full gap-10 text-base`}
     >
       <ul
         className={`flex flex-col ${
