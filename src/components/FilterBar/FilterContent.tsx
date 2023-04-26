@@ -28,6 +28,8 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     return servicesListData?.services ?? [];
   }, [servicesListData]);
 
+  const [isChanged, setIsChanged] = useState(false);
+
   const minDataPrice =
     Math.min(...servicesData?.map((item) => item.price)) ?? 0;
   const maxDataPrice =
@@ -43,6 +45,8 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     } else {
       setMinPrice(value);
     }
+
+    setIsChanged(true);
   };
 
   const handleMaxInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,11 +56,15 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     } else {
       setMaxPrice(value);
     }
+
+    setIsChanged(true);
   };
 
   const handleSliderChange = (event: any, newValue: number | number[]) => {
     setMinPrice(newValue[0] as number);
     setMaxPrice(newValue[1] as number);
+
+    setIsChanged(true);
   };
 
   useEffect(() => {
@@ -75,6 +83,8 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     } else {
       setPeople(value);
     }
+
+    setIsChanged(true);
   };
 
   const [minDate, setMinDate] = useState<Date | null>(null);
@@ -101,12 +111,16 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     if (date) {
       setMinDate(date);
     }
+
+    setIsChanged(true);
   };
 
   const handleMaxDateChange = (date: Date | null) => {
     if (date) {
       setMaxDate(date);
     }
+
+    setIsChanged(true);
   };
 
   const [category, setCategory] = useState<Lookup[]>([]);
@@ -122,6 +136,8 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     } else {
       setCategory(category.filter((item) => item.id !== categoryId));
     }
+
+    setIsChanged(true);
   };
 
   const [location, setLocation] = useState('');
@@ -129,6 +145,8 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
 
   const handleLocationChange = (value) => {
     setLocation(value);
+
+    setIsChanged(true);
   };
 
   useEffect(() => {
@@ -158,36 +176,35 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     } else {
       setUserRating(undefined);
     }
+
+    setIsChanged(true);
   };
 
   useEffect(() => {
-    if (
-      name === 'cijena' &&
-      (minPrice !== minDataPrice || maxPrice !== maxDataPrice)
-    )
+    if (name === 'cijena' && isChanged)
       setFilters({ ...filters, minPrice: minPrice, maxPrice: maxPrice });
-    else if (name === 'vrijeme obavljanja' && (minDate || maxDate))
+    else if (name === 'vrijeme obavljanja' && isChanged)
       setFilters({
         ...filters,
         minDate: minDate,
         maxDate: maxDate,
       });
-    else if (name === 'kategorija' && category?.length !== 0)
+    else if (name === 'kategorija' && isChanged)
       setFilters({
         ...filters,
         categoryId: category?.map((item) => item.id),
       });
-    else if (name === 'lokacija' && location)
+    else if (name === 'lokacija' && isChanged)
       setFilters({
         ...filters,
         location: location,
       });
-    else if (name === 'broj osoba' && people)
+    else if (name === 'broj osoba' && isChanged)
       setFilters({
         ...filters,
         people: people,
       });
-    else if (name === 'ocjena korisnika' && userRating)
+    else if (name === 'ocjena korisnika' && isChanged)
       setFilters({
         ...filters,
         userRating: userRating,
