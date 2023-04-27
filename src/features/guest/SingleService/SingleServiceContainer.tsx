@@ -20,10 +20,15 @@ const SingleServiceContainer = () => {
   const handleGoBack = () => {
     flag
       ? navigateTo('/favorites', {
-          state: { currentPage: location?.state?.currentPage },
+          state: {
+            currentPage: location.state && location?.state?.currentPage,
+          },
         })
       : navigateTo('/services-list', {
-          state: { currentPage: location?.state?.currentPage },
+          state: {
+            currentPage: location.state && location?.state?.currentPage,
+            filters: location.state && location?.state?.filters,
+          },
         });
   };
 

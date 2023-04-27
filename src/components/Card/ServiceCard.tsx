@@ -3,10 +3,11 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { BsChevronRight as ArrowRightIcon } from 'react-icons/bs';
 import { AiFillHeart as FavoriteFilledIcon } from 'react-icons/ai';
 import { format } from 'date-fns';
-import { ServiceProps } from '../../types/typeDefinitions';
+import { Filters, ServiceProps } from '../../types/typeDefinitions';
 
 interface Props extends ServiceProps {
   currentPage?: number;
+  filters?: Filters;
 }
 
 const ServiceCard: FC<Props> = ({
@@ -16,6 +17,7 @@ const ServiceCard: FC<Props> = ({
   price,
   location,
   currentPage,
+  filters,
 }) => {
   const locationHook = useLocation();
 
@@ -35,7 +37,7 @@ const ServiceCard: FC<Props> = ({
           ? `/favorites/${id}`
           : `/services-list/${id}`
       }
-      state={{ currentPage }}
+      state={{ currentPage, filters }}
       className={`w-[250px] h-[250px] ${
         flag === 2 ? 'bg-secondaryColor text-lightColor' : 'bg-lightColor'
       } rounded-lg font-ubuntu flex flex-col items-start pl-7 justify-center relative transition ease-in-out delay-50 hover:scale-105 duration-300`}

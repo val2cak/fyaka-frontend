@@ -18,7 +18,11 @@ const ServicesListContainer = () => {
       ? location.state.currentPage
       : 1
   );
-  const [filters, setFilters] = useState<Filters>();
+  const [filters, setFilters] = useState<Filters>(
+    location.state !== null && location.state.filters
+      ? location.state.filters
+      : undefined
+  );
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -69,7 +73,12 @@ const ServicesListContainer = () => {
           <div className='flex flex-col gap-8 w-3/4 justify-between min-h-[592px]'>
             <div className='flex flex-wrap gap-5'>
               {servicesData.map((item, index) => (
-                <ServiceCard key={index} {...item} currentPage={currentPage} />
+                <ServiceCard
+                  key={index}
+                  {...item}
+                  currentPage={currentPage}
+                  filters={filters}
+                />
               ))}
             </div>
 
