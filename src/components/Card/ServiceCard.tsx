@@ -1,9 +1,8 @@
 import { FC } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { BsChevronRight as ArrowRightIcon } from 'react-icons/bs';
 import { AiFillHeart as FavoriteFilledIcon } from 'react-icons/ai';
 import { format } from 'date-fns';
-
 import { ServiceProps } from '../../types/typeDefinitions';
 
 const ServiceCard: FC<ServiceProps> = ({
@@ -13,8 +12,6 @@ const ServiceCard: FC<ServiceProps> = ({
   price,
   location,
 }) => {
-  const navigateTo = useNavigate();
-
   const locationHook = useLocation();
 
   const flag =
@@ -25,13 +22,13 @@ const ServiceCard: FC<ServiceProps> = ({
       : 0;
 
   return (
-    <button
-      onClick={() =>
+    <NavLink
+      to={
         flag === 1
-          ? navigateTo(`/my-services/${id}`)
+          ? `/my-services/${id}`
           : flag === 2
-          ? navigateTo(`/favorites/${id}`)
-          : navigateTo(`/services-list/${id}`)
+          ? `/favorites/${id}`
+          : `/services-list/${id}`
       }
       className={`w-[250px] h-[250px] ${
         flag === 2 ? 'bg-secondaryColor text-lightColor' : 'bg-lightColor'
@@ -54,7 +51,7 @@ const ServiceCard: FC<ServiceProps> = ({
           <ArrowRightIcon />
         </p>
       </div>
-    </button>
+    </NavLink>
   );
 };
 
