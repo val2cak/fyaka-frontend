@@ -1,20 +1,24 @@
 import { Fragment, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Pagination } from '@mui/material';
 
+import { useGetServicesListQuery } from './servicesApiSlice';
 import ServiceCard from '../../../components/Card/ServiceCard';
 import FilterBar from '../../../components/FilterBar/FilterBar';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import TitleBar from '../../../components/TitleBar/TitleBar';
-import { useGetServicesListQuery } from './servicesApiSlice';
-import { useLocation } from 'react-router-dom';
-import { Filters } from '../../../types/typeDefinitions';
 import CustomLoader from '../../../components/Loader/CustomLoader';
+import { Filters } from '../../../types/typeDefinitions';
 
 const ServicesListContainer = () => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [filters, setFilters] = useState<Filters>();
-
   const location = useLocation();
+
+  const [currentPage, setCurrentPage] = useState<number>(
+    location.state !== null && location.state.currentPage
+      ? location.state.currentPage
+      : 1
+  );
+  const [filters, setFilters] = useState<Filters>();
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -65,7 +69,7 @@ const ServicesListContainer = () => {
           <div className='flex flex-col gap-8 w-3/4 justify-between min-h-[592px]'>
             <div className='flex flex-wrap gap-5'>
               {servicesData.map((item, index) => (
-                <ServiceCard key={index} {...item} />
+                <ServiceCard key={index} {...item} currentPage={currentPage} />
               ))}
             </div>
 

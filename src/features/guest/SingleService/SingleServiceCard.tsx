@@ -6,14 +6,14 @@ import {
 } from 'react-icons/ai';
 import { format } from 'date-fns';
 
-import { ServiceProps, User } from '../../../types/typeDefinitions';
-import { getUserFromStorage } from '../../../services/storage';
 import {
   useAddFavoriteMutation,
   useGetSingleFavoriteQuery,
   useRemoveFavoriteMutation,
 } from '../../admin/Favorites/favoritesApiSlice';
 import { useGetCategoriesQuery } from '../ServicesList/servicesApiSlice';
+import { ServiceProps, User } from '../../../types/typeDefinitions';
+import { getUserFromStorage } from '../../../services/storage';
 import useNotifications from '../../../hooks/useNotifications';
 
 const SingleServiceCard: FC<ServiceProps> = ({

@@ -16,7 +16,11 @@ const FavoritesContainer = () => {
 
   const location = useLocation();
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(
+    location.state !== null && location.state.currentPage
+      ? location.state.currentPage
+      : 1
+  );
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -73,6 +77,7 @@ const FavoritesContainer = () => {
                 description={item.service.description}
                 people={item.service.people}
                 categoryId={item.service.categoryId}
+                currentPage={currentPage}
               />
             ))}
           </div>

@@ -5,12 +5,17 @@ import { AiFillHeart as FavoriteFilledIcon } from 'react-icons/ai';
 import { format } from 'date-fns';
 import { ServiceProps } from '../../types/typeDefinitions';
 
-const ServiceCard: FC<ServiceProps> = ({
+interface Props extends ServiceProps {
+  currentPage?: number;
+}
+
+const ServiceCard: FC<Props> = ({
   id,
   title,
   date,
   price,
   location,
+  currentPage,
 }) => {
   const locationHook = useLocation();
 
@@ -30,6 +35,7 @@ const ServiceCard: FC<ServiceProps> = ({
           ? `/favorites/${id}`
           : `/services-list/${id}`
       }
+      state={{ currentPage }}
       className={`w-[250px] h-[250px] ${
         flag === 2 ? 'bg-secondaryColor text-lightColor' : 'bg-lightColor'
       } rounded-lg font-ubuntu flex flex-col items-start pl-7 justify-center relative transition ease-in-out delay-50 hover:scale-105 duration-300`}

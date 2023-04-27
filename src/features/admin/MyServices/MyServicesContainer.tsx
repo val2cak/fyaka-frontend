@@ -15,7 +15,11 @@ const ServicesListContainer = () => {
 
   const location = useLocation();
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(
+    location.state !== null && location.state.currentPage
+      ? location.state.currentPage
+      : 1
+  );
 
   const searchTerm =
     location.state !== null && location.state.search
@@ -61,7 +65,7 @@ const ServicesListContainer = () => {
         <div className='flex flex-col px-56 gap-8 pb-8 justify-between min-h-[620px]'>
           <div className='flex flex-wrap flex-start gap-4 items-center flex-row w-full'>
             {servicesData.map((item, index) => (
-              <ServiceCard key={index} {...item} />
+              <ServiceCard key={index} {...item} currentPage={currentPage} />
             ))}
           </div>
 

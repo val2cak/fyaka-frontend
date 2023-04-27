@@ -1,11 +1,11 @@
 import { IoArrowUndoCircleSharp as ArrowBackIcon } from 'react-icons/io5';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import TitleBar from '../../../components/TitleBar/TitleBar';
 import { useGetSingleServiceQuery } from '../../guest/ServicesList/servicesApiSlice';
 import MySingleServiceForm from './MySingleServiceForm';
 
-const SingleServiceContainer = () => {
+const MySingleServiceContainer = () => {
   const navigateTo = useNavigate();
 
   const { id } = useParams();
@@ -13,12 +13,22 @@ const SingleServiceContainer = () => {
   const { data: serviceData, isFetching: isServiceDataLoading } =
     useGetSingleServiceQuery(Number(id));
 
+  const location = useLocation();
+
+  const handleGoBack = () => {
+    location.state && location.state !== null && location.state?.currentPage
+      ? navigateTo('/my-services', {
+          state: { currentPage: location?.state?.currentPage },
+        })
+      : navigateTo(-1);
+  };
+
   return (
     <main className='bg-lightColor'>
       <TitleBar title={'moje usluge'} />
 
       <button
-        onClick={() => navigateTo(-1)}
+        onClick={handleGoBack}
         className='text-secondaryColor text-3xl m-3 absolute transition ease-in-out delay-50 hover:scale-110 duration-300'
       >
         <ArrowBackIcon />
@@ -33,4 +43,4 @@ const SingleServiceContainer = () => {
   );
 };
 
-export default SingleServiceContainer;
+export default MySingleServiceContainer;
