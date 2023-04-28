@@ -39,6 +39,7 @@ const InputElement: FC<Props> = ({
 
         {flag && (
           <button
+            type='button'
             onClick={() => setVisible(!visible)}
             className={`absolute right-4 top-0 bottom-0 mx-auto my-0 text-md text-lightColor`}
           >

@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from '../../../app/hooks';
@@ -10,8 +11,12 @@ import { useLoginUserMutation } from '../authApiSlice';
 import { loginUserSuccess } from '../authStateSlice';
 
 const LoginForm = () => {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   const navigateTo = useNavigate();
 
@@ -35,30 +40,16 @@ const LoginForm = () => {
     [dispatch, navigateTo]
   );
 
-  const handleFormInputChange =
-    (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      switch (name) {
-        case 'userName':
-          setUserName(event.target.value);
-          break;
-        case 'password':
-          setPassword(event.target.value);
-          break;
-        default:
-          return '';
-      }
-    };
-
   const { handleUserActionNotification, handlePromiseNotification } =
     useNotifications();
 
-  const handleFormSubmit = async (event: React.MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-
+  const handleFormSubmit = async (data) => {
     try {
       handlePromiseNotification(
-        loginUser({ username: userName, password: password }).unwrap(),
+        loginUser({
+          username: data.username,
+          password: data.password,
+        }).unwrap(),
         {
           success: {
             message: 'Dobrodošli!',
@@ -100,43 +91,57 @@ const LoginForm = () => {
   ]);
 
   return (
-    <div className='bg-lightColor bg-opacity-80 rounded-lg px-12 py-8 flex flex-col gap-8'>
+    <div className='bg-lightColor bg-opacity-80 rounded-lg px-12 py-8 flex flex-col gap-4'>
       <h1 className='flex justify-center items-center font-ubuntu text-primaryColor font-bold text-xl'>
         Prijava
       </h1>
 
-      <div className='flex flex-col gap-16'>
+      {(errors.username?.type || errors.password?.type) && (
+        <span className='text-redColor font-ubuntu'>
+          Molimo ispunite sva obavezna polja!
+        </span>
+      )}
+
+      <form
+        onSubmit={handleSubmit(handleFormSubmit)}
+        className='flex flex-col gap-16'
+      >
         <div className='flex flex-col gap-4'>
           <InputElement
             label={'korisničko ime'}
             placeholder={'username'}
-            labelClasses={'text-secondaryColor'}
+            labelClasses={'text-primaryColor'}
             inputClasses={
-              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-secondaryColor h-12'
+              `placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12` +
+              (errors.username ? ' border-2 border-redColor' : '')
             }
             inputProps={{
-              value: userName,
-              onChange: handleFormInputChange('userName'),
+              ...register('username', {
+                required: true,
+              }),
               type: 'text',
             }}
           />
+
           <InputElement
             label={'lozinka'}
-            placeholder={'*********'}
-            labelClasses={'text-secondaryColor'}
+            placeholder={'lozinka'}
+            labelClasses={'text-primaryColor'}
             inputClasses={
-              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-secondaryColor h-12'
+              `placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12` +
+              (errors.password ? ' border-2 border-redColor' : '')
             }
             inputProps={{
-              value: password,
-              onChange: handleFormInputChange('password'),
+              ...register('password', {
+                required: true,
+              }),
             }}
           />
         </div>
 
         <div>
           <button
-            onClick={handleFormSubmit}
+            type='submit'
             className='button bg-primaryColor text-lightColor !py-4'
           >
             prijavi se
@@ -148,7 +153,7 @@ const LoginForm = () => {
             </NavLink>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

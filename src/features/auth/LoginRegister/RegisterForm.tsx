@@ -168,7 +168,7 @@ const RegisterForm = () => {
 
         <div>
           <button
-            onClick={handleFormSubmit}
+            type='submit'
             className='button bg-secondaryColor text-lightColor !py-4 h-16'
           >
             registriraj se
