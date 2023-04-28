@@ -8,6 +8,7 @@ interface Props {
   items: Lookup[];
   placeholder?: string;
   selectedItem?: Lookup | undefined;
+  className?: string;
 }
 
 const DropdownMenu: FC<Props> = ({
@@ -15,6 +16,7 @@ const DropdownMenu: FC<Props> = ({
   onSelect,
   selectedItem,
   placeholder,
+  className,
 }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -41,7 +43,7 @@ const DropdownMenu: FC<Props> = ({
   return (
     <div
       ref={ref}
-      className='w-full p-5 rounded-lg font-raleway placeholder-primaryColor bg-lightColor relative'
+      className={`w-full p-5 rounded-lg font-raleway placeholder-primaryColor bg-lightColor relative ${className}`}
     >
       <div
         onClick={() => setOpen(!open)}

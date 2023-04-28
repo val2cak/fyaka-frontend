@@ -9,6 +9,7 @@ interface Props {
   handleSelect: (item: Lookup) => void;
   data: Lookup[];
   selectedId: number;
+  inputClasses?: string;
 }
 
 const DropdownElement: FC<Props> = ({
@@ -18,6 +19,7 @@ const DropdownElement: FC<Props> = ({
   handleSelect,
   data,
   selectedId,
+  inputClasses,
 }) => {
   return (
     <div className='flex flex-col'>
@@ -30,6 +32,7 @@ const DropdownElement: FC<Props> = ({
         onSelect={handleSelect}
         items={data}
         placeholder={placeholder}
+        className={inputClasses}
       />
     </div>
   );

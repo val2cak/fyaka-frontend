@@ -128,20 +128,23 @@ const LookingForServiceForm = () => {
       <div className='flex flex-row justify-evenly gap-10'>
         <div className='w-1/2 flex flex-col gap-6'>
           <InputElement
-            label={'autor'}
-            placeholder={'autor'}
-            labelClasses={'text-primaryColor'}
-            inputClasses={'placeholder-primaryColor bg-lightColor'}
-            inputProps={{ disabled: true, value: user.username }}
-          />
-
-          <InputElement
             label={'naslov'}
             placeholder={'naslov'}
             labelClasses={'text-primaryColor'}
             inputClasses={'placeholder-primaryColor'}
             inputProps={{
               onChange: handleFormInputChange('title'),
+            }}
+          />
+
+          <InputElement
+            label={'cijena usluge (€)'}
+            placeholder={'cijena usluge'}
+            labelClasses={'text-primaryColor'}
+            inputClasses={`placeholder-primaryColor`}
+            inputProps={{
+              onChange: handleFormInputChange('price'),
+              type: 'number',
             }}
           />
 
@@ -156,13 +159,14 @@ const LookingForServiceForm = () => {
             />
           )}
 
-          <TextElement
-            label={'opis'}
-            placeholder={'opis'}
+          <DateTimePickerElement
+            label={'vrijeme obavljanja'}
             labelClasses={'text-primaryColor'}
-            textClasses={'placeholder-primaryColor'}
-            textProps={{
-              onChange: handleFormInputChange('description'),
+            inputClasses={
+              '!placeholder-primaryColor bg-lightColor !color-primaryColor'
+            }
+            inputProps={{
+              onChange: handleDateChange,
             }}
           />
         </div>
@@ -172,17 +176,6 @@ const LookingForServiceForm = () => {
             label={'lokacija'}
             inputProps={{
               onChange: handleLocationChange,
-            }}
-          />
-
-          <DateTimePickerElement
-            label={'vrijeme obavljanja'}
-            labelClasses={'text-primaryColor'}
-            inputClasses={
-              '!placeholder-primaryColor bg-lightColor !color-primaryColor'
-            }
-            inputProps={{
-              onChange: handleDateChange,
             }}
           />
 
@@ -197,14 +190,13 @@ const LookingForServiceForm = () => {
             }}
           />
 
-          <InputElement
-            label={'cijena usluge (€)'}
-            placeholder={'cijena usluge'}
+          <TextElement
+            label={'opis'}
+            placeholder={'opis'}
             labelClasses={'text-primaryColor'}
-            inputClasses={`placeholder-primaryColor`}
-            inputProps={{
-              onChange: handleFormInputChange('price'),
-              type: 'number',
+            textClasses={'placeholder-primaryColor'}
+            textProps={{
+              onChange: handleFormInputChange('description'),
             }}
           />
         </div>

@@ -127,7 +127,7 @@ const RegisterForm = () => {
 
           <InputElement
             label={'lozinka'}
-            placeholder={'*********'}
+            placeholder={'lozinka'}
             labelClasses={'text-primaryColor'}
             inputClasses={
               `placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12` +
@@ -152,7 +152,7 @@ const RegisterForm = () => {
 
           <InputElement
             label={'ponovi lozinku'}
-            placeholder={'*********'}
+            placeholder={'ponovi lozinku'}
             labelClasses={'text-primaryColor'}
             inputClasses={
               `placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12` +
