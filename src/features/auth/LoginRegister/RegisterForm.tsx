@@ -1,16 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 import InputElement from '../../../components/Form/InputElement';
 import useNotifications from '../../../hooks/useNotifications';
 import { useRegisterUserMutation } from '../authApiSlice';
 
 const RegisterForm = () => {
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
   const navigateTo = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   const [
     registerUser,
@@ -32,36 +36,16 @@ const RegisterForm = () => {
     }
   }, [isUserRegisterError, isUserRegisterLoading, userAuthData, navigateTo]);
 
-  const handleFormInputChange =
-    (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      switch (name) {
-        case 'email':
-          setEmail(event.target.value);
-          break;
-        case 'username':
-          setUsername(event.target.value);
-          break;
-        case 'password':
-          setPassword(event.target.value);
-          break;
-        default:
-          return '';
-      }
-    };
-
   const { handleUserActionNotification, handlePromiseNotification } =
     useNotifications();
 
-  const handleFormSubmit = async (event: React.MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-
+  const handleFormSubmit = async (data) => {
     try {
       handlePromiseNotification(
         registerUser({
-          email: email,
-          username: username,
-          password: password,
+          email: data.email,
+          username: data.username,
+          password: data.password,
         }).unwrap(),
         {
           success: {
@@ -88,23 +72,38 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className='bg-lightColor bg-opacity-80 rounded-lg px-12 py-8 flex flex-col gap-4'>
+    <div className='bg-lightColor bg-opacity-80 rounded-lg px-12 py-6 flex flex-col gap-2'>
       <h1 className='flex justify-center items-center font-ubuntu text-secondaryColor font-bold text-xl'>
         Registracija
       </h1>
 
-      <div className='flex flex-col gap-8'>
+      {(errors.email?.type ||
+        errors.username?.type ||
+        errors.password?.type ||
+        errors.confirmPassword?.type) && (
+        <span className='text-redColor font-ubuntu'>
+          Molimo ispunite sva obavezna polja!
+        </span>
+      )}
+
+      <form
+        onSubmit={handleSubmit(handleFormSubmit)}
+        className='flex flex-col gap-6'
+      >
         <div className='flex flex-col gap-4'>
           <InputElement
             label={'email'}
             placeholder={'yourmail@mail.com'}
             labelClasses={'text-primaryColor'}
             inputClasses={
-              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12'
+              `placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12` +
+              (errors.email ? ' border-2 border-redColor' : '')
             }
             inputProps={{
-              value: email,
-              onChange: handleFormInputChange('email'),
+              ...register('email', {
+                required: true,
+                pattern: /^\S+@\S+$/i,
+              }),
               type: 'email',
             }}
           />
@@ -114,11 +113,14 @@ const RegisterForm = () => {
             placeholder={'username'}
             labelClasses={'text-primaryColor'}
             inputClasses={
-              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12'
+              `placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12` +
+              (errors.username ? ' border-2 border-redColor' : '')
             }
             inputProps={{
-              value: username,
-              onChange: handleFormInputChange('username'),
+              ...register('username', {
+                required: true,
+                minLength: 3,
+              }),
               type: 'text',
             }}
           />
@@ -128,13 +130,24 @@ const RegisterForm = () => {
             placeholder={'*********'}
             labelClasses={'text-primaryColor'}
             inputClasses={
-              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12'
+              `placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12` +
+              (errors.password ? ' border-2 border-redColor' : '')
             }
             inputProps={{
-              value: password,
-              onChange: handleFormInputChange('password'),
-              type: 'password',
+              ...register('password', {
+                required: true,
+                minLength: {
+                  value: 8,
+                  message: 'Lozinka mora imati barem 8 znakova!',
+                },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                  message:
+                    'Lozinka mora sadržavati barem jedno veliko, jedno malo slovo i broj!',
+                },
+              }),
             }}
+            errors={errors.password?.message.toString()}
           />
 
           <InputElement
@@ -142,10 +155,13 @@ const RegisterForm = () => {
             placeholder={'*********'}
             labelClasses={'text-primaryColor'}
             inputClasses={
-              'placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12'
+              `placeholder-lightColor placeholder:opacity-50 text-lightColor bg-primaryColor h-12` +
+              (errors.confirmPassword ? ' border-2 border-redColor' : '')
             }
             inputProps={{
-              type: 'password',
+              ...register('confirmPassword', {
+                required: true,
+              }),
             }}
           />
         </div>
@@ -164,7 +180,7 @@ const RegisterForm = () => {
             </NavLink>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

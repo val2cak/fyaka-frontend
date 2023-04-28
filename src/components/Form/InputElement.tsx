@@ -10,6 +10,7 @@ interface Props {
   labelClasses?: string;
   inputClasses?: string;
   inputProps?: any;
+  errors?: string;
 }
 
 const InputElement: FC<Props> = ({
@@ -18,6 +19,7 @@ const InputElement: FC<Props> = ({
   labelClasses,
   inputClasses,
   inputProps,
+  errors,
 }) => {
   const flag = label.includes('lozink');
   const [visible, setVisible] = useState(false);
@@ -38,12 +40,15 @@ const InputElement: FC<Props> = ({
         {flag && (
           <button
             onClick={() => setVisible(!visible)}
-            className={`absolute right-4 top-0 bottom-0 mx-auto my-0 text-md ${inputClasses}`}
+            className={`absolute right-4 top-0 bottom-0 mx-auto my-0 text-md text-lightColor`}
           >
             {visible ? <VisibleIcon /> : <NotVisibleIcon />}
           </button>
         )}
       </div>
+      {errors && (
+        <p className='text-redColor font-ubuntu w-[300px]'>{errors}</p>
+      )}
     </div>
   );
 };

@@ -130,7 +130,6 @@ const LoginForm = () => {
             inputProps={{
               value: password,
               onChange: handleFormInputChange('password'),
-              type: 'password',
             }}
           />
         </div>
