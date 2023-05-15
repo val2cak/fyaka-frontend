@@ -10,6 +10,7 @@ interface Props {
   data: Lookup[];
   selectedId: number;
   inputClasses?: string;
+  errors?: string;
 }
 
 const DropdownElement: FC<Props> = ({
@@ -20,6 +21,7 @@ const DropdownElement: FC<Props> = ({
   data,
   selectedId,
   inputClasses,
+  errors,
 }) => {
   return (
     <div className='flex flex-col'>
@@ -34,6 +36,10 @@ const DropdownElement: FC<Props> = ({
         placeholder={placeholder}
         className={inputClasses}
       />
+
+      {errors && (
+        <p className='text-redColor font-ubuntu w-[300px]'>{errors}</p>
+      )}
     </div>
   );
 };

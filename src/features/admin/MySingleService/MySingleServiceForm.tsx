@@ -114,7 +114,7 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
           },
         });
 
-        navigateTo(-1);
+        navigateTo(-2);
       } catch (error: any) {
         handleUserActionNotification({
           message: error.data.message,
@@ -155,16 +155,6 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
       <div className='flex flex-row justify-evenly gap-10'>
         <div className='w-1/2 flex flex-col gap-6'>
           <InputElement
-            label={'autor'}
-            placeholder={'autor'}
-            labelClasses={'text-primaryColor'}
-            inputClasses={
-              'placeholder-primaryColor bg-lightColor text-darkColor'
-            }
-            inputProps={{ defaultValue: data.author.username, disabled: true }}
-          />
-
-          <InputElement
             label={'naslov'}
             placeholder={'naslov'}
             labelClasses={'text-primaryColor'}
@@ -175,6 +165,20 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
               onChange: handleFormInputChange('title'),
               defaultValue: data.title,
               type: 'text',
+            }}
+          />
+
+          <InputElement
+            label={'cijena usluge (€)'}
+            placeholder={'naslov'}
+            labelClasses={'text-primaryColor'}
+            inputClasses={
+              'placeholder-primaryColor bg-lightColor text-darkColor'
+            }
+            inputProps={{
+              onChange: handleFormInputChange('price'),
+              defaultValue: data.price,
+              type: 'number',
             }}
           />
 
@@ -189,17 +193,15 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
             />
           )}
 
-          <TextElement
-            label={'opis'}
-            placeholder={'opis'}
+          <DateTimePickerElement
+            label={'vrijeme obavljanja'}
             labelClasses={'text-primaryColor'}
-            textClasses={
+            inputClasses={
               'placeholder-primaryColor bg-lightColor text-darkColor'
             }
-            textProps={{
-              onChange: handleFormInputChange('description'),
-              defaultValue: data.description,
-              type: 'text',
+            inputProps={{
+              onChange: handleDateChange,
+              defaultValue: new Date(data.date),
             }}
           />
         </div>
@@ -213,18 +215,6 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
                 name: data.location.split(',')[0],
                 adminName1: data.location.split(', ')[1],
               },
-            }}
-          />
-
-          <DateTimePickerElement
-            label={'vrijeme obavljanja'}
-            labelClasses={'text-primaryColor'}
-            inputClasses={
-              'placeholder-primaryColor bg-lightColor text-darkColor'
-            }
-            inputProps={{
-              onChange: handleDateChange,
-              defaultValue: new Date(data.date),
             }}
           />
 
@@ -242,17 +232,17 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
             }}
           />
 
-          <InputElement
-            label={'cijena usluge'}
-            placeholder={'naslov'}
+          <TextElement
+            label={'opis'}
+            placeholder={'opis'}
             labelClasses={'text-primaryColor'}
-            inputClasses={
+            textClasses={
               'placeholder-primaryColor bg-lightColor text-darkColor'
             }
-            inputProps={{
-              onChange: handleFormInputChange('price'),
-              defaultValue: data.price,
-              type: 'number',
+            textProps={{
+              onChange: handleFormInputChange('description'),
+              defaultValue: data.description,
+              type: 'text',
             }}
           />
         </div>

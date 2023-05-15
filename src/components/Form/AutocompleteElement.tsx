@@ -1,21 +1,19 @@
 import { FC } from 'react';
 
-import { Location } from '../../types/typeDefinitions';
 import LocationsAutocomplete from '../Locations/LocationsAutocomplete';
 
 interface Props {
   label: string;
-  inputProps?: {
-    onChange?: (value: any) => void;
-    defaultValue?: Location;
-  };
+  inputProps?: any;
   inputClasses?: string;
+  errors?: string;
 }
 
 const AutocompleteElement: FC<Props> = ({
   label,
   inputProps,
   inputClasses,
+  errors,
 }) => {
   return (
     <div className='flex flex-col'>
@@ -27,6 +25,10 @@ const AutocompleteElement: FC<Props> = ({
           inputProps={inputProps}
           className={inputClasses}
         />
+
+        {errors && (
+          <p className='text-redColor font-ubuntu w-[300px]'>{errors}</p>
+        )}
       </div>
     </div>
   );
