@@ -181,7 +181,6 @@ const LookingForServiceForm = () => {
                 }`}
                 inputProps={{
                   ...field,
-                  onChange: (value: Date) => setValue('date', value),
                 }}
                 errors={errors?.date?.message}
               />
@@ -201,7 +200,6 @@ const LookingForServiceForm = () => {
                 label='lokacija'
                 inputProps={{
                   ...field,
-                  onChange: (value) => setValue('location', value),
                 }}
                 inputClasses={`placeholder-primaryColor ${
                   errors?.location?.message ? 'border-2 border-redColor' : ''
