@@ -29,6 +29,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
     register,
     handleSubmit,
     reset,
+    trigger,
     formState: { errors },
   } = useForm<WriteReview>({
     mode: 'onChange',
@@ -57,6 +58,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
           .then(() => {
             closeModal(true);
             reset();
+            trigger();
           }),
         {
           success: {
@@ -86,9 +88,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
     <Modal isOpen={isOpen}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`bg-lightColor w-[500px] ${
-          id ? 'h-[475px]' : 'h-[575px]'
-        } rounded-lg opacity-95 p-8 flex flex-col gap-4 relative`}
+        className={`bg-lightColor w-[500px] h-auto rounded-lg opacity-95 p-8 flex flex-col gap-4`}
       >
         <header className='flex justify-between items-center text-primaryColor text-base'>
           <h3 className='font-ubuntu text-lg font-medium'>ostavi recenziju</h3>
@@ -97,13 +97,14 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
             onClick={() => {
               closeModal(false);
               reset();
+              trigger();
             }}
           >
             <CloseIcon />
           </button>
         </header>
 
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-4'>
           {!id && (
             <Controller
               name='userId'
@@ -173,7 +174,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
           />
         </div>
 
-        <div className='absolute w-full flex justify-center gap-5 bottom-5 pr-14'>
+        <div className='w-full flex justify-center gap-5 pt-4'>
           <button
             type='submit'
             className='button bg-primaryColor text-lightColor !w-auto !text-base'
@@ -185,6 +186,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
             onClick={() => {
               closeModal(false);
               reset();
+              trigger();
             }}
             className='button bg-redColor text-lightColor !w-auto !text-base'
           >
