@@ -31,9 +31,8 @@ const LookingForServiceForm = () => {
     register,
     handleSubmit,
     reset,
-    setValue,
     getValues,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isDirty },
   } = useForm<NewService>({
     mode: 'onChange',
     defaultValues: {
