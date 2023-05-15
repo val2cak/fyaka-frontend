@@ -7,9 +7,16 @@ import { useGetUsersQuery } from '../../auth/authApiSlice';
 interface Props {
   inputProps?: any;
   label?: string;
+  errors?: string;
+  className?: string;
 }
 
-const UsersAutocomplete: FC<Props> = ({ inputProps, label }) => {
+const UsersAutocomplete: FC<Props> = ({
+  inputProps,
+  label,
+  errors,
+  className,
+}) => {
   let userJson: string | null = getUserFromStorage();
   let user: User = userJson && JSON.parse(userJson).user;
 
@@ -48,7 +55,7 @@ const UsersAutocomplete: FC<Props> = ({ inputProps, label }) => {
 
       <Autocomplete
         id='users-autocomplete'
-        className={`w-full rounded-lg font-raleway autocomplete`}
+        className={`w-full rounded-lg font-raleway autocomplete ${className}`}
         options={
           usersData ? usersData.filter((item) => item.id !== user.id) : []
         }
@@ -69,10 +76,14 @@ const UsersAutocomplete: FC<Props> = ({ inputProps, label }) => {
           if (!value || value === undefined || value === null) {
             handleClear();
           } else if (inputProps?.onChange) {
-            inputProps.onChange(value);
+            inputProps.onChange(value?.id);
           }
         }}
       />
+
+      {errors && (
+        <p className='text-redColor font-ubuntu w-[300px]'>{errors}</p>
+      )}
     </div>
   );
 };
