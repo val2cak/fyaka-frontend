@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+
 import InputElement from '../../../components/Form/InputElement';
 import useNotifications from '../../../hooks/useNotifications';
 import { getUserFromStorage } from '../../../services/storage';
@@ -20,22 +22,29 @@ const ChangeEmailComponent = () => {
 
   const [updateUser] = useUpdateUserMutation();
 
-  const [newEmail, setNewEmail] = useState<string>('');
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isDirty },
+  } = useForm<User>({
+    mode: 'onChange',
+    defaultValues: {
+      id: user?.id,
+    },
+  });
 
-  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewEmail(event.target.value);
-    setHasUnsavedChanges(true);
+  const onSubmit = (data: User) => {
+    handleEmailSubmit(data);
   };
 
-  const handleEmailSubmit = () => {
-    if (userData?.email !== newEmail)
+  const handleEmailSubmit = (data: User) => {
+    if (userData?.email !== data?.email)
       try {
         handlePromiseNotification(
           updateUser({
             id: user?.id,
-            email: newEmail,
+            email: data?.email,
           }).unwrap(),
 
           {
@@ -54,8 +63,7 @@ const ChangeEmailComponent = () => {
           }
         );
 
-        setNewEmail('');
-        setHasUnsavedChanges(false);
+        reset();
       } catch (error: any) {
         handleUserActionNotification({
           message: error.data.message,
@@ -73,7 +81,7 @@ const ChangeEmailComponent = () => {
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
-      if (hasUnsavedChanges) {
+      if (isDirty) {
         event.preventDefault();
         event.returnValue =
           'Niste spremili promjene. Sigurno želite napustiti stranicu?';
@@ -85,12 +93,15 @@ const ChangeEmailComponent = () => {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [hasUnsavedChanges]);
+  }, [isDirty]);
 
   return (
     <div className='bg-secondaryColor h-full rounded-lg p-6 flex flex-col gap-4 text-lightColor'>
       {!isUserDataLoading && (
-        <div className='flex flex-col h-full justify-between'>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='flex flex-col h-full justify-between'
+        >
           <div className='flex flex-col gap-3 w-[400px]'>
             <InputElement
               label='stara e-mail adresa'
@@ -110,22 +121,23 @@ const ChangeEmailComponent = () => {
               label='nova e-mail adresa'
               placeholder={'nova@mail.hr'}
               labelClasses={'text-primaryColor'}
-              inputClasses={'placeholder:opacity-70 h-12 text-darkColor'}
-              inputProps={{
-                type: 'email',
-                onChange: handleEmailChange,
-                value: newEmail,
-              }}
+              inputClasses={`placeholder:opacity-70 h-12 text-darkColor ${
+                errors?.email?.message ? 'border-2 border-redColor' : ''
+              }`}
+              inputProps={register('email', {
+                required: 'Ovo polje je obavezno',
+              })}
+              errors={errors?.email?.message}
             />
           </div>
 
           <button
-            onClick={handleEmailSubmit}
+            type='submit'
             className='button bg-primaryColor !w-auto place-self-center'
           >
             spremi promjene
           </button>
-        </div>
+        </form>
       )}
     </div>
   );
