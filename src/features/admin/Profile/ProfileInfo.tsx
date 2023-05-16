@@ -1,5 +1,13 @@
 import { Rating } from '@mui/material';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
+import {
+  RiUserStarFill as ReviewsIcon,
+  RiArrowRightSLine as ArrowIcon,
+} from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
+import { useForm, Controller } from 'react-hook-form';
+
 import DatePickerElement from '../../../components/Form/DatePickerElement';
 import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
@@ -8,12 +16,6 @@ import { Lookup, User } from '../../../types/typeDefinitions';
 import { useUpdateUserMutation } from '../../auth/authApiSlice';
 import genderTypes from '../../../types/genderTypes';
 import DropdownElement from '../../../components/Form/DropdownElement';
-import {
-  RiUserStarFill as ReviewsIcon,
-  RiArrowRightSLine as ArrowIcon,
-} from 'react-icons/ri';
-import { useNavigate } from 'react-router-dom';
-import { format } from 'date-fns';
 
 interface Props extends User {
   isMine: boolean;
@@ -31,9 +33,29 @@ const ProfileInfo: FC<Props> = ({
   dateOfBirth,
   isMine,
 }) => {
-  const [userData, setUserData] = useState<User>();
+  const {
+    control,
+    register,
+    handleSubmit,
+    reset,
+    getValues,
+    formState: { errors, isDirty },
+  } = useForm<User>({
+    mode: 'onChange',
+    defaultValues: {
+      id,
+      username,
+      biography,
+      phoneNumber,
+      fullName,
+      gender,
+      dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : undefined,
+    },
+  });
 
-  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const onSubmit = (data: User) => {
+    handleUpdate(data);
+  };
 
   const navigateTo = useNavigate();
 
@@ -42,13 +64,10 @@ const ProfileInfo: FC<Props> = ({
 
   const [updateUser] = useUpdateUserMutation();
 
-  const handleUpdate = () => {
+  const handleUpdate = (data: User) => {
     try {
       handlePromiseNotification(
-        updateUser({
-          ...userData,
-          id: id,
-        }).unwrap(),
+        updateUser(data).unwrap(),
 
         {
           success: {
@@ -66,7 +85,7 @@ const ProfileInfo: FC<Props> = ({
         }
       );
 
-      setHasUnsavedChanges(false);
+      reset();
     } catch (error: any) {
       handleUserActionNotification({
         message: error.data.message,
@@ -76,46 +95,9 @@ const ProfileInfo: FC<Props> = ({
     }
   };
 
-  const handleDataChange =
-    (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      switch (name) {
-        case 'username':
-          setUserData({ ...userData, username: event.target.value });
-          break;
-        case 'biography':
-          setUserData({ ...userData, biography: event.target.value });
-          break;
-        case 'phoneNumber':
-          setUserData({
-            ...userData,
-            phoneNumber: event.target.value,
-          });
-          break;
-        case 'fullName':
-          setUserData({ ...userData, fullName: event.target.value });
-          break;
-        default:
-          return '';
-      }
-
-      setHasUnsavedChanges(true);
-    };
-
-  const handleDateChange = (newValue: Date) => {
-    setUserData({ ...userData, dateOfBirth: newValue });
-
-    setHasUnsavedChanges(true);
-  };
-
-  const handleGenderChange = (newValue: Lookup) => {
-    setUserData({ ...userData, gender: newValue.name });
-
-    setHasUnsavedChanges(true);
-  };
-
   useEffect(() => {
     const handleBeforeUnload = (event) => {
-      if (hasUnsavedChanges) {
+      if (isDirty) {
         event.preventDefault();
         event.returnValue =
           'Niste spremili promjene. Sigurno želite napustiti stranicu?';
@@ -127,10 +109,13 @@ const ProfileInfo: FC<Props> = ({
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [hasUnsavedChanges]);
+  }, [isDirty]);
 
   return (
-    <div className='flex flex-col gap-8 items-center'>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className='flex flex-col gap-8 items-center'
+    >
       <div className='flex flex-row gap-16'>
         <div className='flex flex-col gap-4'>
           <InputElement
@@ -145,13 +130,14 @@ const ProfileInfo: FC<Props> = ({
             label={'korisničko ime'}
             placeholder={'korisničko ime'}
             labelClasses={'text-primaryColor'}
-            inputClasses={'placeholder-primaryColor w-[300px] bg-lightColor'}
-            inputProps={{
-              type: 'text',
-              defaultValue: username,
-              onChange: handleDataChange('username'),
+            inputClasses={`placeholder-primaryColor w-[300px] bg-lightColor ${
+              errors?.username?.message ? 'border-2 border-redColor' : ''
+            }`}
+            inputProps={register('username', {
+              required: 'Ovo polje je obavezno',
               disabled: !isMine,
-            }}
+            })}
+            errors={errors?.username?.message}
           />
 
           <InputElement
@@ -159,12 +145,9 @@ const ProfileInfo: FC<Props> = ({
             placeholder={'ime i prezime'}
             labelClasses={'text-primaryColor'}
             inputClasses={'placeholder-primaryColor w-[300px] bg-lightColor'}
-            inputProps={{
-              type: 'text',
-              defaultValue: fullName,
-              onChange: handleDataChange('fullName'),
+            inputProps={register('fullName', {
               disabled: !isMine,
-            }}
+            })}
           />
 
           <div className='flex flex-col'>
@@ -205,27 +188,39 @@ const ProfileInfo: FC<Props> = ({
             placeholder={'09x xxx xxxx'}
             labelClasses={'text-primaryColor'}
             inputClasses={'placeholder-primaryColor w-[300px] bg-lightColor'}
-            inputProps={{
-              type: 'text',
-              defaultValue: phoneNumber,
-              onChange: handleDataChange('phoneNumber'),
+            inputProps={register('phoneNumber', {
               disabled: !isMine,
-            }}
+            })}
           />
 
           {isMine ? (
-            <DropdownElement
-              label={'spol'}
-              placeholder={'spol'}
-              labelClasses={'text-primaryColor'}
-              handleSelect={handleGenderChange}
-              data={genderTypes}
-              selectedId={
-                userData?.gender !== null && !userData?.gender
-                  ? genderTypes.find((item) => item.name === gender)?.id
-                  : genderTypes.find((item) => item.name === userData?.gender)
-                      ?.id
-              }
+            <Controller
+              name='gender'
+              control={control}
+              render={({ field }) => (
+                <DropdownElement
+                  label='spol'
+                  placeholder='spol'
+                  labelClasses='text-primaryColor'
+                  inputClasses={`${
+                    errors?.gender?.message ? 'border-2 border-redColor' : ''
+                  }`}
+                  handleSelect={(item: Lookup) => {
+                    field.onChange(item.name);
+                  }}
+                  data={genderTypes}
+                  selectedId={
+                    getValues('gender') !== null && !getValues('gender')
+                      ? genderTypes.find(
+                          (item) => item.name === getValues('gender')
+                        )?.id
+                      : genderTypes.find(
+                          (item) => item.name === getValues('gender')
+                        )?.id
+                  }
+                  errors={errors?.gender?.message}
+                />
+              )}
             />
           ) : (
             <InputElement
@@ -242,16 +237,24 @@ const ProfileInfo: FC<Props> = ({
           )}
 
           {isMine ? (
-            <DatePickerElement
-              label={'datum rođenja'}
-              labelClasses={'text-primaryColor'}
-              inputClasses={'placeholder-primaryColor bg-lightColor w-[300px]'}
-              inputProps={{
-                type: 'text',
-                defaultValue:
-                  dateOfBirth && dateOfBirth !== null && new Date(dateOfBirth),
-                onChange: handleDateChange,
-              }}
+            <Controller
+              name='dateOfBirth'
+              control={control}
+              render={({ field }) => (
+                <DatePickerElement
+                  label='datum rođenja'
+                  labelClasses='text-primaryColor'
+                  inputClasses={`placeholder-primaryColor bg-lightColor w-[300px] ${
+                    errors?.dateOfBirth?.message
+                      ? '!border-2 !border-redColor'
+                      : ''
+                  }`}
+                  inputProps={{
+                    ...field,
+                  }}
+                  errors={errors?.dateOfBirth?.message}
+                />
+              )}
             />
           ) : (
             <InputElement
@@ -272,26 +275,26 @@ const ProfileInfo: FC<Props> = ({
             placeholder={'napiši nešto o sebi...'}
             labelClasses={'text-primaryColor'}
             textClasses={'placeholder-primaryColor w-[300px] bg-lightColor'}
-            textProps={{
-              type: 'text',
-              defaultValue: biography,
-              onChange: handleDataChange('biography'),
+            textProps={register('biography', {
               disabled: !isMine,
-            }}
+              maxLength: {
+                value: 100,
+                message: 'Biografija može sadržavati najviše 100 znakova',
+              },
+            })}
           />
         </div>
       </div>
 
       {isMine && (
         <button
-          onClick={handleUpdate}
-          disabled={userData ? false : true}
+          type='submit'
           className='button text-lightColor bg-primaryColor !w-auto'
         >
           spremi promjene
         </button>
       )}
-    </div>
+    </form>
   );
 };
 

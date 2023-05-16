@@ -8,6 +8,7 @@ interface Props {
   labelClasses?: string;
   inputClasses?: string;
   inputProps?: any;
+  errors?: string;
 }
 
 const DatePickerElement: FC<Props> = ({
@@ -15,6 +16,7 @@ const DatePickerElement: FC<Props> = ({
   labelClasses,
   inputClasses,
   inputProps,
+  errors,
 }) => {
   return (
     <div className='flex flex-col'>
@@ -31,6 +33,9 @@ const DatePickerElement: FC<Props> = ({
           />
         </LocalizationProvider>
       </div>
+      {errors && (
+        <p className='text-redColor font-ubuntu w-[300px]'>{errors}</p>
+      )}
     </div>
   );
 };

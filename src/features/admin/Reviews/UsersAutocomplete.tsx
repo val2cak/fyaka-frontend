@@ -76,7 +76,7 @@ const UsersAutocomplete: FC<Props> = ({
           if (!value || value === undefined || value === null) {
             handleClear();
           } else if (inputProps?.onChange) {
-            inputProps.onChange(value?.id);
+            inputProps.onChange(value);
           }
         }}
       />
