@@ -124,9 +124,18 @@ const ChangeEmailComponent = () => {
               inputClasses={`placeholder:opacity-70 h-12 text-darkColor ${
                 errors?.email?.message ? 'border-2 border-redColor' : ''
               }`}
-              inputProps={register('email', {
-                required: 'Ovo polje je obavezno',
-              })}
+              inputProps={{
+                ...register('email', {
+                  required: 'Ovo polje je obavezno',
+                  pattern: /^\S+@\S+$/i,
+                  validate: {
+                    matchOldEmail: (value) =>
+                      value !== userData?.email ||
+                      'Nova e-mail adresa ne smije biti jednaka staroj!',
+                  },
+                }),
+                type: 'email',
+              }}
               errors={errors?.email?.message}
             />
           </div>

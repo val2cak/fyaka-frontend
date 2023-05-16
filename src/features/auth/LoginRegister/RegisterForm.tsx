@@ -90,7 +90,7 @@ const RegisterForm = () => {
         onSubmit={handleSubmit(handleFormSubmit)}
         className='flex flex-col gap-6'
       >
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-2'>
           <InputElement
             label={'email'}
             placeholder={'yourmail@mail.com'}
@@ -161,8 +161,14 @@ const RegisterForm = () => {
             inputProps={{
               ...register('confirmPassword', {
                 required: true,
+                validate: {
+                  matchNewPassword: (value) =>
+                    value === watch('password') ||
+                    'Ponovljena lozinka mora odgovarati upisanoj lozinki!',
+                },
               }),
             }}
+            errors={errors.confirmPassword?.message.toString()}
           />
         </div>
 

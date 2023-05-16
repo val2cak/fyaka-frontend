@@ -13,7 +13,10 @@ import InputElement from '../../../components/Form/InputElement';
 import TextElement from '../../../components/Form/TextElement';
 import useNotifications from '../../../hooks/useNotifications';
 import { Lookup, User } from '../../../types/typeDefinitions';
-import { useUpdateUserMutation } from '../../auth/authApiSlice';
+import {
+  useGetUsersQuery,
+  useUpdateUserMutation,
+} from '../../auth/authApiSlice';
 import genderTypes from '../../../types/genderTypes';
 import DropdownElement from '../../../components/Form/DropdownElement';
 
@@ -95,6 +98,9 @@ const ProfileInfo: FC<Props> = ({
     }
   };
 
+  const { data: usersData, isFetching: isUsersDataLoading } =
+    useGetUsersQuery('');
+
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       if (isDirty) {
@@ -126,19 +132,26 @@ const ProfileInfo: FC<Props> = ({
             inputProps={{ type: 'text', disabled: true, value: email }}
           />
 
-          <InputElement
-            label={'korisničko ime'}
-            placeholder={'korisničko ime'}
-            labelClasses={'text-primaryColor'}
-            inputClasses={`placeholder-primaryColor w-[300px] bg-lightColor ${
-              errors?.username?.message ? 'border-2 border-redColor' : ''
-            }`}
-            inputProps={register('username', {
-              required: 'Ovo polje je obavezno',
-              disabled: !isMine,
-            })}
-            errors={errors?.username?.message}
-          />
+          {!isUsersDataLoading && (
+            <InputElement
+              label={'korisničko ime'}
+              placeholder={'korisničko ime'}
+              labelClasses={'text-primaryColor'}
+              inputClasses={`placeholder-primaryColor w-[300px] bg-lightColor ${
+                errors?.username?.message ? 'border-2 border-redColor' : ''
+              }`}
+              inputProps={register('username', {
+                required: 'Ovo polje je obavezno',
+                disabled: !isMine,
+                validate: {
+                  uniqueUsername: (value) =>
+                    usersData?.find((user) => user.username === value) ===
+                      undefined || 'Korisničko ime je zauzeto!',
+                },
+              })}
+              errors={errors?.username?.message}
+            />
+          )}
 
           <InputElement
             label={'ime i prezime'}

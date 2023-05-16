@@ -20,6 +20,7 @@ const ChangePasswordComponent = () => {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isDirty },
   } = useForm<ChangePassword>({
     mode: 'onChange',
@@ -119,6 +120,11 @@ const ChangePasswordComponent = () => {
             }`}
             inputProps={register('newPassword', {
               required: 'Ovo polje je obavezno',
+              validate: {
+                matchOldPassword: (value) =>
+                  value !== watch('currentPassword') ||
+                  'Nova lozinka ne smije biti jednaka staroj!',
+              },
             })}
             errors={errors?.newPassword?.message}
           />
@@ -132,6 +138,11 @@ const ChangePasswordComponent = () => {
             }`}
             inputProps={register('repeatPassword', {
               required: 'Ovo polje je obavezno',
+              validate: {
+                matchNewPassword: (value) =>
+                  value === watch('newPassword') ||
+                  'Ponovljena lozinka mora odgovarati novoj lozinki!',
+              },
             })}
             errors={errors?.repeatPassword?.message}
           />
