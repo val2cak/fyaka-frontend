@@ -9,6 +9,7 @@ interface Props {
   label?: string;
   errors?: string;
   className?: string;
+  isReviewModal?: boolean;
 }
 
 const UsersAutocomplete: FC<Props> = ({
@@ -16,6 +17,7 @@ const UsersAutocomplete: FC<Props> = ({
   label,
   errors,
   className,
+  isReviewModal,
 }) => {
   let userJson: string | null = getUserFromStorage();
   let user: User = userJson && JSON.parse(userJson).user;
@@ -38,7 +40,7 @@ const UsersAutocomplete: FC<Props> = ({
   const handleClear = () => {
     setSearchTerm('');
     if (inputProps?.onChange) {
-      inputProps.onChange('');
+      inputProps.onChange(undefined);
     }
     refetch();
   };
@@ -76,7 +78,7 @@ const UsersAutocomplete: FC<Props> = ({
           if (!value || value === undefined || value === null) {
             handleClear();
           } else if (inputProps?.onChange) {
-            inputProps.onChange(value);
+            inputProps.onChange(isReviewModal ? value?.id : value);
           }
         }}
       />

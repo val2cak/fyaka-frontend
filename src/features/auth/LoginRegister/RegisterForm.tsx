@@ -169,7 +169,7 @@ const RegisterForm = () => {
         <div>
           <button
             type='submit'
-            className='button bg-secondaryColor text-lightColor !py-4 h-16'
+            className='button bg-secondaryColor text-lightColor !py-2'
           >
             registriraj se
           </button>

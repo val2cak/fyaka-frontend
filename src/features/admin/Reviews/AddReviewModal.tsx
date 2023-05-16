@@ -104,7 +104,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
           </button>
         </header>
 
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-2'>
           {!id && (
             <Controller
               name='userId'
@@ -122,38 +122,53 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
                     errors?.userId?.message ? 'border-2 border-redColor' : ''
                   }`}
                   errors={errors?.userId?.message}
+                  isReviewModal={true}
                 />
               )}
             />
           )}
 
           <div className='flex flex-col'>
-            <div className='flex items-center gap-4'>
-              <InputElement
-                label='ocjena'
-                placeholder=''
-                inputClasses={`rounded-lg p-2 px-5 flex flex-nowrap bg-transparent border-[0.5px] border-grayColor h-[64px] w-[100px] !font-ubuntu ${
-                  errors?.rating?.message ? '!border-2 !border-redColor' : ''
-                }`}
-                labelClasses='font-ubuntu text-base font-bold text-primaryColor'
-                inputProps={register('rating', {
-                  required: 'Ovo polje je obavezno',
-                  valueAsNumber: true,
-                  min: {
-                    value: 1,
-                    message: 'Ocjena mora biti barem 1',
-                  },
-                })}
-                errors={errors?.rating?.message}
-              />
-              {/* <Rating
-                value={parseFloat(reviewData.rating)}
-                onChange={handleInputChange('rating')}
-                size='medium'
-                precision={0.5}
-                className='pt-8'
-              /> */}
-            </div>
+            <Controller
+              name='rating'
+              control={control}
+              rules={{
+                required: 'Ovo polje je obavezno',
+                min: {
+                  value: 0.5,
+                  message: 'Ocjena mora biti barem 0.5',
+                },
+              }}
+              render={({ field }) => (
+                <div className='flex flex-col justify-center items-start'>
+                  <div className='flex justify-center items-center gap-4'>
+                    <InputElement
+                      label='ocjena'
+                      placeholder=''
+                      inputClasses={`rounded-lg p-2 px-5 flex flex-nowrap bg-transparent border-[0.5px] border-grayColor h-[64px] w-[100px] !font-ubuntu ${
+                        errors?.rating?.message
+                          ? '!border-2 !border-redColor'
+                          : ''
+                      }`}
+                      labelClasses='font-ubuntu text-base font-bold text-primaryColor'
+                      inputProps={{ ...field }}
+                    />
+                    <Rating
+                      {...field}
+                      value={parseFloat(field.value)}
+                      size='medium'
+                      precision={0.5}
+                      className='pt-8'
+                    />
+                  </div>
+                  {errors?.rating?.message && (
+                    <p className='text-redColor font-ubuntu w-[300px]'>
+                      {errors?.rating?.message}
+                    </p>
+                  )}
+                </div>
+              )}
+            />
           </div>
 
           <TextElement

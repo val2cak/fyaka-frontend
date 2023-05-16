@@ -141,7 +141,7 @@ const LoginForm = () => {
         <div>
           <button
             type='submit'
-            className='button bg-primaryColor text-lightColor !py-4'
+            className='button bg-primaryColor text-lightColor !py-2'
           >
             prijavi se
           </button>
