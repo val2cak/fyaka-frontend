@@ -13,7 +13,7 @@ const GetStartedContainer = () => {
         !Fyaka
       </h1>
 
-      <div className='flex flex-row px-5 justify-center items-center'>
+      <div className='flex flex-row lg:px-16 px-5 2xl:py-24 justify-center items-center'>
         <div className='flex flex-col w-1/3 gap-8 justify-center items-center'>
           <button
             className='button bg-secondaryColor text-lightColor h-[70px]'
@@ -44,7 +44,7 @@ const GetStartedContainer = () => {
         </div>
 
         <div className='flex justify-center items-center'>
-          <img src={image} alt='man' className='' />
+          <img src={image} alt='man' className='2xl:w-[1000px]' />
         </div>
       </div>
     </main>

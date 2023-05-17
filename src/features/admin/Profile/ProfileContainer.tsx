@@ -32,7 +32,7 @@ const ProfileContainer = () => {
       )}
 
       {!isUserDataLoading && (
-        <div className='bg-secondaryColor flex py-24 px-56 justify-center items-center gap-32'>
+        <div className='bg-secondaryColor flex lg:py-12 py-16 px-56 2xl:px-12 justify-center items-center lg:gap-8 gap-32 2xl:gap-64'>
           <ProfileImage
             imageUrl={userData?.imageUrl}
             id={userData?.id}

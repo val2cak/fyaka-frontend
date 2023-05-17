@@ -14,15 +14,13 @@ const LoginRegisterContainer = () => {
             !Fyaka
           </h1>
 
-          {location.pathname === '/auth/login' ? (
-            <div className='flex justify-start items-center ml-52 my-20'>
+          <div className='flex justify-start 2xl:justify-center items-center lg:ml-32 ml-52 2xl:ml-0 lg:my-16 my-20 2xl:my-40'>
+            {location.pathname === '/auth/login' ? (
               <LoginForm />
-            </div>
-          ) : (
-            <div className='flex justify-start items-center ml-52 my-8'>
+            ) : (
               <RegisterForm />
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </section>
     </main>

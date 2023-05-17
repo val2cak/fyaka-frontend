@@ -19,7 +19,7 @@ const SettingsContainer = () => {
     <main className='bg-lightColor'>
       <TitleBar title={'postavke'} />
 
-      <div className='flex flex-row px-48 py-10 w-full gap-4 h-[500px]'>
+      <div className='flex flex-row lg:px-32 px-48 py-10 w-full gap-4 h-[500px] 2xl:h-[900px]'>
         <div className='w-1/3'>
           <OptionsListComponent
             options={options}

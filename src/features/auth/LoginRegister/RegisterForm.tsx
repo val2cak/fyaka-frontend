@@ -72,7 +72,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className='bg-lightColor bg-opacity-80 rounded-lg px-12 py-6 flex flex-col gap-2'>
+    <div className='bg-lightColor bg-opacity-80 rounded-lg px-12 2xl:px-20 py-6 2xl:py-16 flex flex-col gap-2 2xl:gap-8'>
       <h1 className='flex justify-center items-center font-ubuntu text-secondaryColor font-bold text-xl'>
         Registracija
       </h1>
@@ -88,9 +88,9 @@ const RegisterForm = () => {
 
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
-        className='flex flex-col gap-6'
+        className='flex flex-col gap-6 2xl:gap-12'
       >
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-2 2xl:gap-6'>
           <InputElement
             label={'email'}
             placeholder={'yourmail@mail.com'}

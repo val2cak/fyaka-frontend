@@ -98,7 +98,7 @@ const LookingForServiceForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='bg-secondaryColor rounded-lg py-12 px-32 flex flex-col gap-8'
+      className='bg-secondaryColor rounded-lg py-12 2xl:py-24 px-32 flex flex-col gap-8'
     >
       <div className='flex flex-row justify-evenly gap-10'>
         <div className='w-1/2 flex flex-col gap-6'>

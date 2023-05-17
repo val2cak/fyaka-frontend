@@ -6,7 +6,7 @@ const LookingForServiceContainer = () => {
     <main>
       <TitleBar title={'trebam uslugu'} />
 
-      <div className='px-28 py-10'>
+      <div className='px-28 2xl:px-56 py-10 2xl:py-20'>
         <LookingForServiceForm />
       </div>
     </main>

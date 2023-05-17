@@ -89,7 +89,7 @@ const ReviewsContainer = () => {
         </button>
       )}
 
-      <div className='flex flex-col px-32 py-8 gap-4 w-full'>
+      <div className='flex flex-col px-32 2xl:px-60 py-8 2xl:py-16 gap-4 w-full'>
         <div className='flex justify-between'>
           <div className='flex gap-8 justify-start items-center'>
             <div className='w-[50px] h-[50px] rounded-full'>

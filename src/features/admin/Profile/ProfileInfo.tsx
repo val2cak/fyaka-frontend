@@ -120,10 +120,10 @@ const ProfileInfo: FC<Props> = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='flex flex-col gap-8 items-center'
+      className='flex flex-col gap-8 2xl:gap-16 items-center'
     >
-      <div className='flex flex-row gap-16'>
-        <div className='flex flex-col gap-4'>
+      <div className='flex flex-row lg:gap-8 gap-16 2xl:gap-32'>
+        <div className='flex flex-col gap-4 2xl:gap-8'>
           <InputElement
             label={'email'}
             placeholder={'email'}
@@ -195,7 +195,7 @@ const ProfileInfo: FC<Props> = ({
           </div>
         </div>
 
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-4 2xl:gap-8'>
           <InputElement
             label={'broj telefona'}
             placeholder={'09x xxx xxxx'}

@@ -90,7 +90,7 @@ const LoginForm = () => {
   ]);
 
   return (
-    <div className='bg-lightColor bg-opacity-80 rounded-lg px-12 py-8 flex flex-col gap-4'>
+    <div className='bg-lightColor bg-opacity-80 rounded-lg px-12 2xl:px-16 py-8 2xl:py-16 flex flex-col gap-4'>
       <h1 className='flex justify-center items-center font-ubuntu text-primaryColor font-bold text-xl'>
         Prijava
       </h1>
@@ -105,7 +105,7 @@ const LoginForm = () => {
         onSubmit={handleSubmit(handleFormSubmit)}
         className='flex flex-col gap-16'
       >
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-4 2xl:gap-6'>
           <InputElement
             label={'korisničko ime'}
             placeholder={'username'}

@@ -64,14 +64,14 @@ const ServicesListContainer = () => {
         </div>
       </div>
 
-      <div className='flex flex-row h-full px-40 gap-8 pb-8 w-full'>
+      <div className='flex flex-row h-full justify-between 2xl:justify-start lg:px-24 px-40 gap-8 pb-8 w-full'>
         <Fragment>
           <FilterBar filters={filters} setFilters={setFilters} />
         </Fragment>
 
         {!isServicesListDataLoading ? (
-          <div className='flex flex-col gap-8 w-3/4 justify-between min-h-[592px]'>
-            <div className='flex flex-wrap gap-5'>
+          <div className='flex flex-col gap-8 justify-between min-h-[592px]'>
+            <div className='grid lg:grid-cols-2 xl:grid-cols-3 grid-cols-5 gap-5'>
               {servicesData.map((item, index) => (
                 <ServiceCard
                   key={index}

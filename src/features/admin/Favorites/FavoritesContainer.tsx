@@ -57,14 +57,14 @@ const FavoritesContainer = () => {
           <TitleBar title={'favoriti'} />
         </div>
 
-        <div className='w-full pl-56 absolute -bottom-8'>
+        <div className='w-full lg:pl-36 pl-56 absolute -bottom-8'>
           <SearchBar />
         </div>
       </div>
 
       {!isFavoritesListDataLoading ? (
-        <div className='flex flex-col px-56 gap-8 pb-8 justify-between min-h-[620px]'>
-          <div className='flex flex-wrap flex-start gap-4 items-center flex-row w-full'>
+        <div className='flex flex-col lg:px-36 px-56 gap-8 2xl:gap-16 pb-8 justify-between 2xl:items-start min-h-[620px]'>
+          <div className='grid lg:grid-cols-3 xl:grid-cols-4 grid-cols-6 gap-5'>
             {favoritesData.map((item, index) => (
               <ServiceCard
                 id={item.service.id}

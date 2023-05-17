@@ -8,21 +8,21 @@ const HomeCover = () => {
   };
 
   return (
-    <main className='ellipse'>
+    <main className='ellipse lg:h-[70vh]'>
       <div className='bg-homeCover bg-contain bg-no-repeat w-full h-full flex justify-center items-center'>
-        <div className='flex flex-col justify-center items-center w-full h-[400px] p-5 bg-grayColor/50 relative'>
-          <>
-            <div className='text-lightColor text-3xl font-ubuntu font-medium pt-4 pb-2'>
+        <div className='flex flex-col justify-center items-center w-full h-[400px] 2xl:h-[500px] p-5 bg-grayColor/50 relative'>
+          <div className='flex flex-col items-center gap-3'>
+            <div className='text-lightColor text-3xl 2xl:text-4xl font-ubuntu font-medium pt-2 pb-2'>
               budi dio zajednice i zaradi novce
             </div>
-            <div className='text-lightColor text-md font-medium font-raleway text-center leading-5 pb-4 w-[30vw]'>
+            <div className='text-lightColor text-md 2xl:text-lg font-medium font-raleway text-center leading-5 pb-4 lg:w-[40vw] w-[30vw]'>
               bilo da trebaš ili nudiš uslugu, ovdje ćeš pronaći najaktualnije
               jednokratne poslove na jednom mjestu
             </div>
             <div>
               <SearchBar />
             </div>
-          </>
+          </div>
 
           <button
             onClick={handleClick}
