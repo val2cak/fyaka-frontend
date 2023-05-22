@@ -20,10 +20,10 @@ const Footer = () => {
     <main
       className={`font-raleway font-medium ${
         flag ? 'bg-secondaryColor' : 'bg-lightColor'
-      } flex flex-row justify-evenly p-12 w-full h-full gap-10 text-base`}
+      } flex sm:flex-col flex-row justify-evenly p-12 w-full h-full gap-10 text-base`}
     >
       <ul
-        className={`flex flex-col ${
+        className={`flex flex-col sm:order-1 ${
           !flag ? 'text-primaryColor' : 'text-lightColor'
         }`}
       >
@@ -38,7 +38,7 @@ const Footer = () => {
         </li>
       </ul>
       <ul
-        className={`flex flex-col justify-between ${
+        className={`flex flex-col justify-between sm:order-3 ${
           flag ? 'text-primaryColor' : 'text-lightColor'
         }`}
       >
@@ -69,7 +69,7 @@ const Footer = () => {
         </li>
       </ul>
       <ul
-        className={`flex flex-col ${
+        className={`flex flex-col sm:order-2 ${
           !flag ? 'text-primaryColor' : 'text-lightColor'
         }`}
       >

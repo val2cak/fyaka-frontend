@@ -8,7 +8,7 @@ const HomeCover = () => {
   };
 
   return (
-    <main className='ellipse sm:h-[55vh] lg:h-[70vh]'>
+    <main className='ellipse sm:h-[80vh] lg:h-[70vh]'>
       <div className='bg-homeCover sm:bg-cover bg-contain bg-no-repeat w-full h-full flex justify-center items-center'>
         <div className='flex flex-col justify-center items-center w-full sm:h-[450px] h-[400px] 2xl:h-[500px] p-5 bg-grayColor/50 relative'>
           <div className='flex flex-col items-center gap-3'>
