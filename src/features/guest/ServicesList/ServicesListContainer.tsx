@@ -59,12 +59,12 @@ const ServicesListContainer = () => {
           <TitleBar title={'popis usluga'} />
         </div>
 
-        <div className='w-full pl-40 absolute -bottom-8'>
+        <div className='w-full sm:pl-4 pl-40 absolute -bottom-8'>
           <SearchBar />
         </div>
       </div>
 
-      <div className='flex flex-row h-full justify-between 2xl:justify-start lg:px-24 px-40 gap-8 pb-8 w-full'>
+      <div className='flex flex-row h-full justify-between 2xl:justify-start lg:px-24 sm:px-4 px-40 gap-8 pb-8 w-full'>
         <Fragment>
           <FilterBar filters={filters} setFilters={setFilters} />
         </Fragment>

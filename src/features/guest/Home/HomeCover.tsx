@@ -13,7 +13,7 @@ const HomeCover = () => {
         <div className='flex flex-col justify-center items-center w-full sm:h-[450px] h-[400px] 2xl:h-[500px] p-5 bg-grayColor/50 relative'>
           <div className='flex flex-col items-center gap-3'>
             <div className='text-lightColor sm:text-lg text-3xl 2xl:text-4xl font-ubuntu font-medium pt-2 pb-2 sm:text-center'>
-              odmori, zaradi, ponovi
+              zaradi, odmori, ponovi
             </div>
             <div className='text-lightColor sm:text-base text-md 2xl:text-lg font-medium font-raleway text-center sm:leading-[1.75rem] leading-5 pb-4 sm:w-[80vw] w-[50vw]'>
               <p>
