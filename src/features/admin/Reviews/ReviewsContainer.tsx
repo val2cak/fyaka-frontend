@@ -89,8 +89,8 @@ const ReviewsContainer = () => {
         </button>
       )}
 
-      <div className='flex flex-col px-32 2xl:px-60 py-8 2xl:py-16 gap-4 w-full'>
-        <div className='flex justify-between'>
+      <div className='flex flex-col sm:px-4 px-32 2xl:px-60 py-8 2xl:py-16 gap-4 w-full'>
+        <div className='flex justify-between sm:flex-col sm:gap-2'>
           <div className='flex gap-8 justify-start items-center'>
             <div className='w-[50px] h-[50px] rounded-full'>
               <img
@@ -108,8 +108,8 @@ const ReviewsContainer = () => {
             </div>
 
             {!isReviewsDataLoading && (
-              <>
-                <div className='text-sm font-bold flex justify-center items-center gap-2'>
+              <div className='flex sm:flex-col sm:gap-0 gap-8'>
+                <div className='text-sm font-bold flex sm:justify-start justify-center items-center gap-2'>
                   <div className='font-bold'>{averageRating?.toFixed(1)}</div>
                   <Rating
                     name='read-only'
@@ -123,7 +123,7 @@ const ReviewsContainer = () => {
                 <div className='uppercase font-medium text-sm'>
                   broj recenzija korisnika: {reviewsListData?.totalCount}
                 </div>
-              </>
+              </div>
             )}
           </div>
 
@@ -162,7 +162,7 @@ const ReviewsContainer = () => {
             <img
               src={arrow}
               alt='arrow left'
-              className='object-fill h-16 w-28 -rotate-180'
+              className='object-fill sm:h-12 h-16 sm:w-24 w-28 -rotate-180'
             />
           </button>
           <button
@@ -177,7 +177,7 @@ const ReviewsContainer = () => {
             <img
               src={arrow}
               alt='arrow right'
-              className='object-fill h-16 w-28'
+              className='object-fill sm:h-12 h-16 sm:w-24 w-28'
             />
           </button>
         </div>

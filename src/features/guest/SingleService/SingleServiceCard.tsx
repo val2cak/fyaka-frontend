@@ -120,7 +120,7 @@ const SingleServiceCard: FC<ServiceProps> = ({
       {user && user?.id !== author.id && (
         <button
           onClick={handleClickFavorite}
-          className='uppercase w-full flex justify-end text-primaryColor'
+          className='uppercase w-full flex sm:justify-start justify-end text-primaryColor'
         >
           {favorite ? (
             <div className='flex justify-center items-center gap-2'>

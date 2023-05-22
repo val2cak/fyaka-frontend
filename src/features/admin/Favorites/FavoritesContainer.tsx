@@ -52,19 +52,19 @@ const FavoritesContainer = () => {
 
   return (
     <main className='bg-lightColor h-full w-full flex flex-col'>
-      <div className='bg-primaryColor w-full relative mb-16'>
-        <div className='pb-5'>
+      <div className='bg-primaryColor w-full relative sm:mb-12 mb-16'>
+        <div className='sm:pb-10 pb-5'>
           <TitleBar title={'favoriti'} />
         </div>
 
-        <div className='w-full lg:pl-36 pl-56 absolute -bottom-8'>
+        <div className='w-full sm:pl-4 sm:pr-4 lg:pl-36 pl-56 absolute -bottom-8'>
           <SearchBar />
         </div>
       </div>
 
       {!isFavoritesListDataLoading ? (
-        <div className='flex flex-col lg:px-36 px-56 gap-8 2xl:gap-16 pb-8 justify-between 2xl:items-start min-h-[620px]'>
-          <div className='grid lg:grid-cols-3 xl:grid-cols-4 grid-cols-6 gap-5'>
+        <div className='flex flex-col sm:px-4 lg:px-36 px-56 gap-8 2xl:gap-16 pb-8 justify-between 2xl:items-start min-h-[620px]'>
+          <div className='grid sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 grid-cols-6 gap-5'>
             {favoritesData.map((item, index) => (
               <ServiceCard
                 id={item.service.id}

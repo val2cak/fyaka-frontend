@@ -52,17 +52,17 @@ const ServicesListContainer = () => {
   return (
     <main className='bg-secondaryColor h-full w-full flex flex-col'>
       <div className='bg-primaryColor w-full relative mb-16'>
-        <div className='pb-5'>
+        <div className='sm:pb-10 pb-5'>
           <TitleBar title={'moje usluge'} />
         </div>
 
-        <div className='w-full lg:pl-36 pl-56 absolute -bottom-8'>
+        <div className='w-full sm:px-4 lg:pl-36 pl-56 absolute -bottom-8'>
           <SearchBar />
         </div>
       </div>
 
       {!isServicesListDataLoading ? (
-        <div className='flex flex-col lg:px-36 px-56 gap-8 2xl:gap-16 pb-8 2xl:pb-56 justify-between 2xl:items-start min-h-[620px]'>
+        <div className='flex flex-col sm:px-4 lg:px-36 px-56 gap-8 2xl:gap-16 pb-8 2xl:pb-56 justify-between 2xl:items-start min-h-[620px]'>
           <div className='grid lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-5'>
             {servicesData.map((item, index) => (
               <ServiceCard key={index} {...item} currentPage={currentPage} />

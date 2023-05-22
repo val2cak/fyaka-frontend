@@ -129,10 +129,10 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='bg-secondaryColor rounded-lg py-12 2xl:py-24 px-32 flex flex-col gap-8'
+      className='bg-secondaryColor rounded-lg sm:py-6 py-12 2xl:py-24 sm:px-6 px-32 flex flex-col sm:gap-4 gap-8'
     >
-      <div className='flex flex-row justify-evenly gap-10'>
-        <div className='w-1/2 flex flex-col gap-6'>
+      <div className='flex sm:flex-col flex-row justify-evenly sm:gap-4 gap-10'>
+        <div className='sm:w-full w-1/2 flex flex-col sm:gap-4 gap-6'>
           <InputElement
             label='naslov'
             placeholder='naslov'
@@ -218,7 +218,7 @@ const MySingleServiceForm: FC<ServiceProps> = ({ ...data }) => {
           />
         </div>
 
-        <div className='w-1/2 flex flex-col gap-6'>
+        <div className='sm:w-full w-1/2 flex flex-col sm:gap-4 gap-6'>
           <Controller
             name='location'
             control={control}

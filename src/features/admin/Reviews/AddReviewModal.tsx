@@ -88,7 +88,7 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
     <Modal isOpen={isOpen}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`bg-lightColor w-[500px] h-auto rounded-lg opacity-95 p-8 flex flex-col gap-4`}
+        className={`bg-lightColor sm:w-full w-[500px] h-auto rounded-lg opacity-95 p-8 flex flex-col gap-4`}
       >
         <header className='flex justify-between items-center text-primaryColor text-base'>
           <h3 className='font-ubuntu text-lg font-medium'>ostavi recenziju</h3>
