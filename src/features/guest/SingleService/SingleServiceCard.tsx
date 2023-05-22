@@ -113,8 +113,8 @@ const SingleServiceCard: FC<ServiceProps> = ({
 
   return (
     <div
-      className={`bg-lightColor rounded-lg p-8 flex flex-col gap-8 ${
-        user?.id === author.id || !user ? 'py-16' : ''
+      className={`bg-lightColor rounded-lg p-8 flex flex-col sm:gap-4 gap-8 ${
+        user?.id === author.id || !user ? 'sm:py-8 py-16' : ''
       }`}
     >
       {user && user?.id !== author.id && (
@@ -134,8 +134,8 @@ const SingleServiceCard: FC<ServiceProps> = ({
         </button>
       )}
 
-      <div className='flex flex-row gap-5 pb-8 px-32'>
-        <ul className='font-ubuntu font-bold text-primaryColor text-base flex flex-col gap-8 w-2/5'>
+      <div className='flex flex-row gap-5 pb-8 sm:px-0 px-32'>
+        <ul className='font-ubuntu font-bold text-primaryColor text-base flex flex-col sm:gap-4 gap-8 w-2/5'>
           <li>autor</li>
           <li>naslov</li>
           <li>kategorija</li>
@@ -146,7 +146,7 @@ const SingleServiceCard: FC<ServiceProps> = ({
           <li>broj osoba</li>
         </ul>
 
-        <ul className='font-raleway text-base flex flex-col gap-8'>
+        <ul className='font-raleway text-base flex flex-col sm:gap-4 gap-8'>
           <li
             onClick={() =>
               user?.id === author.id

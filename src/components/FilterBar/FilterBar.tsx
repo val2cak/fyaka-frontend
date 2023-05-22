@@ -16,7 +16,7 @@ const FilterBar: FC<Props> = ({ filters, setFilters }) => {
   };
 
   return (
-    <div className='font-ubuntu uppercase text-lightColor font-bold text-sm flex flex-col border border-darkColor border-opacity-40 rounded-lg h-fit min-w-[320px] max-w-[320px]'>
+    <div className='font-ubuntu uppercase text-lightColor font-bold text-sm flex flex-col border border-darkColor border-opacity-40 rounded-lg h-fit min-w-[320px] sm:max-w-full max-w-[320px]'>
       <FilterElement
         name={'cijena'}
         filters={filters}

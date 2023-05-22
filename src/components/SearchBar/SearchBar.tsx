@@ -25,7 +25,7 @@ const SearchBar = () => {
 
   return (
     <div
-      className={`flex flex-row sm:w-[350px] w-[700px] 2xl:w-[850px] ${
+      className={`flex flex-row sm:w-full w-[700px] 2xl:w-[850px] ${
         flag
           ? 'bg-secondaryColor text-lightColor'
           : 'bg-lightColor shadow-lightGrayColor'

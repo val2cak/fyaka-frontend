@@ -22,7 +22,7 @@ const HomeCover = () => {
               </p>
               <p>iskoristi moć zajednice - radi samo kad ti nije fjaka!</p>
             </div>
-            <div>
+            <div className='sm:w-full'>
               <SearchBar />
             </div>
           </div>

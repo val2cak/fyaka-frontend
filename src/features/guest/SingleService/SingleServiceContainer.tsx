@@ -44,7 +44,7 @@ const SingleServiceContainer = () => {
       </button>
 
       {!isServiceDataLoading && (
-        <div className='px-36 2xl:px-80 py-10 2xl:py-20'>
+        <div className='sm:px-4 px-36 2xl:px-80 sm:pt-[4.25rem] py-10 2xl:py-20'>
           <SingleServiceCard {...serviceData} />
         </div>
       )}

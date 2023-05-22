@@ -21,8 +21,8 @@ const FilterElement: FC<Props> = ({ name, filters, setFilters, reset }) => {
   }, [reset]);
 
   return (
-    <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 px-12 last:border-none'>
-      <div className='flex flex-row justify-between w-full font-bold text-base py-2 gap-3'>
+    <div className='flex flex-col items-start justify-start w-full border-b border-darkColor border-opacity-40 p-4 sm:px-4 px-12 last:border-none'>
+      <div className='flex flex-row justify-between w-full font-bold sm:text-sm text-base sm:py-0 py-2 gap-3'>
         <h3>{name}</h3>
         <button className='font-bold text-sm' onClick={() => setOpen(!open)}>
           {open ? <MinimizeIcon /> : <MaximizeIcon />}

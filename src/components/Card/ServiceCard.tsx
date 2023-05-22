@@ -38,7 +38,7 @@ const ServiceCard: FC<Props> = ({
           : `/services-list/${id}`
       }
       state={{ currentPage, filters }}
-      className={`w-[250px] h-[250px] ${
+      className={`sm:w-full w-[250px] sm:h-[200px] h-[250px] ${
         flag === 2 ? 'bg-secondaryColor text-lightColor' : 'bg-lightColor'
       } rounded-lg font-ubuntu flex flex-col items-start pl-7 justify-center relative transition ease-in-out delay-50 hover:scale-105 duration-300`}
     >
