@@ -6,12 +6,12 @@ import {
   ImBubbles2 as MessagesIcon,
   ImHeart as FavoritesIcon,
   ImBriefcase as MyServicesIcon,
-  ImHome as HomeIcon,
 } from 'react-icons/im';
 import {
-  MdSpaceDashboard as ListServicesIcon,
-  MdLibraryAdd as AddServiceIcon,
-} from 'react-icons/md';
+  RiPlayListAddLine as AddServiceIcon,
+  RiLayoutMasonryLine as ListServicesIcon,
+  RiHome2Line as HomeIcon,
+} from 'react-icons/ri';
 
 import ProtectedRoute from './ProtectedRoute';
 import AdminLayout from '../features/admin/AdminLayout';

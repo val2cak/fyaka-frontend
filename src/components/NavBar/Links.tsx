@@ -31,7 +31,7 @@ const Links: FC<Props> = ({ name }) => {
   }, []);
 
   return (
-    <ul className='flex sm:justify-between justify-center items-center sm:gap-5 gap-10 sm:first:pl-2 sm:last:pr-2 first:pl-16 last:pr-16 text-md font-ubuntu'>
+    <ul className='flex sm:justify-between justify-center items-center sm:gap-7 gap-10 sm:pt-4 sm:first:pl-2 sm:last:pr-2 first:pl-16 last:pr-16 text-md font-ubuntu'>
       {Routes.find((item) => item.name === 'Dashboard')
         ?.children?.find((child) => child.name === name)
         .children.map((route, index) => (
@@ -43,8 +43,8 @@ const Links: FC<Props> = ({ name }) => {
                     to={route.path !== undefined ? route.path : '/'}
                     className={({ isActive }) =>
                       isActive
-                        ? 'font-bold border-b-4 pb-1'
-                        : 'font-regular border-b-4 border-transparent pb-1 delay-50 hover:font-bold hover:border-lightColor duration-100'
+                        ? 'font-bold sm:border-b-2 border-b-4 pb-1'
+                        : 'font-regular sm:border-b-2 border-b-4 border-transparent pb-1 delay-50 hover:font-bold hover:border-lightColor duration-100'
                     }
                   >
                     {isMobile ? (
