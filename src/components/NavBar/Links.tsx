@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { Routes } from '../../routes/Routes';
@@ -16,43 +16,65 @@ const Links: FC<Props> = ({ name }) => {
     userJson !== null ? true : false
   );
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
-    <ul className='flex justify-center items-center gap-10 first:pl-16 last:pr-16 text-md font-ubuntu'>
+    <ul className='flex sm:justify-between justify-center items-center sm:gap-5 gap-10 sm:first:pl-2 sm:last:pr-2 first:pl-16 last:pr-16 text-md font-ubuntu'>
       {Routes.find((item) => item.name === 'Dashboard')
         ?.children?.find((child) => child.name === name)
         .children.map((route, index) => (
-          <li key={index} className='lowercase flex'>
-            {route.name !== 'Profil' ? (
-              <NavLink
-                to={route.path !== undefined ? route.path : '/'}
-                className={({ isActive }) =>
-                  isActive
-                    ? 'font-bold border-b-4 pb-1'
-                    : 'font-regular border-b-4 border-transparent pb-1 delay-50 hover:font-bold hover:border-lightColor duration-100'
-                }
-              >
-                {!route.invisible && route.name !== undefined && route.name}
-              </NavLink>
-            ) : (
-              <>
-                {!isLoggedIn ? (
+          <Fragment key={index}>
+            {!route?.invisible && (
+              <li className='lowercase flex'>
+                {route.name !== 'Profil' ? (
                   <NavLink
-                    to='/auth/get-started'
-                    className={
-                      'font-regular pb-1 delay-50 hover:font-bold hover:border-lightColor border-transparent border-b-4 duration-100'
+                    to={route.path !== undefined ? route.path : '/'}
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'font-bold border-b-4 pb-1'
+                        : 'font-regular border-b-4 border-transparent pb-1 delay-50 hover:font-bold hover:border-lightColor duration-100'
                     }
                   >
-                    prijava
+                    {isMobile ? (
+                      <route.icon className='text-[28px]' />
+                    ) : (
+                      route.name
+                    )}
                   </NavLink>
                 ) : (
-                  <ProfileMenu
-                    routes={route.children}
-                    setIsLoggedIn={setIsLoggedIn}
-                  />
+                  <>
+                    {!isLoggedIn ? (
+                      <NavLink
+                        to='/auth/get-started'
+                        className={
+                          'font-regular pb-1 delay-50 hover:font-bold hover:border-lightColor border-transparent border-b-4 duration-100'
+                        }
+                      >
+                        prijava
+                      </NavLink>
+                    ) : (
+                      <ProfileMenu
+                        routes={route.children}
+                        setIsLoggedIn={setIsLoggedIn}
+                      />
+                    )}
+                  </>
                 )}
-              </>
+              </li>
             )}
-          </li>
+          </Fragment>
         ))}
     </ul>
   );

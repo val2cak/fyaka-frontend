@@ -1,7 +1,11 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   BsChevronDown as ArrowDownIcon,
   BsChevronUp as ArrowUpIcon,
+} from 'react-icons/bs';
+import {
+  BsFillPersonLinesFill as ProfileOpenIcon,
+  BsFillPersonXFill as ProfileClosedIcon,
 } from 'react-icons/bs';
 import { RiLogoutCircleRLine as LogoutIcon } from 'react-icons/ri';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -38,19 +42,43 @@ const ProfileMenu: FC<Props> = ({ routes, setIsLoggedIn }) => {
     });
   };
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <main>
       <button
-        onMouseEnter={() => setOpen(true)}
-        className='flex justify-center items-center gap-2 pb-1'
+        onMouseEnter={() => !isMobile && setOpen(true)}
+        onClick={() => isMobile && (open ? setOpen(false) : setOpen(true))}
+        className='flex justify-center items-center gap-2 pb-2'
       >
-        profil {open ? <ArrowUpIcon /> : <ArrowDownIcon />}
+        {isMobile ? (
+          open ? (
+            <ProfileClosedIcon className='text-[28px]' />
+          ) : (
+            <ProfileOpenIcon className='text-[28px]' />
+          )
+        ) : (
+          'profil'
+        )}
+        {!isMobile && (open ? <ArrowUpIcon /> : <ArrowDownIcon />)}
       </button>
 
       {open && (
         <ul
           onMouseLeave={() => setOpen(false)}
-          className='absolute z-[10] bg-primaryColor pb-16 pt-4 px-24 right-0 top-16 bg-opacity-90 flex flex-col gap-2 items-start'
+          className='absolute sm:w-full z-[10] bg-primaryColor pb-16 pt-4 px-24 right-0 top-16 bg-opacity-90 flex flex-col gap-2 items-start'
         >
           {routes
             .filter((route) => !route.invisible)

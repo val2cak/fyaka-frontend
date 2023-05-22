@@ -10,7 +10,7 @@ const HomeInfoSection = () => {
   return (
     <main
       id='info-section'
-      className='bg-primaryColor text-lightColor lg:mt-8 mt-20 px-24 lg:py-4 py-10 flex flex-row items-start'
+      className='bg-primaryColor text-lightColor sm:mt-8 lg:mt-8 mt-20 sm:px-4 px-24 lg:py-4 py-10 flex flex-row sm:flex-col items-start'
     >
       <HomeInfoColumn
         heading={'sigurno korištenje'}

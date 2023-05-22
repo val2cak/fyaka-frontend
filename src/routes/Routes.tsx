@@ -6,7 +6,12 @@ import {
   ImBubbles2 as MessagesIcon,
   ImHeart as FavoritesIcon,
   ImBriefcase as MyServicesIcon,
+  ImHome as HomeIcon,
 } from 'react-icons/im';
+import {
+  MdSpaceDashboard as ListServicesIcon,
+  MdLibraryAdd as AddServiceIcon,
+} from 'react-icons/md';
 
 import ProtectedRoute from './ProtectedRoute';
 import AdminLayout from '../features/admin/AdminLayout';
@@ -63,11 +68,13 @@ export let Routes: CustomRouteObject[] = [
           {
             path: '',
             name: 'Naslovna',
+            icon: HomeIcon,
             element: <HomeContainer />,
           },
           {
             path: 'services-list',
             name: 'Popis Usluga',
+            icon: ListServicesIcon,
             element: <ServicesListContainer />,
           },
           {
@@ -110,6 +117,7 @@ export let Routes: CustomRouteObject[] = [
           {
             path: 'looking-for-service',
             name: 'Trebam Uslugu',
+            icon: AddServiceIcon,
             element: <LookingForServiceContainer />,
           },
           {
@@ -121,6 +129,7 @@ export let Routes: CustomRouteObject[] = [
                 path: 'profile',
                 name: 'profil',
                 icon: ProfileIcon,
+
                 element: <ProfileContainer />,
               },
               {
