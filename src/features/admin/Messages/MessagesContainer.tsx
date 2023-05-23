@@ -21,6 +21,12 @@ const MessagesContainer = () => {
     };
   }, []);
 
+  useEffect(() => {
+    alert(
+      'Ispričavamo se zbog neugodnosti. Funkcija poruka trenutačno ima tehničke poteškoće. Naš tim marljivo radi na rješavanju problema i vraćanju pune funkcionalnosti što je prije moguće.\n\nTijekom ove faze beta testiranja, povremeni problemi i prekidi mogu se javiti. Zahvaljujemo vam na strpljenju i razumijevanju dok nastojimo pružiti poboljšano iskustvo korištenja poruka.\n\nHvala vam na podršci!\n\nFyaka'
+    );
+  }, []);
+
   const location = useLocation();
 
   const locationRecipientId = location?.state?.recipientId;
