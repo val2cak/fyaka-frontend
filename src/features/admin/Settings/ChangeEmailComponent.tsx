@@ -96,13 +96,13 @@ const ChangeEmailComponent = () => {
   }, [isDirty]);
 
   return (
-    <div className='bg-secondaryColor h-full rounded-lg p-6 flex flex-col gap-4 text-lightColor'>
+    <div className='bg-secondaryColor sm:w-full h-full rounded-lg p-6 flex flex-col gap-4 text-lightColor'>
       {!isUserDataLoading && (
         <form
           onSubmit={handleSubmit(onSubmit)}
           className='flex flex-col h-full justify-between'
         >
-          <div className='flex flex-col gap-3 w-[400px]'>
+          <div className='flex flex-col gap-3 sm:w-full w-[400px]'>
             <InputElement
               label='stara e-mail adresa'
               placeholder={'stara@mail.hr'}

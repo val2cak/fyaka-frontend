@@ -4,7 +4,7 @@ const NotFoundContainer = () => {
   const navigateTo = useNavigate();
 
   return (
-    <div className='bg-notFound bg-cover w-screen h-screen text-3xl font-ubuntu font-medium flex flex-col justify-start items-center pt-24'>
+    <div className='bg-notFound sm:bg-right bg-cover sm:p-4 w-screen h-screen sm:text-xl text-3xl font-ubuntu font-medium flex flex-col justify-start items-center pt-24'>
       <p>Stranica nije pronađena!</p>
       <p>
         Vrati se na{' '}

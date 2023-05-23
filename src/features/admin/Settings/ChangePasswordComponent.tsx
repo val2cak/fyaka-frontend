@@ -94,10 +94,10 @@ const ChangePasswordComponent = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='bg-secondaryColor h-full rounded-lg p-6 flex flex-col gap-4 text-lightColor'
+      className='bg-secondaryColor sm:w-full h-full rounded-lg p-6 flex flex-col gap-4 text-lightColor'
     >
       <div className='flex flex-col h-full justify-between'>
-        <div className='flex flex-col gap-3 w-[400px]'>
+        <div className='flex flex-col gap-3 sm:w-full w-[400px]'>
           <InputElement
             label='stara lozinka'
             placeholder='upiši staru lozinku...'

@@ -53,7 +53,7 @@ const DeleteAccountComponent = () => {
   };
 
   return (
-    <div className='bg-secondaryColor bg-deleteAccount bg-contain bg-no-repeat bg-right rounded-lg p-6 flex flex-col h-full justify-between gap-4 text-lightColor font-ubuntu text-base'>
+    <div className='bg-secondaryColor sm:w-full bg-deleteAccount bg-contain bg-no-repeat bg-right rounded-lg p-6 flex flex-col h-full justify-between gap-4 text-lightColor font-ubuntu text-base'>
       <div className='flex flex-col gap-2  h-full'>
         <p>Žao nam je što odlazite!</p>
         <p>Nakon što izbrišete račun, više ga ne možete vratiti.</p>

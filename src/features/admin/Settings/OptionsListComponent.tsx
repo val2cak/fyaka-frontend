@@ -13,7 +13,7 @@ const OptionsListComponent: FC<Props> = ({
   setChosenId,
 }) => {
   return (
-    <div className='bg-secondaryColor h-full rounded-lg p-6 flex flex-col gap-3 text-lightColor'>
+    <div className='bg-secondaryColor sm:w-full h-full rounded-lg p-6 flex flex-col gap-3 text-lightColor'>
       {options.map((option, index) => (
         <div
           className={`${
