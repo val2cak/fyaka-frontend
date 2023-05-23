@@ -97,7 +97,7 @@ const ConversationsComponent: FC<Props> = ({ recipientId, setRecipientId }) => {
   };
 
   return (
-    <div className='bg-lightColor h-full rounded-lg p-6 flex flex-col gap-4'>
+    <div className='bg-lightColor sm:w-full h-full rounded-lg p-6 flex flex-col gap-4'>
       <div className='flex justify-between items-center'>
         <h3 className='font-ubuntu text-lg font-medium'>razgovori</h3>
         <button

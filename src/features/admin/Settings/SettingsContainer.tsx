@@ -39,7 +39,7 @@ const SettingsContainer = () => {
     <main className='bg-lightColor'>
       <TitleBar title={'postavke'} />
 
-      {chosenId && (
+      {isMobile && chosenId && (
         <button
           onClick={handleGoBack}
           className='text-secondaryColor text-3xl m-3 absolute transition ease-in-out delay-50 hover:scale-110 duration-300'
@@ -69,14 +69,14 @@ const SettingsContainer = () => {
           )
         ) : (
           <>
-            <div className='sm:w-full w-1/3'>
+            <div className='w-1/3'>
               <OptionsListComponent
                 options={options}
                 chosenId={chosenId}
                 setChosenId={setChosenId}
               />
             </div>
-            <div className='sm:w-full w-2/3'>
+            <div className='w-2/3'>
               {chosenId === 1 && <ChangePasswordComponent />}
               {chosenId === 2 && <ChangeEmailComponent />}
               {chosenId === 3 && <DeleteAccountComponent />}
