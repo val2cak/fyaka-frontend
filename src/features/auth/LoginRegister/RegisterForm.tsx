@@ -72,7 +72,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className='bg-lightColor bg-opacity-80 rounded-lg px-12 2xl:px-20 py-6 2xl:py-16 flex flex-col gap-2 2xl:gap-8'>
+    <div className='bg-lightColor bg-opacity-80 rounded-lg sm:w-full sm:px-8 px-12 2xl:px-20 sm:py-4 py-6 2xl:py-16 flex flex-col gap-2 2xl:gap-8'>
       <h1 className='flex justify-center items-center font-ubuntu text-secondaryColor font-bold text-xl'>
         Registracija
       </h1>

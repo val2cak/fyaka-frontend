@@ -1,5 +1,6 @@
 import { FC, Fragment, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { RiLoginBoxLine as LoginIcon } from 'react-icons/ri';
 
 import { Routes } from '../../routes/Routes';
 import { getUserFromStorage } from '../../services/storage';
@@ -62,7 +63,11 @@ const Links: FC<Props> = ({ name }) => {
                           'font-regular pb-1 delay-50 hover:font-bold hover:border-lightColor border-transparent border-b-4 duration-100'
                         }
                       >
-                        prijava
+                        {isMobile ? (
+                          <LoginIcon className='text-[28px]' />
+                        ) : (
+                          'prijava'
+                        )}
                       </NavLink>
                     ) : (
                       <ProfileMenu

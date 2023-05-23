@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 const App = () => {
   const prepareRoutes = useRoutes(Routes);
   return (
-    <div className='App'>
+    <div className='h-screen'>
       <ToastContainer />
       {prepareRoutes}
     </div>

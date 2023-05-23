@@ -51,7 +51,7 @@ const ServicesListContainer = () => {
 
   return (
     <main className='bg-secondaryColor h-full w-full flex flex-col'>
-      <div className='bg-primaryColor w-full relative mb-16'>
+      <div className='bg-primaryColor w-full relative sm:mb-12 mb-16'>
         <div className='sm:pb-10 pb-5'>
           <TitleBar title={'moje usluge'} />
         </div>

@@ -46,6 +46,7 @@ module.exports = {
         login: "url('../assets/vectors/login.png')",
         notFound: "url('../assets/vectors/not-found.jpg')",
         deleteAccount: "url('../assets/vectors/delete-account.png')",
+        getStarted: "url('../assets/vectors/get-started-mobile.png')",
       }),
       lineHeight: {
         3: '1.2rem',
