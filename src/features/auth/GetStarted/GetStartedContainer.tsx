@@ -1,8 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { FaFacebook } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
 
 import image from '../../../assets/vectors/get-started.png';
+import GoogleLoginComponent from '../LoginRegister/GoogleLoginComponent';
 
 const GetStartedContainer = () => {
   const navigateTo = useNavigate();
@@ -28,19 +27,13 @@ const GetStartedContainer = () => {
             Registracija
           </button>
 
-          <div className='flex flex-row text-lightColor items-center gap-2 pt-8'>
+          <div className='flex flex-row text-lightColor items-center gap-1 pt-8'>
             <hr />
-            <p>ili se prijavi s</p>
+            <p>ili se registriraj s</p>
             <hr />
           </div>
 
-          <button className='button bg-white h-[50px] gap-4 relative'>
-            <FcGoogle className='absolute left-5' />
-            Google
-          </button>
-          <button className='button bg-[#2D9CDB] text-white h-[50px] gap-4 relative'>
-            <FaFacebook className='absolute left-5' /> Facebook
-          </button>
+          <GoogleLoginComponent />
         </div>
 
         <div className='flex justify-center items-center sm:hidden'>

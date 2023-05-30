@@ -38,7 +38,7 @@ hr {
 hr:after {
   background: transparent;
   content: '';
-  padding: 0 45px;
+  padding: 0 35px;
   position: relative;
 }
 
