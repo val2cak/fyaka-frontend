@@ -1,12 +1,8 @@
-// HOOKS
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 // import useNotifications from '../hooks/useNotifications';
-//
 
-// SERVICES
 import { getUserFromStorage } from '../services/storage';
-//
 
 const ProtectedRoute = ({ children }: any) => {
   const navigateTo = useNavigate();
@@ -16,14 +12,14 @@ const ProtectedRoute = ({ children }: any) => {
 
   useEffect(() => {
     if (location.pathname === '/' && !user) {
-      navigateTo('/get-started');
+      navigateTo('/auth/get-started');
     } else if (!user && location.pathname.length > 1) {
       // handleUserActionNotification({
       //   message: 'You need to be logged in to continue!',
       //   type: 'error',
       //   autoClose: 2500,
       // });
-      navigateTo('/get-started');
+      navigateTo('/auth/get-started');
     } else if (
       user &&
       new Date(JSON.parse(user).tokenExpiry).getTime() < new Date().getTime()
@@ -33,9 +29,9 @@ const ProtectedRoute = ({ children }: any) => {
       //   type: 'error',
       //   autoClose: 2500,
       // });
-      navigateTo('/get-started');
+      navigateTo('/auth/get-started');
     } else if (location.pathname === '/') {
-      navigateTo('/home');
+      navigateTo('/');
     }
   }, [user, navigateTo, location]);
 
