@@ -414,7 +414,7 @@ hr:after {
   border-radius: 25px;
 }
 
-.custom-loading .d1 {
+.toast-loading .d1 {
   width: 27px;
   height: 27px;
   position: absolute;
@@ -422,7 +422,7 @@ hr:after {
   animation: load161 1s linear infinite;
 }
 
-.custom-loading .d2 {
+.toast-loading .d2 {
   width: 20px;
   height: 20px;
   border-top-color: transparent;
