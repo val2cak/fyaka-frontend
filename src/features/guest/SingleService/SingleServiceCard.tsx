@@ -160,7 +160,7 @@ const SingleServiceCard: FC<ServiceProps> = ({
           <li>{title}</li>
           {!isCategoriesDataLoading && (
             <li>
-              {categoriesData.find((item) => item.id === categoryId).name}
+              {categoriesData?.find((item) => item.id === categoryId)?.name}
             </li>
           )}
           <li>{description}</li>

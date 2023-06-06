@@ -47,7 +47,7 @@ const ConversationsComponent: FC<Props> = ({ recipientId, setRecipientId }) => {
                   id: recipient.id,
                   imageUrl: recipient.imageUrl,
                 };
-                if (!conversations.find((item) => item.id === userData.id)) {
+                if (!conversations?.find((item) => item.id === userData.id)) {
                   setConversations((prevConversations) => [
                     ...prevConversations,
                     userData,
@@ -74,7 +74,7 @@ const ConversationsComponent: FC<Props> = ({ recipientId, setRecipientId }) => {
                   id: recipient.id,
                   imageUrl: recipient.imageUrl,
                 };
-                if (!conversations.find((item) => item.id === userData.id)) {
+                if (!conversations?.find((item) => item.id === userData.id)) {
                   setConversations((prevConversations) => [
                     ...prevConversations,
                     userData,
@@ -91,7 +91,7 @@ const ConversationsComponent: FC<Props> = ({ recipientId, setRecipientId }) => {
   const handleAddNew = (value: User) => {
     setRecipientId(value?.id);
     setAddNew(false);
-    if (!conversations.find((item) => item.id === value?.id)) {
+    if (!conversations?.find((item) => item.id === value?.id)) {
       setConversations((prevConversations) => [...prevConversations, value]);
     }
   };

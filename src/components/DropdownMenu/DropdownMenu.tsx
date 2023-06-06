@@ -65,7 +65,7 @@ const DropdownMenu: FC<Props> = ({
           open ? 'block' : 'hidden'
         } absolute bg-lightColor z-10 hover:cursor-pointer mt-6 left-0 w-full rounded-lg`}
       >
-        {items.map((item) => (
+        {items?.map((item) => (
           <div
             key={item.id}
             onClick={() => handleSelect(item)}

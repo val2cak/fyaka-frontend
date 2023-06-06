@@ -64,7 +64,7 @@ const ServicesListContainer = () => {
       {!isServicesListDataLoading ? (
         <div className='flex flex-col sm:px-4 lg:px-36 px-56 gap-8 2xl:gap-16 pb-8 2xl:pb-56 justify-between 2xl:items-start min-h-[620px]'>
           <div className='grid lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-5'>
-            {servicesData.map((item, index) => (
+            {servicesData?.map((item, index) => (
               <ServiceCard key={index} {...item} currentPage={currentPage} />
             ))}
           </div>

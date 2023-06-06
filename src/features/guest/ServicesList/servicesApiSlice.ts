@@ -62,7 +62,7 @@ export const servicesApiSlice = createApi({
             }
             if (filters.categoryId) {
               Array.isArray(filters.categoryId)
-                ? filters.categoryId.map((catId) =>
+                ? filters.categoryId?.map((catId) =>
                     queryParams.append('categoryId', catId.toString())
                   )
                 : queryParams.append(

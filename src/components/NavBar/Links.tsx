@@ -33,9 +33,9 @@ const Links: FC<Props> = ({ name }) => {
 
   return (
     <ul className='flex sm:justify-between justify-center items-center sm:gap-7 gap-10 sm:pt-4 sm:first:pl-2 sm:last:pr-2 first:pl-16 last:pr-16 text-md font-ubuntu'>
-      {Routes.find((item) => item.name === 'Dashboard')
+      {Routes?.find((item) => item.name === 'Dashboard')
         ?.children?.find((child) => child.name === name)
-        .children.map((route, index) => (
+        .children?.map((route, index) => (
           <Fragment key={index}>
             {!route?.invisible && (
               <li className='lowercase flex'>

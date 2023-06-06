@@ -131,7 +131,7 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
     if (checked) {
       setCategory([
         ...category,
-        categoriesData.find((item) => item.id === categoryId),
+        categoriesData?.find((item) => item.id === categoryId),
       ]);
     } else {
       setCategory(category.filter((item) => item.id !== categoryId));
@@ -294,7 +294,7 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
 
           {name === 'ocjena korisnika' && (
             <FormGroup className='w-[225px]'>
-              {userRatingsList.map((item) => {
+              {userRatingsList?.map((item) => {
                 const checked = filters?.userRating === item;
                 return (
                   <FormControlLabel
@@ -318,7 +318,7 @@ const FilterContent: FC<Props> = ({ name, filters, setFilters }) => {
 
           {name === 'kategorija' && !isCategoriesDataLoading && (
             <FormGroup className='w-[225px]'>
-              {categoriesData.map((item) => {
+              {categoriesData?.map((item) => {
                 const checked = category?.some((cat) => cat.id === item.id);
                 return (
                   <FormControlLabel

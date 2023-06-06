@@ -30,7 +30,7 @@ const DropdownElement: FC<Props> = ({
       </label>
 
       <DropdownMenu
-        selectedItem={data.find((item) => item.id === selectedId)}
+        selectedItem={data?.find((item) => item.id === selectedId)}
         onSelect={handleSelect}
         items={data}
         placeholder={placeholder}

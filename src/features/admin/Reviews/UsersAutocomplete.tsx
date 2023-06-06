@@ -59,7 +59,7 @@ const UsersAutocomplete: FC<Props> = ({
         id='users-autocomplete'
         className={`w-full rounded-lg font-raleway autocomplete ${className}`}
         options={
-          usersData ? usersData.filter((item) => item.id !== user.id) : []
+          usersData ? usersData?.filter((item) => item.id !== user.id) : []
         }
         defaultValue={inputProps?.defaultValue}
         renderInput={(params) => (

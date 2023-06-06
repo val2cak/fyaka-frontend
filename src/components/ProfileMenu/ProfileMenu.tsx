@@ -81,8 +81,8 @@ const ProfileMenu: FC<Props> = ({ routes, setIsLoggedIn }) => {
           className='absolute sm:w-[80vw] sm:h-screen z-[10] bg-primaryColor pb-16 sm:pt-12 pt-4 sm:px-12 px-24 right-0 top-16 bg-opacity-90 flex flex-col gap-2 items-start'
         >
           {routes
-            .filter((route) => !route.invisible)
-            .map((item, index) => (
+            ?.filter((route) => !route.invisible)
+            ?.map((item, index) => (
               <li key={index} className='lowercase flex'>
                 <NavLink
                   to={item.path !== undefined ? item.path : '/'}

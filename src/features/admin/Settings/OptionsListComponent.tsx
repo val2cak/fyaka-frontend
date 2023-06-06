@@ -14,7 +14,7 @@ const OptionsListComponent: FC<Props> = ({
 }) => {
   return (
     <div className='bg-secondaryColor sm:w-full h-full rounded-lg p-6 flex flex-col gap-3 text-lightColor'>
-      {options.map((option, index) => (
+      {options?.map((option, index) => (
         <div
           className={`${
             chosenId === option?.id && 'bg-primaryColor text-lightColor'

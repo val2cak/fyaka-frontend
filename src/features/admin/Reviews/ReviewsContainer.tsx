@@ -139,7 +139,7 @@ const ReviewsContainer = () => {
 
         {!isReviewsDataLoading ? (
           <div className='flex flex-wrap justify-start items-start flex-row gap-5 w-full min-h-[520px]'>
-            {reviewsData.map((item, index) => (
+            {reviewsData?.map((item, index) => (
               <ReviewCard key={index} {...item} />
             ))}
           </div>
