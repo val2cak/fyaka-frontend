@@ -3,7 +3,7 @@ import {
   BsFillPatchQuestionFill as WarningIcon,
   BsFillPatchExclamationFill as ErrorIcon,
 } from 'react-icons/bs';
-import CustomLoader from '../Loader/CustomLoader';
+import ToastLoader from '../Loader/ToastLoader';
 
 const CustomIcon = (type: any) => {
   if (type === 'success') {
@@ -11,7 +11,7 @@ const CustomIcon = (type: any) => {
   }
 
   if (type === 'info') {
-    return <CustomLoader />;
+    return <ToastLoader />;
   }
 
   if (type === 'warning') {
