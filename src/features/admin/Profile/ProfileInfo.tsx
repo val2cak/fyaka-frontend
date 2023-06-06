@@ -224,10 +224,10 @@ const ProfileInfo: FC<Props> = ({
                   data={genderTypes}
                   selectedId={
                     getValues('gender') !== null && !getValues('gender')
-                      ? genderTypes.find(
+                      ? genderTypes?.find(
                           (item) => item.name === getValues('gender')
                         )?.id
-                      : genderTypes.find(
+                      : genderTypes?.find(
                           (item) => item.name === getValues('gender')
                         )?.id
                   }

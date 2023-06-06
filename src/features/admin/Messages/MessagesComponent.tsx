@@ -74,9 +74,9 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
 
       // Add the retrieved messages to the state
       const messages: Message[] = resultPage.items
-        .reverse()
-        .map((message) => message.data)
-        .filter((item) => item?.hasOwnProperty('text'));
+        ?.reverse()
+        ?.map((message) => message.data)
+        ?.filter((item) => item?.hasOwnProperty('text'));
       setMessages((prevMessages) => [...prevMessages, ...messages]);
     });
 
@@ -88,9 +88,9 @@ const MessagesComponent: FC<Props> = ({ recipientId }) => {
 
       // Add the retrieved messages to the state
       const retrievedMessages: Message[] = resultPage.items
-        .reverse()
-        .map((message) => message.data)
-        .filter((item) => item?.hasOwnProperty('text'));
+        ?.reverse()
+        ?.map((message) => message.data)
+        ?.filter((item) => item?.hasOwnProperty('text'));
       setMessages((prevMessages) => [...prevMessages, ...retrievedMessages]);
     });
 
