@@ -57,7 +57,12 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
           .unwrap()
           .then(() => {
             closeModal(true);
-            reset();
+            reset({
+              userId: id ? parseInt(id) : undefined,
+              authorId: user.id,
+              rating: '',
+              text: '',
+            });
             trigger();
           }),
         {
@@ -96,7 +101,12 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
             type='button'
             onClick={() => {
               closeModal(false);
-              reset();
+              reset({
+                userId: id ? parseInt(id) : undefined,
+                authorId: user.id,
+                rating: '',
+                text: '',
+              });
               trigger();
             }}
           >
@@ -200,7 +210,12 @@ const AddReviewModal: FC<Props> = ({ isOpen, closeModal }) => {
             type='button'
             onClick={() => {
               closeModal(false);
-              reset();
+              reset({
+                userId: id ? parseInt(id) : undefined,
+                authorId: user.id,
+                rating: '',
+                text: '',
+              });
               trigger();
             }}
             className='button bg-redColor text-lightColor !w-auto !text-base'
