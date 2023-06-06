@@ -7,7 +7,7 @@ const USERNAME = process.env.REACT_APP_GEONAMES_USERNAME;
 export const locationsApiSlice = createApi({
   reducerPath: 'Locations-Api-Slice',
   baseQuery: fetchBaseQuery({
-    baseUrl: `http://api.geonames.org/searchJSON`,
+    baseUrl: `https://api.geonames.org/searchJSON`,
   }),
   tagTypes: ['Locations-List'],
   refetchOnMountOrArgChange: true,
